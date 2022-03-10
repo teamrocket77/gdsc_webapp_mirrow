@@ -1,2 +1,2 @@
 # Webapp
-Mirrors to https://dscksu.cluv
+Mirrors to https://dscksu.club
