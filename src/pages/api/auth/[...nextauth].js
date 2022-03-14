@@ -7,35 +7,22 @@ dotenv.config();
 
 // Configure Authentication Provider.
 export default NextAuth({
-    secret: process.env.SECRET,
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            authorization: {
-                params: {
-                    prompt: 'consent',
-                    access_type: 'offline',
-                    response_type: 'code'
-                }
-            }
+            authorization: process.env.GOOGLE_AUTHORIZATION_URL
         }),
     ],
+    secret: process.env.SECRET,
     jwt: {
         encryption: true
     },
     callbacks: {
-        // Set Oauth access_Token to account access_token immediately after the client signs in.
-        async jwt({token, account}) {
-            if(account?.access_token) {
-                token.accessToken = account.access_token;
-            }
-            return token;
-        },
-
-        // Pass properties (accessToken) to client.
-        async session({session, token}) {
-            session.accessToken = token.accessToken;
+        
+        // Returns session token when callback is invoked.
+        session: async({session, token}) => {
+            return session;
         },
 
         // Manage redirect based on whether or not the user is logged in.
@@ -47,5 +34,8 @@ export default NextAuth({
             }
             return Promise.resolve('/');
         }
+    },
+    pages: {
+        error: '/auth/error'
     }
 })
