@@ -17,14 +17,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* If Session does not exist, invalid or client has not logged in, do this.*/}
+      {/* If Session does not exist, invalid or client has not logged in, do this. */}
       {!session && (
         <>
           <button onClick={() => signIn()}>Login</button>
         </>
       )}
 
-      {/* If Session does exist and the client has logged in, do this.*/}
+      {/* If Session does exist and the client has logged in, do this. */}
       {session && (
         <>
           <main className={styles.main}>
