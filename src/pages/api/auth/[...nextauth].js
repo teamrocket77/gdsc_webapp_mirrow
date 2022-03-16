@@ -2,8 +2,12 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 // Configure Environmental Variables.
+// NODE_ENV is set to 'development' when 'npm run dev' in development mode.
+// NODE_ENV is set to 'production' when 'npm start' in production mode.
+// DEVELOPERS WILL ALWAYS BE IN DEVELOPMENT MODE.
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path: `.env.${process.env.NODE_ENV}`});
+console.log('Environment Mode: '+process.env.NODE_ENV);
 
 // Configure Authentication Provider.
 export default NextAuth({
