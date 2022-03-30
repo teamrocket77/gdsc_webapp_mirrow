@@ -1,11 +1,9 @@
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { FirebaseAdapter } from '@next-auth/firebase-adapter';
-import { db, collection, query, getDocs, where, limit, doc, getDoc, addDoc, updateDoc, deleteDoc, runTransaction, getFirestore } from 'firebase/firestore';
-import * as firebase from 'firebase/app';
+import { FirebaseAdapter } from '../../../temp_modules/FirebaseAdapter';
 
-//import firebase from "firebase/app";
-//import "firebase/firestore";
 
 // Configure Environmental Variables.
 // NODE_ENV is set to 'development' when 'npm run dev' in development mode.
@@ -15,10 +13,10 @@ const dotenv = require('dotenv');
 dotenv.config({path: `.env.${process.env.NODE_ENV}`});
 console.log('Environment Mode: '+process.env.NODE_ENV);
 
-const firestoreApp = firebase.initializeApp({
+const firestoreApp = initializeApp({
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-    //databaseURL: process.env.FIREBASE_DATABASE_URL,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
     projectId: process.env.FIREBASE_PROJECT_ID,
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
@@ -27,6 +25,8 @@ const firestoreApp = firebase.initializeApp({
 });
 
 const firestore = getFirestore(firestoreApp);
+
+//const collectionReference = doc(firestore, 'users')
 
 // Configure Authentication Provider.
 export default NextAuth({
@@ -37,7 +37,7 @@ export default NextAuth({
             authorization: process.env.GOOGLE_AUTHORIZATION_URL
         }),
     ],
-    adapter: FirebaseAdapter({ db, collection, query, getDocs, where, limit, doc, getDoc, addDoc, updateDoc, deleteDoc, runTransaction }),
+    adapter: FirebaseAdapter(firestore.app),
     secret: process.env.SECRET,
     jwt: {
         encryption: true
