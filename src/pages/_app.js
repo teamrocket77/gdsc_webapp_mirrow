@@ -17,6 +17,8 @@ export default function App(props) {
     <SessionProvider session={pageProps.session}>
       <CacheProvider value={emotionCache}>
         <Head>
+          <title>Developer Student Club at Kennesaw State University</title>
+          <link rel='icon' href='/favicon.ico' />
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <ThemeProvider theme={theme}>
