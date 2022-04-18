@@ -4,13 +4,13 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { FirebaseAdapter } from '../../../temp_modules/FirebaseAdapter';
 
-
 // Configure Environmental Variables.
 // NODE_ENV is set to 'development' when 'npm run dev' in development mode.
 // NODE_ENV is set to 'production' when 'npm start' in production mode.
 // DEVELOPERS WILL ALWAYS BE IN DEVELOPMENT MODE.
 const dotenv = require('dotenv');
 dotenv.config({path: `.env.${process.env.NODE_ENV}`});
+
 console.log('Environment Mode: '+process.env.NODE_ENV);
 
 const firestoreApp = initializeApp({
@@ -25,8 +25,6 @@ const firestoreApp = initializeApp({
 });
 
 const firestore = getFirestore(firestoreApp);
-
-//const collectionReference = doc(firestore, 'users')
 
 // Configure Authentication Provider.
 export default NextAuth({
@@ -53,13 +51,10 @@ export default NextAuth({
         // Also known as a protected routes. If the user is not logged in,
         // redirect (resolve) to the site's landing page ('/').
         redirect: async(url) => {
-            if(url === '/profile') {
-                return Promise.resolve('/');
-            }
             return Promise.resolve('/');
         }
     },
     pages: {
-        error: '/auth/error'
+        //error: '/auth/error'
     }
 })
