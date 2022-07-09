@@ -1,8 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "GoogleSans";
+  src: local("GoogleSans"),
+    url("./fonts/GoogleSans-Bold-v1.27.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "GoogleSans";
+  src: local("GoogleSans"),
+    url("./fonts/GoogleSansDisplay-Regular-v1.27.ttf") format("truetype");
+  font-weight: normal;
+}
 
-html,
+/* html,
 body {
   padding: 0;
   margin: 0;
@@ -17,4 +29,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
+} */
