@@ -11,7 +11,7 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+// Do not remove the next 54 lines
   return (
     //This is the original version of Webapp. We not remove it till the website working
     // <CacheProvider value={emotionCache}>
@@ -32,7 +32,8 @@ export default function MyApp(props) {
       <div className="container h-[80vh] mx-auto relative flex flex-col items-center justify-center ">
         <div className="flex gap-5 justify-center items-center mb-6 mx-8">
           <img
-            src={dscLogo}
+            //src={dscLogo}
+            src={"../svg/dsclogo.svg"} Uncomment if it throws error that dscLogo is not defined
             alt="dscLogo"
             className="h-7 w-auto md:h-10 lg:h-12"
           />
@@ -48,11 +49,11 @@ export default function MyApp(props) {
           <h3>#googlestudents</h3>
           <h3>#growwithgoogle</h3>
         </div>
-        {/* buttons*/}
+        {/* buttons */}
         <div className=" buttons flex justify-center content-center items-center ">
-          <Button href="#" variant="contained">
+          <button href="#" variant="contained">
             Get Started
-          </Button>
+          </button>
         </div>
       </div>
       {/* Wave */}
@@ -62,6 +63,7 @@ export default function MyApp(props) {
         <div className="bg-[url('./svg/wave.svg')] bg-repeat-x absolute bottom-[0px] w-[6400px] h-[198px] animate-wave2 translate-x-[0] translate-y-[0] translate-z-[0] opacity-60 z-10"></div>
       </div>
     </div>
+    
   );
 }
 
