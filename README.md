@@ -14,9 +14,6 @@ Serves as the primary landing site for the **Google Developer Student Club @ Ken
 
 If you're confused by this, please reach out to a Project Manager or an Admin.
 
-# Troubleshooting
-If you get an error that a node module cannot be found, please re-run the command ``npm ci``. If this not works, please run the ``npm install <module>`` command with the name of the module that is missing. If the issue is still not resolved, please contact the Project Manager or an Admin.
-
 # Contributions
 
 Master branch is **production**. Development is technically-speaking **release candidate**. If you're developing a feature or fixing a bug, **create a new branch**. When you're finsihed, **create a pull request** and in that pull request, go into depth about what your code does. Admins & Project Managers lead code reviews. All **pull requests** must be reviewed before entering release candidate or production. 
