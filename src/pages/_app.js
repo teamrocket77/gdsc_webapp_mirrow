@@ -8,6 +8,8 @@ import { SessionProvider } from 'next-auth/react';
 import theme from '../themes/theme';
 import createEmotionCache from '../themes/createEmotionCache';
 
+import Navbar from '../components/navbar';
+
 const clientSideEmotionCache = createEmotionCache();
 
 export default function App(props) {
@@ -21,7 +23,10 @@ export default function App(props) {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+          <Navbar />
+          <div>
+            <Component {...pageProps} />
+          </div>
         </ThemeProvider>
       </CacheProvider>
     </SessionProvider>
