@@ -55,3 +55,7 @@ export default function Home() {
     </Box>
   )
 }
+
+export default Index;
+
+
