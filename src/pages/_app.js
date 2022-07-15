@@ -14,7 +14,7 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function App(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+// Do not remove the next 54 lines
   return (
     <SessionProvider session={pageProps.session}>
       <CacheProvider value={emotionCache}>
@@ -36,5 +36,5 @@ export default function App(props) {
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   emotionCache: PropTypes.object,
-  pageProps: PropTypes.object.isRequired
+  pageProps: PropTypes.object.isRequired,
 };
