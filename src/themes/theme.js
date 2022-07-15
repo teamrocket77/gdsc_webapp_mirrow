@@ -1,16 +1,19 @@
 import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { blue, grey, red } from '@mui/material/colors';
 
 const theme = createTheme({
-    palette: {
-        main: '#556cd6'
+    palette: { 
+        primary: {
+            main: '#FFFFFF',
+            alternate: grey[700],
+        },
+        secondary: {
+            main: blue[500],
+        },
+        hashtags: {
+            main: '#FF69B4'
+        }
     },
-    secondary: {
-        main: '#19857b'
-    },
-    error: {
-        main: red.A400
-    }
 });
 
 export default theme;
