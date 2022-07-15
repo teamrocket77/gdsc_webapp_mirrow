@@ -2,7 +2,7 @@ import { Box, Grid, Typography, Stack, Button } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import { useSession } from 'next-auth/react';
 
-export default function Home() {
+export default function Index() {
   const theme = useTheme()
   const { data: session, status } = useSession();
 
@@ -55,7 +55,3 @@ export default function Home() {
     </Box>
   )
 }
-
-export default Index;
-
-
