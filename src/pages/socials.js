@@ -14,11 +14,29 @@ export default function Index() {
 
   return (
     
+    <Box component='div' sx={{ height: '100%', overflow: 'hidden'}} mt={4}>
+      <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
+      <Grid item>
+              <Stack direction='row' spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
+                <Typography variant='h2' component='div' color={ theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
+                  JOIN US ON...
+                </Typography>
+              </Stack>
+              <Stack direction='row' spacing={-20} display='flex' alignItems='center' flexWrap='wrap'>
+                <Typography variant='h3' component='div' color= { theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
+                  (Site still under development)
+                </Typography>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Box>
+
+
+    /*
     <Box component='div' sx={{ height: '100%', overflow: 'hidden' }} mt={4}>
       <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
         <Grid item>
           <Stack direction='row' spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
-            <Box component='img' sx={{ height: 64, width: 64 }} alt='Google Developer Student Club Logo' src='/static/images/gdsc_logo.png' />
             <Typography variant='h2' component='div' color={ theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
               Google Developer Student Club
             </Typography>
@@ -54,7 +72,7 @@ export default function Index() {
         </Grid>
       </Grid>
     </Box>
-
+*/
     
   )
 }
