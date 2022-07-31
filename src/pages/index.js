@@ -45,7 +45,7 @@ export default function Index() {
               variant="h2"
               component="div"
               color={theme.palette.primary.alternate}
-              sx={{ fontSize: { xs: 22, sm: 36, md: 46, lg: 50 } }}
+              sx={{ fontSize: { xs: 22, sm: 36, md: 50, lg: 60 } }}
             >
               Google Developer Student Club
             </Typography>
