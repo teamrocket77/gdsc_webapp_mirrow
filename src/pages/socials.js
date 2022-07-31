@@ -23,9 +23,9 @@ export default function Index() {
                 </Typography>
               </Stack>
               <Stack direction='row' spacing={-20} display='flex' alignItems='center' flexWrap='wrap'>
-                <Typography variant='h3' component='div' color= { theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
-                  (Site still under development)
-                </Typography>
+                <Button variant='secondary' href="https://www.youtube.com/channel/UCO3Yz1Nj6qkIZkHF9RS9UvA" target="_blank">
+                  <p>YouTube</p>
+                </Button>
               </Stack>
             </Grid>
           </Grid>
