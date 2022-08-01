@@ -1,4 +1,4 @@
-import { db } from "./get/all";
+import {db} from '../../../database';
 //hypothetically this would also work pretty much like a PATCH request
 //since the DB key is taken from the request body itself
 export default async function handler(req, res) {
