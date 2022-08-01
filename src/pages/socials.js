@@ -1,3 +1,4 @@
+import { ClassNames } from "@emotion/react";
 import { Box, Grid, Typography, Stack, Button } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import { useSession } from 'next-auth/react';
@@ -5,7 +6,6 @@ import { useSession } from 'next-auth/react';
 export default function Index() {
   const theme = useTheme()
   const { data: session, status } = useSession();
-
   // If the client session is loading, do this.
   // Todo: Replace with a nice loading screen.
   if (status === "loading") {
@@ -13,7 +13,6 @@ export default function Index() {
   }
 
   return (
-    
     <Box component='div' sx={{ height: '100%', overflow: 'hidden'}} mt={4}>
       <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
       <Grid item>
@@ -22,10 +21,18 @@ export default function Index() {
                   JOIN US ON...
                 </Typography>
               </Stack>
-              <Stack direction='row' spacing={-20} display='flex' alignItems='center' flexWrap='wrap'>
-                <Button variant='secondary' href="https://www.youtube.com/channel/UCO3Yz1Nj6qkIZkHF9RS9UvA" target="_blank">
-                  <p>YouTube</p>
+              <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
+                <Button variant='outlined' color= "red" href="https://www.youtube.com/channel/UCO3Yz1Nj6qkIZkHF9RS9UvA" target="_blank">
+                  YouTube
                 </Button>
+              </Stack>
+              <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
+                <Button variant='outlined' color= "blue" href="https://mobile.twitter.com/gdscksu" target="_blank">
+                  Twitter
+                </Button>
+              </Stack>
+              <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
+                  <Button variant='outlined' color= "yellow" href='https://www.instagram.com/gdscksu/' target="_blank">Instagram</Button>
               </Stack>
             </Grid>
           </Grid>

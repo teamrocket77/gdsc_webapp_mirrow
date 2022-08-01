@@ -11,9 +11,27 @@ const theme = createTheme({
             main: blue[500],
         },
         hashtags: {
-            main: '#FF69B4'
-        }
+            main: '#FF69B4',
+        },
+        red: {
+            main: `#FF0000`,   
+        },
+        blue: {
+            main: "#0000FF",
+        },
+        yellow: {
+            main: "#FFBC00",
+        },
     },
+    socials_btn_red: {
+        backgroundColor: "white",
+        borderColor: "red",
+        "&:hover": {
+            backgroundColor: '#FF0000',
+            color: "white",
+            borderColor: "black",
+        }
+      },
 });
 
 export default theme;
