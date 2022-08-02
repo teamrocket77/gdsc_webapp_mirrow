@@ -12,6 +12,7 @@ export default function Index() {
     return <p>Loading Session</p>
   }
 
+  // TODO: INSERT LINK TO LINKEDIN
   return (
     <Box component='div' sx={{ height: '100%', overflow: 'hidden'}} mt={4}>
       <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
@@ -33,6 +34,12 @@ export default function Index() {
               </Stack>
               <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
                   <Button variant='outlined' color= "yellow" href='https://www.instagram.com/gdscksu/' target="_blank">Instagram</Button>
+              </Stack>
+              <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
+                  <Button variant='outlined' color= "dark_blue"  href='https://www.discord.gg/jQpFr6ZRXg' target="_blank">Discord</Button>
+              </Stack>
+              <Stack spacing={1} display='flex' alignItems="center" flexWrap="wrap">
+                <Button variant='outlined' color="light_red" href="https://www.tiktok.com/@gdscksu_" target="_blank">TikTok</Button>
               </Stack>
             </Grid>
           </Grid>

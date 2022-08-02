@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { blue, grey, red } from '@mui/material/colors';
+import { blue, grey, red, yellow } from '@mui/material/colors';
 
 const theme = createTheme({
     palette: { 
@@ -16,12 +16,19 @@ const theme = createTheme({
         red: {
             main: `#FF0000`,   
         },
+        light_red: {
+            main: red[700],
+        },
         blue: {
-            main: "#0000FF",
+            main: blue[400],
         },
         yellow: {
             main: "#FFBC00",
         },
+        dark_blue: {
+            main: blue[900],
+        }
+        
     },
     socials_btn_red: {
         backgroundColor: "white",
