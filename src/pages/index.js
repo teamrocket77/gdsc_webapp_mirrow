@@ -1,7 +1,21 @@
 import { Box, Grid, Typography, Stack, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useSession } from "next-auth/react";
-
+import { keyframes } from "@mui/system";
+const wave = keyframes`
+    from{
+      margin-left: 0;
+    }
+    to{
+      margin-left: -1600px;
+    }`;
+const swell = keyframes`
+    0%,100%{
+      transform: translate3d(0, -10px, 0);
+    }
+    50%{
+      transform: translate3d(0, 20px, 0);
+    }`;
 export default function Index() {
   const theme = useTheme();
   const { data: session, status } = useSession();
@@ -15,7 +29,7 @@ export default function Index() {
   return (
     <Box
       component="div"
-      sx={{ height: "100vh", width: "100vw", overflow: "hidden" }}
+      sx={{ height: "100%", width: "100vw", overflow: "hidden" }}
       mt={4}
     >
       <Grid
@@ -24,7 +38,7 @@ export default function Index() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "60vh" }}
+        style={{ minHeight: "80vh" }}
       >
         <Grid item>
           <Stack
@@ -102,36 +116,44 @@ export default function Index() {
       {/*-----Wavesvg-------*/}
       <Grid
         container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ ml: -70, mt: -0.7 }}
+        sx={{
+          height: "5%",
+          width: "100%",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          background: "#42a5f5",
+        }}
       >
-        <Grid item sx={{ mt: 10, zIndex: 3 }}>
-          <Box
-            component="img"
-            sx={{ height: 250.61, width: 2671.24 }}
-            alt=""
-            src="/static/images/wave.svg"
-          />
-        </Grid>
-        <Grid item sx={{ mt: -37, zIndex: 2 }}>
-          <Box
-            component="img"
-            sx={{ height: 250.61, width: 2671.24 }}
-            alt=""
-            src="/static/images/wave.svg"
-          />
-        </Grid>
-        <Grid item sx={{ mt: -37, zIndex: 1 }}>
-          <Box
-            component="img"
-            sx={{ height: 250.61, width: 2671.24 }}
-            alt=""
-            src="/static/images/wave.svg"
-          />
-        </Grid>
+        <Grid
+          item
+          sx={{
+            position: "absolute",
+            top: "-198px",
+            width: "6400px",
+            height: "198px",
+            backgroundImage: `url(/static/images/wave2.svg)`,
+            backgroundRepeat: "repeat-x",
+            animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite`,
+            transform: "translate3d(0, 0, 0)",
+            zIndex: 1,
+          }}
+        ></Grid>
+        <Grid
+          item
+          sx={{
+            position: "absolute",
+            top: "-175px",
+            width: "6400px",
+            height: "198px",
+            backgroundImage: `url(/static/images/wave2.svg)`,
+            backgroundRepeat: "repeat-x",
+            animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, ${swell} 7s ease -1.25s infinite`,
+            transform: "translate3d(0, 0, 0)",
+            opacity: 10,
+            zIndex: 2,
+          }}
+        ></Grid>
       </Grid>
     </Box>
   );
