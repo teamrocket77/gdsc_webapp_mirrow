@@ -1,11 +1,21 @@
 import { ClassNames } from "@emotion/react";
-import { Box, Grid, Typography, Stack, Button } from "@mui/material"
+import { Box, Grid, Typography, Stack, Button, Paper } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import { useSession } from 'next-auth/react';
 
 export default function Index() {
   const theme = useTheme()
   const { data: session, status } = useSession();
+
+  //This block is a stylesheet for the background shapes.
+  // TODO: Please put this block into a separate file.
+  const styles = {
+    paperContainer: {
+      height: 850,
+      backgroundSize: 'cover',
+      backgroundImage: "url('/static/images/background_shapes.svg')"
+    }
+  }
   // If the client session is loading, do this.
   // Todo: Replace with a nice loading screen.
   if (status === "loading") {
@@ -13,9 +23,12 @@ export default function Index() {
   }
 
   // TODO: INSERT LINK TO LINKEDIN
+  
   return (
+    <Paper style={styles.paperContainer}>
     <Box component='div' sx={{ height: '100%', overflow: 'hidden'}} mt={4}>
       <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
+      
       <Grid item>
               <Stack direction='row' spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
                 <Typography variant='h2' component='div' color={ theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
@@ -32,19 +45,25 @@ export default function Index() {
                   Twitter
                 </Button>
               </Stack>
+            <Stack spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
+              <Button variant='outlined' color= "dark_blue" href="https://www.linkedin.com/groups/12557765/" target="_blank">
+                LinkedIn
+              </Button>
+              </Stack>
               <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
                   <Button variant='outlined' color= "yellow" href='https://www.instagram.com/gdscksu/' target="_blank">Instagram</Button>
               </Stack>
               <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
-                  <Button variant='outlined' color= "dark_blue"  href='https://www.discord.gg/jQpFr6ZRXg' target="_blank">Discord</Button>
+                  <Button variant='outlined' color= "darkest_blue"  href='https://www.discord.gg/jQpFr6ZRXg' target="_blank">Discord</Button>
               </Stack>
               <Stack spacing={1} display='flex' alignItems="center" flexWrap="wrap">
                 <Button variant='outlined' color="light_red" href="https://www.tiktok.com/@gdscksu_" target="_blank">TikTok</Button>
               </Stack>
             </Grid>
           </Grid>
+          
         </Box>
-
+        </Paper>
 
     /*
     <Box component='div' sx={{ height: '100%', overflow: 'hidden' }} mt={4}>
