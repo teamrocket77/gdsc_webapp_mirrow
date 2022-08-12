@@ -1,0 +1,12 @@
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const serviceAccount = require('MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC7SCA0A6mpDHpC\nzvSSvvQCwV5hTI4EtVFldzcmtG+/Ciyzm3/WkybJzI/U0zx9tBr1dmKJhL14W+Tt\n3qcSdgmOmo45mKn1dZVJ98JsUFKpa7wVtCn+qArl6MR/AJxdgGfPMUUHHDyqITzH\n15ZgdoCZ5pBqSVUnoY14I+AJfeRQUguLGr9vG8b21qX9di3L5ISozO4lMm6kV3GO\n3jiFWAf9MaVjRA6zhbwjJScyBLFO5MTX1BxyqAoGxuxlM2Whuv+g+NrMFOdnJN5j\nzxf/hlVnuM/YhdcDbhXQRCzJ80hE4HT9D1OsWxGTv2MAkoUwIVYJB5JBNFKDhAwp\nw2JTFGg7AgMBAAECggEASNQf/cos2HnrM37Ceix6vHWQ67p3Adq22APXtRv21q4w\nuvmt6XYY3+HGTweEHwgCcdEDOaIegicOK/hpNRMk3Uk6JKi68yKyFu0btL45nvuv\nzSreJ9MWRdjSTOciZ3PvKpHo235+EtTRC4/JQSLkGLUiFMsGq941ovIkhdxohFjx\nH9D+Zbow+S5WEWBiJNS1Ik/c7NwGnAs7hQz7osP3MdfIgVXrrixqaPs+H3iTCw4l\nXMFRlkRbf+yYPtbHDDvQxaaX+kjsqvUbS38N1wfIB6Ss4g690BivyV/ydNxXOm7L\n+s43J49HBKdM3VqTL9wcNdmdl+NZclvexZvJ0G6J4QKBgQDf7vpuszL13gIaYvR2\nNDHoT/MdO8SlMJbw8rQuEdGY4LpMEvnzfF3dG0F0IIm7zrfTSMaGMvGN7P7yl8ca\nrVph42Upy13f7DLxqfMJKYWu4slK4JGvycF/iAEjYUIzPr1mU9n+zLvrecb10A4+\n7rg1ou/nFnMAJynnBYJQUIMmIQKBgQDWGY5Zsmfyyfl2hGDTKKHmvqBGvdq9UnwY\nhYm6GCkU9wTZKMS5fg/aWx7Eg6D+dFXxWpd0gxrUtte6xCLhbXCz/EDrgCp9ua2I\nAm+LU7BAERm5EHJweXrD75Pvbf9bOF8SUkHpyCMnSZXPbWeV8UyjcLd6nWS6r243\n83H9a7WK2wKBgDyiB3sL2GOMPkOIwapzzYOaijhDI6aatnP9M146AueDCc5pYPZV\nmVCx/ZIE8WZBvbJexSo3BwKnxgxHnmiRwaQ5nv2nC/8ChHS80IqNjJ3i2CAHGEth\ntJvkZnJ+9h7MARqA38jHBKborT+HmyPdHVGgkZaflHnZINZlvngipLAhAoGAKk1w\nX+6tNT6NCMrNKsureaEOoAuhLakfleTEur1NWLQaBCJXBGORFE7OvHtZkw0/cem5\nZS8GXSMnauKYFbx++UENPrrbKm5GiEoa6geGGpKGZ5eFVQ3boN00eKlePBLeTgts\ntJlzwK58aDiwr+K2htCdoB97KJvDBlEWo8DlZOMCgYA7WSQB5gERFZLVqatBiun/\n6j5jbrJTJvRT3Eg0ulYJ7n/OTrl3vPS5LQF4nzycDflDx0z3U/Iii7KVHCIEnxLE\nWkYhJL58AThFn4oQysyzs3NaSepaM2TUQtU/otxor2lB1cwb3w1hzlWcSVWvqHBb\no+ZDKixQizR5rYlboB3w9A==\n');
+const admin = require('firebase-admin');
+if(!admin.apps.length) {//to ensure app isnt initalized multiple times
+  initializeApp({
+    credential: cert(serviceAccount)
+  });
+}
+
+const db = getFirestore();
+export { db };
