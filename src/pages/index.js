@@ -107,7 +107,7 @@ export default function Index() {
           </Stack>
         </Grid>
         {/*----Button-------*/}
-        <Grid item>
+        <Grid item sx={{ zIndex: 3 }}>
           <Button variant="contained" color="secondary">
             Get Started
           </Button>
