@@ -25,9 +25,9 @@ export default function Error({ statusCode }) {
                 <Typography variant='h3'>{errorStatus[statusCode] !== undefined ? errorStatus[statusCode] : '500 Internal Server Error'}</Typography>
                 <Typography variant='body' maxWidth='560px'>
                     Oops, we can't seem to complete the action you requested.
-                    Try going back to the previous page or click the button below
-                    to go back to the{' '}
+                    Try going back to the{' '}
                     <Link href='/' underline='none' color={ theme.palette.secondary.main } sx={{ fontWeight: 'medium' }}>Landing Page</Link>
+                    {' '} or click the button below to get additional help.
                 </Typography>
                 <Button variant='contained' color='secondary' rel="noreferrer" href='https://discord.gg/jQpFr6ZRXg'>Get Help</Button>
             </Stack>
