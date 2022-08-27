@@ -2,11 +2,10 @@ import * as React from "react";
 import { Stack, Typography, Container } from "@mui/material";
 
 import ProfileCard from "../components/ProfileCard";
-import { red } from "@mui/material/colors";
 
 export default function team() {
   return (
-    <Container maxWidth="lg">
+    <Container justifyContent="center" alignItems="center" maxWidth="lg">
       <Stack mt={10} spacing={3} justifyContent="center" alignItems="center">
         <Typography gutterBottom variant="h4" component="div">
           Leadership

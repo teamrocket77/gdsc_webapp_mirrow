@@ -3,8 +3,8 @@ import {
   Card,
   Typography,
   Avatar,
-  Grid,
   Container,
+  Grid,
   Stack,
 } from "@mui/material";
 //Need to install icon package: `npm install @mui/icons-material`
@@ -15,12 +15,27 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function profilecard() {
   return (
-    <Container maxWidth="lg">
-      <Grid container spacing={4} columns={{ xs: 2, sm: 8, md: 16 }}>
+    <Container justifyContent="center" alignItems="center" maxWidth="lg">
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        spacing={4}
+        columns={{ xs: 2, sm: 8, md: 16 }}
+      >
         {Array.from(Array(4)).map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
+          <Grid
+            item
+            justifyContent="center"
+            alignItems="center"
+            display="flex"
+            xs={2}
+            sm={4}
+            md={4}
+            key={index}
+          >
             {/* ------------ Card Content --------------- */}
-            <Card sx={{ maxWidth: 215, p: 3 }}>
+            <Card sx={{ maxWidth: 215, px: 5, py: 3 }}>
               <Grid
                 container
                 spacing={1.5}
