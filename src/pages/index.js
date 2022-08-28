@@ -2,6 +2,7 @@ import { Box, Grid, Typography, Stack, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useSession } from "next-auth/react";
 import { keyframes } from "@mui/system";
+
 const wave = keyframes`
     from{
       margin-left: 0;
@@ -9,6 +10,7 @@ const wave = keyframes`
     to{
       margin-left: -1600px;
     }`;
+
 const swell = keyframes`
     0%,100%{
       transform: translate3d(0, -10px, 0);
@@ -16,6 +18,7 @@ const swell = keyframes`
     50%{
       transform: translate3d(0, 20px, 0);
     }`;
+
 export default function Index() {
   const theme = useTheme();
   const { data: session, status } = useSession();

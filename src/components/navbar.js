@@ -16,7 +16,13 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "./DrawerComp";
 
+// Navbar Pages
 const PAGES = ["About", "Events", "Socials", "Our Team"];
+
+// This is overkill but, we want page -> href mapping w/ key-value
+// Index matches pages since lists retain position (index)
+const PAGES_MAPPING = ["about", "events", "socials", "team"];
+
 const Navbar = (props) => {
   const { data: session, status } = useSession();
   const [value, setValue] = useState();
@@ -44,7 +50,7 @@ const Navbar = (props) => {
               </Typography>
               <Tabs textColor="#000">
                 {PAGES.map((page, index) => (
-                  <Tab key={index} label={page}></Tab>
+                  <Tab key={index} label={page} href={('/'+PAGES_MAPPING[index])}></Tab>
                 ))}
               </Tabs>
 
