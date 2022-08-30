@@ -13,10 +13,10 @@ const wave = keyframes`
 
 const swell = keyframes`
     0%,100%{
-      transform: translate3d(0, -25px, 0);
+      transform: translate3d(0, -5px, 0);
     }
     50%{
-      transform: translate3d(0, 5px, 0);
+      transform: translate3d(0, 15px, 5px);
     }`;
 
 export default function Index() {
@@ -38,7 +38,6 @@ export default function Index() {
         overflow: "hidden",
         position: "relative",
       }}
-      mt={4}
     >
       <Grid container direction="column" spacing={3}>
         <Grid
@@ -141,29 +140,29 @@ export default function Index() {
               item
               sx={{
                 position: "absolute",
-                top: "-198px",
+                top: "-158px",
                 width: "6400px",
                 height: "198px",
-                backgroundImage: `url(/static/images/wave2.svg)`,
+                backgroundImage: `url(/static/images/wave1.svg)`,
                 backgroundRepeat: "repeat-x",
                 animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite`,
                 transform: "translate3d(0, 0, 0)",
-                zIndex: 1,
+                zIndex: 2,
               }}
             ></Grid>
             <Grid
               item
               sx={{
                 position: "absolute",
-                top: "-175px",
+                top: "-178px",
                 width: "6400px",
                 height: "198px",
                 backgroundImage: `url(/static/images/wave2.svg)`,
                 backgroundRepeat: "repeat-x",
-                animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, ${swell} 7s ease -1.25s infinite`,
+                animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, ${swell} 70s ease -1.25s infinite`,
                 transform: "translate3d(0, 0, 0)",
                 opacity: 10,
-                zIndex: 2,
+                zIndex: 1,
               }}
             ></Grid>
           </Grid>
