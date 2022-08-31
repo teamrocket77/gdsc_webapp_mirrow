@@ -7,7 +7,6 @@ import GoogleProvider from 'next-auth/providers/google';
 // DEVELOPERS WILL ALWAYS BE IN DEVELOPMENT MODE.
 const dotenv = require('dotenv');
 dotenv.config({path: `.env.${process.env.NODE_ENV}`});
-console.log('Environment Mode: '+process.env.NODE_ENV);
 
 // Configure Authentication Provider.
 export default NextAuth({

@@ -8,7 +8,6 @@ export default async function handler(req, res) {
       return;
     }
     //not sure how to sanity-check that these properties exist in the request body, but that should be done here
-    console.log(req.body)
     const newref = db.collection('applicants').doc(`${req.body.firstName}-${req.body.lastName}-${req.body.email}`.toLowerCase());
     await newref.set(req.body);
     res.status(200).send()
