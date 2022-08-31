@@ -123,7 +123,7 @@ export default function Index() {
           </Grid>
         </Grid>
         {/*-----Wavesvg-------*/}
-        <Grid container item sx={{ minHeight: "25vh" }}>
+        <Grid container item sx={{ minHeight: "26.07vh" }}>
           <Grid
             container
             item
