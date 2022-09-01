@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <Box
       component="div"
-      sx={{ height: "100vh", width: "100vw", overflow: "hidden" }}
+      sx={{ height: "100vh", width: "100%", overflow: "hidden" }}
       mt={4}
     >
       <Grid

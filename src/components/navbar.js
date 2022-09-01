@@ -17,11 +17,11 @@ import React, { useState, useEffect } from "react";
 import DrawerComp from "./DrawerComp";
 
 // Navbar Pages
-const PAGES = ["About", "Events", "Socials", "Our Team"];
+const PAGES = ["About", "Events", "Socials", "Our Team", "Opportunities"];
 
 // This is overkill but, we want page -> href mapping w/ key-value
 // Index matches pages since lists retain position (index)
-const PAGES_MAPPING = ["about", "events", "socials", "team"];
+const PAGES_MAPPING = ["about", "events", "socials", "team", "opportunities"];
 
 const Navbar = (props) => {
   const { data: session, status } = useSession();
@@ -50,7 +50,11 @@ const Navbar = (props) => {
               </Typography>
               <Tabs textColor="#000">
                 {PAGES.map((page, index) => (
-                  <Tab key={index} label={page} href={('/'+PAGES_MAPPING[index])}></Tab>
+                  <Tab
+                    key={index}
+                    label={page}
+                    href={"/" + PAGES_MAPPING[index]}
+                  ></Tab>
                 ))}
               </Tabs>
 
@@ -79,4 +83,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar
+export default Navbar;
