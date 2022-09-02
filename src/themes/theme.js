@@ -14,7 +14,7 @@ const theme = createTheme({
             main: '#FF69B4',
         },
         red: {
-            main: `#FF0000`,   
+            main: `#FF0000`,
         },
         light_red: {
             main: red[700],
@@ -26,7 +26,13 @@ const theme = createTheme({
             main: "#FFBC00",
         },
         dark_blue: {
+            main: blue[300],
+        },
+        darkest_blue: {
             main: blue[900],
+        },
+        black: {
+            main: "#000000",
         }
         
     },
@@ -40,5 +46,7 @@ const theme = createTheme({
         }
       },
 });
+
+
 
 export default theme;
