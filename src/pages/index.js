@@ -16,7 +16,7 @@ const swell = keyframes`
       transform: translate3d(0, -5px, 0);
     }
     50%{
-      transform: translate3d(0, 15px, 5px);
+      transform: translate3d(0, 15px, 0);
     }`;
 
 export default function Index() {
@@ -159,9 +159,8 @@ export default function Index() {
                 height: "198px",
                 backgroundImage: `url(/static/images/wave2.svg)`,
                 backgroundRepeat: "repeat-x",
-                animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, ${swell} 70s ease -1.25s infinite`,
+                animation: `${wave} 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, ${swell} 6s ease -1.25s infinite`,
                 transform: "translate3d(0, 0, 0)",
-                opacity: 10,
                 zIndex: 1,
               }}
             ></Grid>
