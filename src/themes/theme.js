@@ -36,6 +36,11 @@ const theme = createTheme({
         }
         
     },
+    MuiButton: {
+        root: {
+            borderRadius: 16,
+        }
+    },
     socials_btn_red: {
         backgroundColor: "white",
         borderColor: "red",

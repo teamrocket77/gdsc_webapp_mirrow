@@ -1,12 +1,21 @@
 import { ClassNames } from "@emotion/react";
 import { Box, Grid, Typography, Stack, Button, Paper} from "@mui/material";
 import YoutubeIcon from "@mui/icons-material/YouTube";
-import { useTheme } from "@mui/material/styles";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import { useTheme, styled } from "@mui/material/styles";
 import { useSession } from 'next-auth/react';
+import { blue } from "@mui/material/colors";
 
 export default function Index() {
   const theme = useTheme()
   const { data: session, status } = useSession();
+
+  const RoundedButton = styled(Button)(({ theme }) => ({
+    borderRadius: 30,
+  }))
+
 
   
   //This block is a stylesheet for the background shapes.
@@ -32,46 +41,74 @@ export default function Index() {
   
   return (
     <Paper style={styles.paperContainer}>
-      <Box component='div' sx={{ height: '100%', overflow: 'hidden'}} mt={4}>
-        <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
+      <Box component='div' sx={{ height: '100%', overflow: 'hidden'}} mt={10}>
+        <Grid container spacing={0} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '86vh' }}>
         <Grid item>
-                <Stack direction='row' spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
+                <Stack direction='row' spacing={25} display='flex' alignItems='center' flexWrap='wrap'>
                   <Typography variant='h2' component='div' color={ theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
                     JOIN US ON...
                   </Typography>
                 </Stack>
-                <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
-                  <Button variant='outlined' sx={
+                <Stack spacing={5} display='flex' alignItems="center" flexWrap='wrap'>
+                  <RoundedButton variant='outlined' sx={
                       {
-                        color: "#000000", backgroundColor: "#FFFFFFF", borderColor: "#FF0000", "&:hover": 
+                        color: "#FF0000", backgroundColor: "#FFFFFFF", borderColor: "#FF0000", "&: hover": 
                         {
                           color: "#FFFFFF", backgroundColor: '#FF0000', borderColor:'#FF0000'
                         }
                       }
                     } startIcon={
-                        <YoutubeIcon sx={{color: "#000000"}}></YoutubeIcon>
+                        <YoutubeIcon></YoutubeIcon>
                         } href="https://www.youtube.com/channel/UCO3Yz1Nj6qkIZkHF9RS9UvA" target="_blank">
                       YouTube
-                  </Button>
+                  </RoundedButton>
                 </Stack>
-                <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
-                  <Button variant='outlined' color= "blue" href="https://mobile.twitter.com/gdscksu" target="_blank">
+                <Stack spacing={5} display='flex' alignItems="center" flexWrap='wrap'>
+                  <RoundedButton variant='outlined' sx={{
+                    color: blue[400], backgroundColor: "#FFFFFF", borderColor: blue[400], "&: hover": {
+                        color: "#FFFFFF", backgroundColor: blue[400], borderColor: "#FFFFFF"
+                      }
+                    }} startIcon = {
+                      <TwitterIcon></TwitterIcon>
+                    }
+                  href="https://mobile.twitter.com/gdscksu" target="_blank">
                     Twitter
-                  </Button>
+                  </RoundedButton>
                 </Stack>
-              <Stack spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
-                <Button variant='outlined' color= "dark_blue" href="https://www.linkedin.com/groups/12557765/" target="_blank">
+              <Stack spacing={5} display='flex' alignItems='center' flexWrap='wrap'>
+                <RoundedButton variant='outlined' sx={{
+                    color: blue[200], backgroundColor: "#FFFFFF", borderColor: blue[200], "&: hover": {
+                      color: "#FFFFFF", backgroundColor: blue[200], borderColor: "#FFFFFF"
+                    }
+                  }}
+                startIcon={
+                    <LinkedInIcon></LinkedInIcon>
+                } href="https://www.linkedin.com/groups/12557765/" target="_blank">
                   LinkedIn
-                </Button>
+                </RoundedButton>
                 </Stack>
-                <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
-                    <Button variant='outlined' color= "yellow" href='https://www.instagram.com/gdscksu/' target="_blank">Instagram</Button>
+                <Stack spacing={5} display='flex' alignItems="center" flexWrap='wrap'>
+                    <RoundedButton variant='outlined' sx={{
+                      color: "#FFBC00", backgroundColor: "#FFFFFF", borderColor: "#FFBC00", "&: hover": {
+                        color: "#FFFFFF", backgroundColor: "#FFBC00", borderColor: "#FFFFFF"
+                      }
+                    }} startIcon = {
+                      <InstagramIcon></InstagramIcon>
+                    } href='https://www.instagram.com/gdscksu/' target="_blank">Instagram</RoundedButton>
                 </Stack>
-                <Stack spacing={1} display='flex' alignItems="center" flexWrap='wrap'>
-                    <Button variant='outlined' color= "darkest_blue"  href='https://www.discord.gg/jQpFr6ZRXg' target="_blank">Discord</Button>
+                <Stack spacing={5} display='flex' alignItems="center" flexWrap='wrap'>
+                    <RoundedButton variant='outlined' sx={{
+                      color: "#0d47a1", backgroundColor: "#FFFFFF", borderColor: "#0d47a1", "&: hover": {
+                        color: "#FFFFFF", backgroundColor: "#0d47a1", borderColor: "FFFFFF"
+                      }
+                    }}  href='https://www.discord.gg/jQpFr6ZRXg' target="_blank">Discord</RoundedButton>
                 </Stack>
-                <Stack spacing={1} display='flex' alignItems="center" flexWrap="wrap">
-                  <Button variant='outlined' color="light_red" href="https://www.tiktok.com/@gdscksu_" target="_blank">TikTok</Button>
+                <Stack spacing={5} display='flex' alignItems="center" flexWrap="wrap">
+                  <RoundedButton variant='outlined' sx={{
+                    color: "#D32F2F", backgroundColor: "#FFFFFF", borderColor: "#D32F2F", "&: hover": {
+                      color: "#FFFFFF", backgroundColor: "#D32F2F", borderColor: "#FFFFFF"
+                    }
+                  }} href="https://www.tiktok.com/@gdscksu_" target="_blank">TikTok</RoundedButton>
                 </Stack>
               </Grid>
             </Grid>
