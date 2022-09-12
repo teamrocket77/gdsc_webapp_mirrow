@@ -48,7 +48,7 @@ const Navbar = (props) => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 DSC KSU
               </Typography>
-              <Tabs textColor="#000">
+              <Tabs textColor={ theme.palette.text.primary }>
                 {PAGES.map((page, index) => (
                   <Tab key={index} label={page} href={('/'+PAGES_MAPPING[index])}></Tab>
                 ))}
