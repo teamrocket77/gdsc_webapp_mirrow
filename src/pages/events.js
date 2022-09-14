@@ -11,11 +11,15 @@ import {
   Button,
   Paper,
 } from "@mui/material";
+
+import BackgroundCircle from "../components/backgroundCircle";
+
 //Need to install react-card-flip from npm with `npm i react-card-flip` to src folder
 const Events = () => {
   const [flip, setFlip] = useState(false);
   return (
-    <Container justifyContent="center" alignItems="center" maxWidth="lg">
+    <Container justifyContent="center" alignItems="center" maxWidth="lg" sx={{ zIndex: "2" }}>
+      <BackgroundCircle color="red" />
       <Typography
         gutterBottom
         variant="h4"

@@ -1,6 +1,7 @@
 import React from "react";
 import { Stack, Box, Grid, Typography, Paper, Card } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import BackgroundCircle from "../components/backgroundCircle";
 
 const About = () => {
   const theme = useTheme();
