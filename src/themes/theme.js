@@ -13,6 +13,10 @@ const theme = createTheme({
     hashtags: {
       main: "#FF69B4",
     },
+    button: {
+      main: "#FFBB00",
+      contrastText: "#FFF"
+    },
     themeColor: {
       blue: "#46A8F6",
       green: "#34A853",
