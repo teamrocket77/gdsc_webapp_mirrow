@@ -15,7 +15,13 @@ const theme = createTheme({
     },
     button: {
       main: "#FFBB00",
-      contrastText: "#FFF",
+      contrastText: "#FFF"
+    },
+    themeColor: {
+      blue: "#46A8F6",
+      green: "#34A853",
+      red: "#EF5350",
+      yellow: "#FBBC04",
     },
   },
 });
