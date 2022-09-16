@@ -1,21 +1,22 @@
 # Security Policy
 
-## Supported Versions
+This document outlines security procedures and general policies for the Google Developer Student Club (Kennesaw State University) as found on [here](https://github.com/KSU-Google-DSC).
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+* [Reporting a Vulnerability](#reporting-a-vulnerability)
+* [Disclosure Policy](#disclosure-policy)
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+We take all security related vulnerabilities and incidents seriously. 
+We appreciate you for reporting and helping to improve our security.
+As always, we appreciate your efforts and responsible disclosure and
+will may every possible effort to acknowledge your contribution.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Disclosure Policy
+
+When a security bug-related report is received, it will be assigned to a developer to investigate and hopefully remediate.
+This person will coordinate and be responsible for the fix and release process that includes the following steps:
+
+* Confirm the bug through reproducible steps
+* Check aduits to see if similar has happened previously
+* Prepare fixes for release
