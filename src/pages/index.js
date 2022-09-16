@@ -1,50 +1,57 @@
-import Head from 'next/head';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import styles from '../styles/Home.module.css';
+import { Box, Grid, Typography, Stack, Button } from "@mui/material"
+import { useTheme } from "@mui/material/styles"
+import { useSession } from 'next-auth/react';
 
-export default function Home() {
+export default function Index() {
+  const theme = useTheme()
   const { data: session, status } = useSession();
 
   // If the client session is loading, do this.
+  // Todo: Replace with a nice loading screen.
   if (status === "loading") {
     return <p>Loading Session</p>
   }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Google Student Developer Club - KSU</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      {/* If Session does not exist, invalid or client has not logged in, do this. */}
-      {!session && (
-        <>
-          <button onClick={() => signIn()}>Login</button>
-        </>
-      )}
-
-      {/* If Session does exist and the client has logged in, do this. */}
-      {session && (
-        <>
-          <main className={styles.main}>
-            <h1 className={styles.title}>
-              Welcome to <a href="https://nextjs.org">Next.js!</a> with{" "}
-              <a href="https://mui.com/">Material-UI!</a>
-            </h1>
-            <p className={styles.description}>
-              Get started by editing{' '}
-              <code className={styles.code}>pages/index.js</code>
-            </p>
-            <p className={styles.description}>
-              Email:{' '}
-              <code className={styles.code}>{session.user.email}</code>
-            </p>
-            <br />
-            <button onClick={() => signOut()}>Logout</button>
-          </main>
-        </>
-      )}
-    </div>
+    <Box component='div' sx={{ height: '100%', overflow: 'hidden' }} mt={4}>
+      <Grid container spacing={6} direction='column' alignItems='center' justifyContent='center' style={{ minHeight: '60vh' }}>
+        <Grid item>
+          <Stack direction='row' spacing={1} display='flex' alignItems='center' flexWrap='wrap'>
+            <Box component='img' sx={{ height: 64, width: 64 }} alt='Google Developer Student Club Logo' src='/static/images/gdsc_logo.png' />
+            <Typography variant='h2' component='div' color={ theme.palette.primary.alternate } sx={{ flexGrow: 1}}>
+              Google Developer Student Club
+            </Typography>
+          </Stack>
+          <Typography variant='h3' component='div' color={ theme.palette.primary.alternate } sx={{ flexGrow: 1}} mt={1} ml={9.5}>
+            Kennesaw State University
+          </Typography>
+          <Stack direction='row' spacing={-20} display='flex' alignItems='center' flexWrap='wrap' mt={5} ml={21}>
+            <Typography variant='body1' component='div' color={ theme.palette.hashtags.main } sx={{ flexGrow: 1}}>
+              #developerstudentclubs
+            </Typography>
+            <Typography variant='body1' component='div' color={ theme.palette.hashtags.main } sx={{ flexGrow: 1}}>
+              #googlestudents
+            </Typography>
+            <Typography variant='body1' component='div' color={ theme.palette.hashtags.main } sx={{ flexGrow: 1}}>
+              #growwithgoogle
+            </Typography>
+          </Stack>
+        </Grid>
+        <Grid item>
+          <Button variant='contained' color='secondary'>Get Started</Button>
+        </Grid>
+      </Grid>
+      <Grid container spacing={0} direction='column' alignItems='center' justifyContent='center' sx={{ ml: -70, mt: -0.7 }}>
+        <Grid item sx={{ mt: 10, zIndex: 3 }}>
+          <Box component='img' sx={{ height: 250.61, width: 2671.24 }} alt='' src='/static/images/wave_1.svg'/>
+        </Grid>
+        <Grid item sx={{ mt: -37, zIndex: 2 }}>
+          <Box component='img' sx={{ height: 250.61, width: 2671.24 }} alt='' src='/static/images/wave_2.svg'/>
+        </Grid>
+        <Grid item sx={{ mt: -37, zIndex: 1 }}>
+          <Box component='img' sx={{ height: 250.61, width: 2671.24 }} alt='' src='/static/images/wave_3.svg' />
+        </Grid>
+      </Grid>
+    </Box>
   )
 }
