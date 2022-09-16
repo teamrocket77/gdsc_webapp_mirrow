@@ -4,7 +4,7 @@ const serviceAccount = require('C:\\Users\\mbjmc\\Documents\\projects\\Webapp\\s
 const admin = require('firebase-admin');
 if(!admin.apps.length) {//probably better way to do this, if you know @ me
   initializeApp({
-    credential: cert(serviceAccount)
+    credential: applicationDefault()
   });
 }
 
