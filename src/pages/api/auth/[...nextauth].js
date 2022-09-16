@@ -30,13 +30,13 @@ const firestore = getFirestore(firestoreApp);
 export default NextAuth({
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            authorization: process.env.GOOGLE_AUTHORIZATION_URL
+            clientId: process.env.GOOGLE_PROVIDER_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_PROVIDER_CLIENT_SECRET,
+            authorization: process.env.GOOGLE_PROVIDER_AUTHORIZATION_URL
         }),
     ],
     adapter: FirebaseAdapter(firestore.app),
-    secret: process.env.SECRET,
+    secret: process.env.AUTH_SECRET,
     jwt: {
         encryption: true
     },
