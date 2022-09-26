@@ -1,8 +1,9 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { FirestoreAdapter, FirstoreAdapter } from '@next-auth/firebase-adapter';
 //import { FirestoreAdapter } from '@next-auth/firebase-adapter';
-import { FirestoreAdapter } from '../../../temp_modules/firebase-admin-adapter';
-import { firestoreApp } from '../../../database';
+//import { FirestoreAdapter } from '../../../temp_modules/firebase-admin-adapter';
+//import { firestoreApp } from '../../../database';
 
 // Configure Environmental Variables.
 // NODE_ENV is set to 'development' when 'npm run dev' in development mode.
@@ -22,7 +23,18 @@ export default NextAuth({
         }),
     ],
     //adapter: FirebaseAdapter(firestore.app),
-    adapter: FirestoreAdapter(firestoreApp.options),
+    //adapter: FirestoreAdapter(firestoreApp.options),
+    adapter: FirestoreAdapter({
+        apiKey: process.env.FIREBASE_USER_ACCOUNT_API_KEY,
+        appId: process.env.FIREBASE_USER_ACCOUNT_APP_ID,
+        authDomain: process.env.FIREBASE_USER_ACCOUNT_AUTH_DOMAIN,
+        databaseURL: process.env.FIREBASE_USER_ACCOUNT_DATABASE_URL,
+        projectId: process.env.FIREBASE_USER_ACCOUNT_PROJECT_ID,
+        storageBucket: process.env.FIREBASE_USER_ACCOUNT_STORAGE_BUCKET,
+        messagingSenderId: process.env.FIREBASE_USER_ACCOUNT_MESSAGING_SENDER_ID,
+        // Optional emulator config (see below for options)
+        emulator: {},
+    }),
     secret: process.env.AUTH_SECRET,
     jwt: {
         encryption: true
