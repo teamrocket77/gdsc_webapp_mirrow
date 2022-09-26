@@ -1,3 +1,4 @@
+// USE THIS IN THE FUTURE; IS BROKEN - Sanjay
 import { initializeApp, getApps, getApp, cert } from 'firebase-admin/app';
 
 const dotenv = require('dotenv')
