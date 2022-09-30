@@ -55,22 +55,22 @@ const Navbar = (props) => {
               </Tabs>
 
               {/* If Session does not exist, invalid or client has not logged in, do this. */}
-              {!session && (
+              {/* {!session && (
                 <>
                   <Button color="inherit" onClick={() => signIn()}>
                     Login
                   </Button>
                 </>
-              )}
+              )} */}
 
               {/* If Session does exist and the client has logged in, do this. */}
-              {session && (
+              {/* {session && (
                 <>
                   <Button color="inherit" onClick={() => signOut()}>
                     Logout
                   </Button>
                 </>
-              )}
+              )} */}
             </>
           )}
         </Toolbar>
