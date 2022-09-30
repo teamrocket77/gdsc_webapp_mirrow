@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   Drawer,
   IconButton,
@@ -7,11 +7,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu"
+import MenuIcon from "@mui/icons-material/Menu";
 
 const DrawerComp = () => {
-  const PAGES = ["About", "Events", "Socials", "Our Team"]
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const PAGES = ["About", "Events", "Socials", "Our Team", "Opportunities"];
+  const PAGES_MAPPING = ["about", "events", "socials", "team", "opportunities"];
+  const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
       <Drawer
@@ -21,7 +22,11 @@ const DrawerComp = () => {
       >
         <List>
           {PAGES.map((page, index) => (
-            <ListItemButton onClick={() => setOpenDrawer(false)} key={index}>
+            <ListItemButton
+              onClick={() => setOpenDrawer(false)}
+              key={index}
+              href={"/" + PAGES_MAPPING[index]}
+            >
               <ListItemIcon>
                 <ListItemText>{page}</ListItemText>
               </ListItemIcon>
@@ -37,4 +42,12 @@ const DrawerComp = () => {
   );
 };
 
-export default DrawerComp
+// {PAGES.map((page, index) => (
+//   <Tab
+//     key={index}
+//     label={page}
+//     href={"/" + PAGES_MAPPING[index]}
+//   ></Tab>
+// ))}
+
+export default DrawerComp;

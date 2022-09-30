@@ -1,15 +1,15 @@
 import {
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
-  Stack,
   Button,
   Box,
   useMediaQuery,
   useTheme,
   Tabs,
   Tab,
+  Grid,
+  Link,
 } from "@mui/material";
 
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -35,22 +35,61 @@ const Navbar = (props) => {
         <Toolbar>
           {isMatch ? (
             <>
-              <DrawerComp sx={{ marginLeft: 4 }} />
-              <Box
-                component="img"
-                sx={{ height: 50, width: 50, mx: "auto" }}
-                alt="Google Developer Student Club Logo"
-                src="/static/images/gdsc_logo.png"
-              />
+              <Grid
+                container
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item xs={2}>
+                  <DrawerComp sx={{ marginLeft: 4 }} />
+                </Grid>
+                <Grid item xs={8}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <a href="/">
+                      <img
+                        alt="Google Developer Student Club Logo"
+                        src="/static/images/gdsc_logo.png"
+                        height="50px"
+                        width="50px"
+                        marginX="auto"
+                      />
+                    </a>
+                  </Box>
+                </Grid>
+                <Grid item xs={2}>
+                  <div></div>
+                </Grid>
+              </Grid>
             </>
           ) : (
             <>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                DSC KSU
+              <Typography
+                variant="h6"
+                noWrap
+                component={Link}
+                sx={{ flexGrow: 1, textDecoration: "none" }}
+              >
+                <Link
+                  href="/"
+                  underline="none"
+                  color={theme.palette.primary.alternate}
+                >
+                  DSC KSU
+                </Link>
               </Typography>
-              <Tabs textColor={ theme.palette.text.primary }>
+
+              <Tabs textColor={theme.palette.text.primary}>
                 {PAGES.map((page, index) => (
-                  <Tab key={index} label={page} href={('/'+PAGES_MAPPING[index])}></Tab>
+                  <Tab
+                    key={index}
+                    label={page}
+                    href={"/" + PAGES_MAPPING[index]}
+                  ></Tab>
                 ))}
               </Tabs>
 
@@ -79,4 +118,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar
+export default Navbar;
