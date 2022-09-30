@@ -1,4 +1,4 @@
-import { firestoreApp } from '../../../database';
+import { firestoreApp  } from '../../../database';
 import { getFirestore } from 'firebase-admin/firestore';
 const Firestore_Database = getFirestore(firestoreApp);
 //hypothetically this would also work pretty much like a PATCH request

@@ -1,9 +1,8 @@
-// USE THIS IN THE FUTURE; IS BROKEN - Sanjay
 import { initializeApp, cert, getApps, getApp } from 'firebase-admin/app';
 
 const dotenv = require('dotenv')
 
-export const firestoreApp = !getApps().length ? initializeApp({
+export let firestoreApp = !getApps().length ? initializeApp({
   credential: cert({
     //"type": process.env.FIREBASE_SERVICE_ACCOUNT_TYPE,
     projectId: process.env.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID,
@@ -17,4 +16,4 @@ export const firestoreApp = !getApps().length ? initializeApp({
     //"client_x509_cert_url": process.env.FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL
   }),
   databaseURL: process.env.FIRESTORE_SERVICE_DATABASE_URL
-}, "COMMON") : getApp();
+}, "COMMON") : getApp("COMMON");
