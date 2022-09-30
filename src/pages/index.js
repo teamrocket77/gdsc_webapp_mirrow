@@ -117,7 +117,7 @@ export default function Index() {
           </Grid>
           {/*----Button-------*/}
           <Grid item>
-            <Button variant="contained" color="secondary">
+            <Button href="/about" variant="contained" color="secondary">
               Get Started
             </Button>
           </Grid>
