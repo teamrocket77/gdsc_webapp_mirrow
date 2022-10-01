@@ -18,6 +18,7 @@ FROM node:16-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
+COPY .env.production ./
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
