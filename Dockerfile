@@ -13,12 +13,16 @@ COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm run build
 
-# Copy & Run
+# Run
 FROM node:16-alpine AS runner
 WORKDIR /app
 
+# Copy Production Env File
 ENV NODE_ENV production
 COPY .env.production ./
+
+# Copy Static Directories
+COPY public/ ./public/
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
