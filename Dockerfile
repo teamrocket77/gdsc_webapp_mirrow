@@ -1,6 +1,6 @@
 # Packages
 FROM node:16-alpine AS dependencies
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat=1.2.3-r0 && rm -rf /var/cache/apk/*
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
@@ -24,8 +24,7 @@ COPY .env.production ./
 # Copy Static Directories
 COPY public/ ./public/
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 
 COPY --from=builder --chown=nextjs:nodes /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
