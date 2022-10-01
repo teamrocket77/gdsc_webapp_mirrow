@@ -29,7 +29,7 @@ export default NextAuth({
         appId: process.env.FIREBASE_USER_ACCOUNT_APP_ID,
         measurementId: process.env.FIREBASE_USER_ACCOUNT_MEASUREMENT_ID
     }),
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     jwt: {
         encryption: true
     },
