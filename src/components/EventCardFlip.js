@@ -15,7 +15,7 @@ const EventCardFlip = (props) => {
     console.log("Event Props: "+props);
     const [flip, setFlip] = useState(false);
     return (
-    <ReactCardFlip isFlipped={flip} flipDirection="vertical">
+    <ReactCardFlip isFlipped={flip} flipDirection="vertical" key={props.key}>
         <Paper
         display="flex"
         justifyContent="center"
