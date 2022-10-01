@@ -1,0 +1,6 @@
+**/src/node_modules
+**/src/.next
+**/src/.git
+Dockerfile
+.dockerignore
+README.md
