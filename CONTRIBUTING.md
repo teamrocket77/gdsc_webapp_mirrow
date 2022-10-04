@@ -79,6 +79,7 @@ service cloud.firestore {
         }
     }
 }
+```
 
 > **Note:** Your database instance should not be open to the public!
 
