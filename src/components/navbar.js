@@ -83,7 +83,7 @@ const Navbar = (props) => {
                 </Link>
               </Typography>
 
-              <Tabs textColor={theme.palette.text.primary}>
+              <Tabs textColor="primary">
                 {PAGES.map((page, index) => (
                   <Tab
                     key={index}
