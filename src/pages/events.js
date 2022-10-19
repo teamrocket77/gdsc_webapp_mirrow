@@ -12,7 +12,7 @@ import { getAllEvents } from "./api/events/all";
 //Need to install react-card-flip from npm with `npm i react-card-flip` to src folder
 const Events = ({ data }) => {
   return (
-    <Container justifycontent="center" alignitems="center" maxWidth="lg">
+    <Container justifyContent="center" alignItems="center" maxWidth="lg">
       <Typography
         gutterBottom
         variant="h4"
