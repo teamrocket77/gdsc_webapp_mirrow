@@ -3,7 +3,7 @@ on:
   release:
     branches:
       - main # https://dscksu.dev
-      # - dev # https://preview.dscksu.dev
+      - dev # https://preview.dscksu.dev
     types: [published]
 env:
   REPO_NAME: Webapp
