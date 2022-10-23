@@ -17,7 +17,9 @@ RUN npm run build
 FROM node:16-alpine AS runner
 WORKDIR /app
 
+# Copy Production Env File
 ENV NODE_ENV production
+COPY .env.production ./
 
 # Copy Static Directories
 COPY public/ ./public/

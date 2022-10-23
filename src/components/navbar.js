@@ -3,15 +3,17 @@ import {
   Toolbar,
   Typography,
   Button,
+  Link,
   Box,
   useMediaQuery,
   useTheme,
   Tabs,
   Tab,
   Grid,
-  Link,
 } from "@mui/material";
 
+//import { Link } from "next/link";
+import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "./DrawerComp";
@@ -50,7 +52,7 @@ const Navbar = (props) => {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <a href="/">
+                    {/* <a href="/">
                       <img
                         alt="Google Developer Student Club Logo"
                         src="/static/images/gdsc_logo.png"
@@ -58,7 +60,16 @@ const Navbar = (props) => {
                         width="50px"
                         marginX="auto"
                       />
-                    </a>
+                    </a> */}
+                    <Link href="/">
+                      <Image
+                          alt="Google Developer Student Club Logo"
+                          src="/static/images/gdsc_logo.png"
+                          height="50px"
+                          width="50px"
+                          marginX="auto"
+                        />
+                    </Link>
                   </Box>
                 </Grid>
                 <Grid item xs={2}>
