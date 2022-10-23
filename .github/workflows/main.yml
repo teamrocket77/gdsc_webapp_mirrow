@@ -1,0 +1,30 @@
+name: Screenshot actions
+on:
+  pull_request:
+    branches:
+      - 'gui/**'
+      - main
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/
+    steps:
+      - uses: actions/checkout@v3
+      - id: matrix
+        run: |
+          echo "file_list=$(
+          site="http://localhost:3000"
+          cd $PWD/pages
+          arr=()
+          for file in *.js; do 
+                  if [[ "$file" != _* ]]; then
+                          arr+=("$file")
+                  fi
+          done
+          printf '%s ' "${arr[@]}"
+          )" 
+
+      - name: Get list 
+        run: echo "File list is ${{ steps.matrix.file_list }}"
