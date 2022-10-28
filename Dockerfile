@@ -2,7 +2,9 @@
 FROM node:16-alpine AS dependencies
 RUN apk add --no-cache libc6-compat=1.2.3-r0 && rm -rf /var/cache/apk/*
 
-WORKDIR /app_prod
+WORKDIR /app
+
+RUN pwd && ls
 
 COPY package.json ./
 COPY package-lock.json ./
