@@ -1,21 +1,26 @@
 # Packages
 FROM node:16-alpine AS dependencies
 RUN apk add --no-cache libc6-compat=1.2.3-r0 && rm -rf /var/cache/apk/*
-WORKDIR /app
+
+#WORKDIR /app
+
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm ci --only=production
 
 # Build
 FROM node:16-alpine AS builder
-WORKDIR /app
+
+#WORKDIR /app
+
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm run build
 
 # Run
 FROM node:16-alpine AS runner
-WORKDIR /app
+
+#WORKDIR /app
 
 ENV NODE_ENV production
 
