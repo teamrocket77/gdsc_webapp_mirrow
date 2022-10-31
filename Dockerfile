@@ -14,6 +14,7 @@ RUN npm ci --only=production
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . .
+COPY --from=dependencies /app/.env ./src/.env
 COPY --from=dependencies /app/node_modules ./src/node_modules
 RUN ls -l
 RUN ls -l /app/src
