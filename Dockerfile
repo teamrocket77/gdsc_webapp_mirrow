@@ -4,20 +4,19 @@
 FROM node:16-alpine AS dependencies
 RUN apk add --no-cache libc6-compat=1.2.3-r0 && rm -rf /var/cache/apk/*
 WORKDIR /app
-COPY /src/.env ./
 COPY /src/package.json ./
 COPY /src/package-lock.json ./
-RUN ls -l
+RUN ls -a
 RUN npm ci --only=production
 
 # Build
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . .
-COPY --from=dependencies /app/.env ./src/.env
+COPY /src/.env /app/src
 COPY --from=dependencies /app/node_modules ./src/node_modules
-RUN ls -l
-RUN ls -l /app/src
+RUN ls -a
+RUN ls -a /app/src
 WORKDIR /app/src
 RUN npm run build
 
