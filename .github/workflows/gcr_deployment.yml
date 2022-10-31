@@ -31,7 +31,7 @@ jobs:
           project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
           service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
-      - name: Generate .env File
+      - name: Source -> Docker Image
         run: |-
           touch ./src/.env
           echo SECRET="$SECRET" >> ./src/.env
@@ -42,8 +42,6 @@ jobs:
           echo FIREBASE_SERVICE_ACCOUNT_PROJECT_ID="$FIREBASE_SERVICE_ACCOUNT_PROJECT_ID" >> ./src/.env
           echo FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY="$FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY" >> ./src/.env
           echo FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL="$FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL" >> ./src/.env
-      - name: Source -> Docker Image
-        run: |-
           docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
       - name: Docker Image -> Google Cloud Run
         run: |-
