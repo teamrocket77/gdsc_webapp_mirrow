@@ -1,4 +1,5 @@
 .vercel
+**/.envrc
 **/.DS_Store
 **/.env.development
 **/.env.local

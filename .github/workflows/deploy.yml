@@ -1,0 +1,63 @@
+name: Push application to GCP
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  deploy:
+    name: Setup Gcloud Account
+    # this line accesses the vars in the deployment env
+    environment: deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+        #login to googgle using creds
+      - id: 'auth'
+        name: 'authenticate to Google Cloud'
+        uses: google-github-actions/auth@v0
+        with:
+          project_id: ${{secrets.GCP_PROJECT_ID}}
+          credentials_json: ${{secrets.GCP_CREDENTIALS}}
+          service_account: ${{secrets.GCP_EMAIL}}
+
+      - name: Login
+        uses: google-github-actions/setup-gcloud@v0.6.2
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+
+      - name: Build Docker image
+        run: |-
+         echo "gcr.io/${{secrets.GCP_PROJECT_ID}}/${{secrets.GCP_EMAIL}}/${{github.sha}}" .
+         #docker build -t gcr.io/${{secrets.GCP_PROJECT_ID}} .
+          docker build -t gcr.io/${{secrets.GCP_PROJECT_ID}}/${{github.sha}} \
+            --build-arg "FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=${{secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID_TEST}}" \
+            --build-arg "FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=${{secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_TEST}}" \
+            --build-arg "FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=${{secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL_TEST}}" \
+            .
+#     - name: Push Docker image to GCP
+#       run: |-
+#         docker push gcr.io/${{secrets.GCP_PROJECT_ID}}/${{github.sha}}
+
+#     - name: Deploy Site to some random place
+#       run: |-
+#         gcloud run deploy test-service \
+#           --region ${{ secrets.REGION }} \
+#           --image gcr.io/${{secrets.GCP_PROJECT_ID}}/${{github.sha}} \
+#           --platform "managed" \
+#           --allow-unauthenticated \
+#           --set-env-vars="FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=${{secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID_TEST}}" \
+#           --set-env-vars="FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=${{secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_TEST}}" \
+#           --set-env-vars="FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=${{secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL_TEST}}" \
+#           --quiet # disable iteractive prompts
+
+
