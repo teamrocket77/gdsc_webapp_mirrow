@@ -7,7 +7,6 @@ on:
     types: [published]
   workflow_dispatch:
 
-
 env:
   REPO_NAME: webapp
   CLOUD_RUN_PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
@@ -35,15 +34,6 @@ jobs:
           service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
       - name: Source -> Docker Image
         run: |-
-          touch ./src/.env
-          echo SECRET="$SECRET" >> ./src/.env
-          echo NEXTAUTH_SECRET="$NEXTAUTH_SECRET" >> ./src/.env
-          echo GOOGLE_PROVIDER_CLIENT_ID="$GOOGLE_PROVIDER_CLIENT_ID" >> ./src/.env
-          echo GOOGLE_PROVIDER_CLIENT_SECRET="$GOOGLE_PROVIDER_CLIENT_SECRET" >> ./src/.env
-          echo GOOGLE_PROVIDER_AUTHORIZATION_URL="$GOOGLE_PROVIDER_AUTHORIZATION_URL" >> ./src/.env
-          echo FIREBASE_SERVICE_ACCOUNT_PROJECT_ID="$FIREBASE_SERVICE_ACCOUNT_PROJECT_ID" >> ./src/.env
-          echo FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY="$FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY" >> ./src/.env
-          echo FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL="$FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL" >> ./src/.env
           docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
       - name: Docker Image -> Google Cloud Run
         run: |-
@@ -57,65 +47,3 @@ jobs:
             --region $CLOUD_RUN_REGION \
             --allow-unauthenticated \
             --quiet
-
-
-
-
-
-
-
-
-
-
-
-# name: webapp-deployment-gcp
-# on:
-#   release:
-#     branches:
-#       - main # https://dscksu.dev
-#       - dev # https://preview.dscksu.dev
-#     types: [published]
-# env:
-#   REPO_NAME: Webapp
-#   CLOUD_RUN_PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
-#   CLOUD_RUN_REGION: ${{ secrets.CLOUD_RUN_REGION }}
-#   SECRET: ${{ secrets.SECRET }}
-#   NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-#   GOOGLE_PROVIDER_CLIENT_ID: ${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}
-#   GOOGLE_PROVIDER_CLIENT_SECRET: ${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}
-#   GOOGLE_PROVIDER_AUTHORIZATION_URL: ${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}
-#   FIREBASE_SERVICE_ACCOUNT_PROJECT_ID: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}
-#   FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}
-#   FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}
-# jobs:
-#   deployment:
-#     name: Deployment
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#       - uses: google-github-actions/setup-gcloud@v0.2.0
-#         with:
-#           project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
-#           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
-#           service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
-#       - name: Enable Google Services
-#         run: |-
-#           gcloud services enable containerregistry.googleapis.com
-#           gcloud services enable run.googleapis.com
-#           gcloud --quiet auth configure-docker
-#       - name: Source -> Docker Image
-#         run: |-
-#           docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
-#       - name: Docker Image -> Google Cloud Run
-#         run: |-
-#           docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
-#       - name: Deploy
-#         run: |-
-#           gcloud components install beta --quiet
-#           gcloud beta run deploy $REPO_NAME --image gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
-#             --project $CLOUD_RUN_PROJECT_ID \
-#             --platform managed \
-#             --region $CLOUD_RUN_REGION \
-#             --allow-unauthenticated \
-#             --quiet
