@@ -5,6 +5,9 @@ on:
       - main # https://dscksu.dev
       - dev # https://preview.dscksu.dev
     types: [published]
+  
+  workflow_dispatch:
+
 
 env:
   REPO_NAME: webapp
