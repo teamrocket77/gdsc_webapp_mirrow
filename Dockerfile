@@ -13,12 +13,27 @@ RUN npm ci --only=production
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . .
-COPY /src/.env /app/src
 COPY --from=dependencies /app/node_modules ./src/node_modules
 RUN ls -a
 RUN ls -a /app/src
 WORKDIR /app/src
-RUN npm run build
+RUN --mount=type=secret,id=SECRET \
+    --mount=type=secret,id=NEXTAUTH_SECRET \ 
+    --mount=type=secret,id=GOOGLE_PROVIDER_CLIENT_ID \ 
+    --mount=type=secret,id=GOOGLE_PROVIDER_CLIENT_SECRET \ 
+    --mount=type=secret,id=GOOGLE_PROVIDER_AUTHORIZATION_URL \ 
+    --mount=type=secret,id=FIREBASE_SERVICE_ACCOUNT_PROJECT_ID \ 
+    --mount=type=secret,id=FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY \
+    --mount=type=secret,id=FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL \
+    export SECRET=$(cat /run/secrets/SECRET) && \
+    export NEXTAUTH_SECRET=$(cat /run/secrets/NEXTAUTH_SECRET) && \
+    export GOOGLE_PROVIDER_CLIENT_ID=$(cat /run/secrets/GOOGLE_PROVIDER_CLIENT_ID) && \
+    export GOOGLE_PROVIDER_CLIENT_SECRET=$(cat /run/secrets/GOOGLE_PROVIDER_CLIENT_SECRET) && \
+    export GOOGLE_PROVIDER_AUTHORIZATION_URL=$(cat /run/secrets/GOOGLE_PROVIDER_AUTHORIZATION_URL) && \
+    export FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=$(cat /run/secrets/FIREBASE_SERVICE_ACCOUNT_PROJECT_ID) && \
+    export FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=$(cat /run/secrets/FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY) && \
+    export FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=$(cat /run/secrets/FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL) && \
+    npm run build
 
 # Run
 FROM node:16-alpine AS runner
