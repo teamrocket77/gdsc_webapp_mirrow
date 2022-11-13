@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import InfoIcon from "@mui/icons-material/Info";
-
-import { Stack, Grid, Typography, Button, Paper } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Stack, Grid, Typography, Button, Paper, Link } from "@mui/material";
 
 const EventCardFlip = (props) => {
+  const theme = useTheme();
+  console.log("Event Props: " + props);
   const [flip, setFlip] = useState(false);
   return (
     <ReactCardFlip isFlipped={flip} flipDirection="vertical" key={props.key}>
@@ -63,9 +65,20 @@ const EventCardFlip = (props) => {
                 >
                   {props.title}
                 </Typography>
-                <Typography variant="body1" gutterBottom>
+                {/* <Typography variant="body1" gutterBottom>
                   Location:{" "}
                   <a href={props.locationData}>{props.locationData}</a>
+                </Typography> */}
+                <Typography variant="body1" gutterBottom>
+                  Location:{" "}
+                  <Link
+                    href={props.locationData}
+                    target="_blank"
+                    underline="none"
+                    color={theme.palette.secondary.main}
+                  >
+                    {props.locationData}
+                  </Link>
                 </Typography>
                 <Typography variant="body1">
                   Time: {props.dateTimeStart} - {props.dateTimeEnd}{" "}
@@ -122,7 +135,15 @@ const EventCardFlip = (props) => {
             {props.title}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Location: <a href={props.locationData}>{props.locationData}</a>
+            Location:{" "}
+            <Link
+              href={props.locationData}
+              target="_blank"
+              underline="none"
+              color={theme.palette.secondary.main}
+            >
+              {props.locationData}
+            </Link>
           </Typography>
           <Typography variant="body1" sx={{ mb: 2 }}>
             Time: {props.dateTimeStart} - {props.dateTimeEnd}{" "}
@@ -146,3 +167,4 @@ const EventCardFlip = (props) => {
 };
 
 export default EventCardFlip;
+

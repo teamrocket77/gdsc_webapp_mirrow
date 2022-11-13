@@ -2,14 +2,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   Link,
-  Box,
   useMediaQuery,
   useTheme,
-  Tabs,
-  Tab,
+  Box,
   Grid,
+  Button,
 } from "@mui/material";
 
 //import { Link } from "next/link";
@@ -30,7 +28,13 @@ const Navbar = (props) => {
   const [value, setValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-
+  const [hasMounted, setHasMounted] = React.useState(false);
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
   return (
     <>
       <AppBar position="static">
@@ -47,30 +51,20 @@ const Navbar = (props) => {
                   <DrawerComp sx={{ marginLeft: 4 }} />
                 </Grid>
                 <Grid item xs={8}>
-                  <Box
+                  <Link
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
+                    href="/"
                   >
-                    {/* <a href="/">
-                      <img
-                        alt="Google Developer Student Club Logo"
-                        src="/static/images/gdsc_logo.png"
-                        height="50px"
-                        width="50px"
-                        marginX="auto"
-                      />
-                    </a> */}
-                    <Link href="/">
-                      <Image
-                          alt="Google Developer Student Club Logo"
-                          src="/static/images/gdsc_logo.png"
-                          height="50px"
-                          width="50px"
-                          marginX="auto"
-                        />
-                    </Link>
-                  </Box>
+                    <Image
+                      alt="Google Developer Student Club Logo"
+                      src="/static/images/gdsc_logo.png"
+                      height="50px"
+                      width="50px"
+                      marginX="auto"
+                    />
+                  </Link>
                 </Grid>
                 <Grid item xs={2}>
                   <div></div>
@@ -82,7 +76,6 @@ const Navbar = (props) => {
               <Typography
                 variant="h6"
                 noWrap
-                component={Link}
                 sx={{ flexGrow: 1, textDecoration: "none" }}
               >
                 <Link
@@ -94,15 +87,17 @@ const Navbar = (props) => {
                 </Link>
               </Typography>
 
-              <Tabs textColor="primary">
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 {PAGES.map((page, index) => (
-                  <Tab
-                    key={index}
-                    label={page}
+                  <Button
+                    key={page}
+                    sx={{ my: 2, mx: 1, color: "inherit", display: "block" }}
                     href={"/" + PAGES_MAPPING[index]}
-                  ></Tab>
+                  >
+                    {page}
+                  </Button>
                 ))}
-              </Tabs>
+              </Box>
 
               {/* If Session does not exist, invalid or client has not logged in, do this. */}
               {/* {!session && (

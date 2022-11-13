@@ -15,7 +15,7 @@ const About = () => {
         marginX: { xs: 10, sm: 10, md: 10, lg: 20 },
       }}
     >
-      <Paper elevation="1">
+      <Paper elevation={1}>
         <Grid
           container
           display="flex"
