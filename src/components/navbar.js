@@ -37,7 +37,7 @@ const Navbar = (props) => {
   }
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" data-cy={`nav-bar-option`}>
         <Toolbar>
           {isMatch ? (
             <>
@@ -93,6 +93,7 @@ const Navbar = (props) => {
                     key={page}
                     sx={{ my: 2, mx: 1, color: "inherit", display: "block" }}
                     href={"/" + PAGES_MAPPING[index]}
+                    data-cy={`nav-bar-${page}`}
                   >
                     {page}
                   </Button>
