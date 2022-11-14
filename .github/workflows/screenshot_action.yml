@@ -5,6 +5,7 @@ on:
     branches:
       - 'gui/**'
       - main
+      - dev
 jobs:
   setup:
     runs-on: ubuntu-latest
