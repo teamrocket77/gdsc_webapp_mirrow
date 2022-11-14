@@ -21,7 +21,7 @@ jobs:
         run: |
             npm ci
             node ./cypress/prep_functions/page_fixture_creator.js
-            npm run dev & wait-on http://localhost:3000
+            npm run dev & npx wait-on http://localhost:3000
             npx cypress run --spec ./cypress/e2e/screenshots.cy.js
       - uses: actions/upload-artifact@v3
         with:
