@@ -1,0 +1,20 @@
+name: Cypress Run 
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      # Install NPM dependencies, cache them correctly and run all Cypress tests
+      - name: E2E Test
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: ./src
+          # Linux and MacOS
+          start: npm run dev
+          # Windows
+          #start-windows: npm run start:windows:server
