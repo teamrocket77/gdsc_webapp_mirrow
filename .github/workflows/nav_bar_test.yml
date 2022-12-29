@@ -15,9 +15,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Change working directory
-        working-directory: ./src
+      - name: Install Node and_Packages
       - id: Install_Node_and_Packages
+        working-directory: ./src
         run: |
             echo "$PWD"
             ls
