@@ -19,7 +19,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: |
-            echo "$PWD"
+
+      - name: Install Packages
+        run: |
             npm ci
+            npm i -g wait-on
+
+      - name: Start Server
+        run: |
+            npm run dev & wait-on http://localhost:3000
+
+      - name: Run tests
+        run: |
             npx cypress run --spec ./cypress/e2e/nav_test.cy.js
