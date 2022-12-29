@@ -17,6 +17,9 @@ jobs:
     name: Deployment
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "Current Github workspace: $GITHUB_WORKSPACE"
       - name: Checkout
         uses: actions/checkout@v2
       - uses: google-github-actions/setup-gcloud@v0.6.2
@@ -36,7 +39,7 @@ jobs:
           envkey_FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}
           envkey_FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}
           envkey_DEBUG: true
-          directory: src
+          directory: $GITHUB_WORKSPACE/src
           file_name: .env.production
           fail_on_empty: true
       - name: Source -> Docker Image
