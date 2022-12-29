@@ -32,6 +32,17 @@ jobs:
           project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
           service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
+      - name: Create Env File -> Source
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          SECRET: ${{ secrets.SECRET }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          GOOGLE_PROVIDER_CLIENT_ID: ${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}
+          GOOGLE_PROVIDER_CLIENT_SECRET: ${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}
+          GOOGLE_PROVIDER_AUTHORIZATION_URL: ${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}
+          FIREBASE_SERVICE_ACCOUNT_PROJECT_ID: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}
+          FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}
+          FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}
       - name: Source -> Docker Image
         run: |-
           DOCKER_BUILDKIT=1 docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
