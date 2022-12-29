@@ -14,13 +14,14 @@ jobs:
       run:
         working-directory: src
     steps:
-      - uses: actions/checkout@v3
       - name: Get Repo
+      - uses: actions/checkout@v3
 
+      - name: Get Node
       - uses: actions/setup-node@v3
-      - name: Get Node, install and run test
         with:
           node-version: 16
+      - name: Install Node and run tests
       - run: |
             echo "$PWD"
             npm ci
