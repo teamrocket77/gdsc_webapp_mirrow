@@ -18,7 +18,7 @@ jobs:
       - id: Install_Node_and_Packages
         run: |
             echo "$PWD"
-            pwd
+            ls
             cd src/
             npm ci
             npx cypress run --spec ./cypress/e2e/nav_test.cy.js
