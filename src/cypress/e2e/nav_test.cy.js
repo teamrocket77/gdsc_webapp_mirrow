@@ -4,19 +4,16 @@ describe('empty spec', () => {
 
     cy.get('[data-cy = "nav-bar-option-About"').click()
 
-    cy.location('pathname').should('eq', '/about')
+    cy.location('pathname').should('eq', '/about');
 
     cy.get('[data-cy = "nav-bar-option-Socials"').click()
 
-    cy.location('pathname').should('eq', '/socials')
+    cy.location('pathname').should('eq', '/socials');
 
 
     cy.get('[data-cy = "nav-bar-option-Our Team"').click()
 
-    cy.location('pathname').should('eq', '/team')
+    cy.location('pathname').should('eq', '/team');
 
-    cy.get('[data-cy = "nav-bar-option-Our Team"').click()
-
-    cy.location('pathname').should('eq', '/team')
   })
 })
