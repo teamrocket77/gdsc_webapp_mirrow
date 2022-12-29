@@ -11,16 +11,17 @@ jobs:
   run_nav_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+
+      - name: Get Node Version
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: install node
+
+      - name: Checkout Repo
+      - uses: actions/checkout@v3
         working-directory: src
-        run: |
-            npm ci
-      - name: run tests
-        working-directory: src
-        run: |
-            echo "$PWD"
-            npx cypress run --spec ./cypress/e2e/nav_test.cy.js
+
+      - name: Get Cypress and Run Tests
+      - uses: cypress-io/github-action@v5
+        with:
+          working-directory: front_end_tests
