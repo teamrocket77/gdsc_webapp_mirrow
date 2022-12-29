@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-        run: |
+      - run: |
             echo "$PWD"
             npm ci
             npx cypress run --spec ./cypress/e2e/nav_test.cy.js
