@@ -21,8 +21,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install Node and run tests
-      - run: |
-            echo "$PWD"
-            npm ci
-            npx cypress run --spec ./cypress/e2e/nav_test.cy.js
+      - run: npm ci
+        # npx cypress run --spec ./cypress/e2e/nav_test.cy.js
