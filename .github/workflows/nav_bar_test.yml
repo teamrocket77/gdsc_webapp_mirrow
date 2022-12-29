@@ -20,6 +20,8 @@ jobs:
           node-version: 16
 
         working-directory: src
+      - name: Install Node and run the nav_etst
+        working-directory: src
         run: |
             echo "$PWD"
             npm ci
