@@ -27,24 +27,19 @@ jobs:
           project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
           service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
-      - name: .env.production -> /github/workspace
-        uses: SpicyPizza/create-envfile@v1.3.1
-        with:
-          envkey_SECRET: ${{ secrets.SECRET }}
-          envkey_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          envkey_GOOGLE_PROVIDER_CLIENT_ID: ${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}
-          envkey_GOOGLE_PROVIDER_CLIENT_SECRET: ${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}
-          envkey_GOOGLE_PROVIDER_AUTHORIZATION_URL: ${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}
-          envkey_FIREBASE_SERVICE_ACCOUNT_PROJECT_ID: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}
-          envkey_FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}
-          envkey_FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}
-          envkey_DEBUG: true
-          file_name: .env.production
-          fail_on_empty: true
       - name: .env.production -> Source
         run: |-
-          mv /github/workspace/.env.production "$GITHUB_WORKSPACE/src"
-          echo "Moved .env.production to $GITHUB_WORKSPACE/src"
+          cd "$GITHUB_WORKSPACE/src"
+          touch .env.production
+          echo "SECRET=${{ secrets.SECRET }}" | tee -a .env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_CLIENT_ID=${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_CLIENT_SECRET=${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_AUTHORIZATION_URL=${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}" | tee -a .env.production
+          echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
           DOCKER_BUILDKIT=1 docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
