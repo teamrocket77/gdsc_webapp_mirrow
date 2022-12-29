@@ -11,13 +11,12 @@ jobs:
   run_nav_test:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Node and_Packages
+        working-directory: ./src
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install Node and_Packages
-      - id: Install_Node_and_Packages
-        working-directory: ./src
         run: |
             echo "$PWD"
             ls
