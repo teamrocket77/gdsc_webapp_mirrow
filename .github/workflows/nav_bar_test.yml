@@ -13,14 +13,15 @@ jobs:
     steps:
 
       - name: Get Node Version
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: Checkout Repo
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Get Cypress and Run Tests
-      - uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v5
         with:
           working-directory: front_end_tests
+          start: npm run dev
