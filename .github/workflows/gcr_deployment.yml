@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Debug
-        run: |
+        run: |-
           echo "Current Github workspace: $GITHUB_WORKSPACE"
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,9 +39,11 @@ jobs:
           envkey_FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}
           envkey_FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}
           envkey_DEBUG: true
-          directory: $GITHUB_WORKSPACE/src
           file_name: .env.production
           fail_on_empty: true
+        run: |-
+          mv /github/workspace/.env.production "$GITHUB_WORKSPACE/src"
+          echo "Moved .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
           DOCKER_BUILDKIT=1 docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
