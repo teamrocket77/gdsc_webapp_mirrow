@@ -1,0 +1,26 @@
+name: Nav Bar Test YML
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  run_nav_test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - id: Install_Node_and_Packages
+        run: |
+            npm ci
+            npx cypress run --spec ./cypress/e2e/nav_test.cy.js
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Photos for recent PR GUI
+          path: "**/cypress/screenshots/**/*.png"
