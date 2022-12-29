@@ -30,7 +30,7 @@ COPY /src/public ./public/
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 
 COPY --from=builder --chown=nextjs:nodes /app/.next ./.next
-COPY --from=builder /app/node_modules ./src/node_modules
+COPY --from=builder /app/src/node_modules ./src/node_modules
 COPY --from=builder /app/src/package.json ./src/package.json
 
 USER nextjs
