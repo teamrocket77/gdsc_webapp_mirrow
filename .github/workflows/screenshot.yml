@@ -19,12 +19,21 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - id: Install_Node_and_Packages
+
+      - name: Install Packages & Create Fixtures
         run: |
             npm ci
+            npm i -g wait-on
             node ./cypress/prep_functions/page_fixture_creator.js
-            npm run dev & npx wait-on http://localhost:3000
+
+      - name: Start Server
+        run: |
+            npm run dev & wait-on http://localhost:3000
+
+      - name: Run Screenshot test
+        run: |
             npx cypress run --spec ./cypress/e2e/screenshots.cy.js
+
       - uses: actions/upload-artifact@v3
         with:
           name: Photos for recent PR GUI
