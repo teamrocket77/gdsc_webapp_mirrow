@@ -27,7 +27,7 @@ jobs:
           project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
           service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
-      - name: Create Env File -> Source
+      - name: .env.production -> /github/workspace
         uses: SpicyPizza/create-envfile@v1.3.1
         with:
           envkey_SECRET: ${{ secrets.SECRET }}
@@ -41,6 +41,7 @@ jobs:
           envkey_DEBUG: true
           file_name: .env.production
           fail_on_empty: true
+        name: .env.production -> Source
         run: |-
           mv /github/workspace/.env.production "$GITHUB_WORKSPACE/src"
           echo "Moved .env.production to $GITHUB_WORKSPACE/src"
