@@ -13,11 +13,11 @@ jobs:
     defaults:
       working-directory: src
     steps:
-      - name: Get Repo
       - uses: actions/checkout@v3
+      - name: Get Repo
 
-      - name: Get Node, install and run test
       - uses: actions/setup-node@v3
+      - name: Get Node, install and run test
         with:
           node-version: 16
       - run: |
