@@ -19,7 +19,6 @@ jobs:
 
       - name: Checkout Repo
       - uses: actions/checkout@v3
-        working-directory: src
 
       - name: Get Cypress and Run Tests
       - uses: cypress-io/github-action@v5
