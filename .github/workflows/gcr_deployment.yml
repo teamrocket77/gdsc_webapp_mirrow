@@ -41,7 +41,7 @@ jobs:
           envkey_DEBUG: true
           file_name: .env.production
           fail_on_empty: true
-        name: .env.production -> Source
+      - name: .env.production -> Source
         run: |-
           mv /github/workspace/.env.production "$GITHUB_WORKSPACE/src"
           echo "Moved .env.production to $GITHUB_WORKSPACE/src"
