@@ -11,7 +11,8 @@ jobs:
   run_nav_test:
     runs-on: ubuntu-latest
     defaults:
-      working-directory: src
+      run:
+        working-directory: src
     steps:
       - uses: actions/checkout@v3
       - name: Get Repo
