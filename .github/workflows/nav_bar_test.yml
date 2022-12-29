@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 16
       - name: install node
-        working-directory: ./src
+        working-directory: src
         run: |
             npm ci
       - name: run tests
