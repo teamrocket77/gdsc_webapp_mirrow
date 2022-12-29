@@ -19,8 +19,3 @@ jobs:
         run: |
             npm ci
             npx cypress run --spec ./cypress/e2e/nav_test.cy.js
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Photos for recent PR GUI
-          path: "**/cypress/screenshots/**/*.png"
