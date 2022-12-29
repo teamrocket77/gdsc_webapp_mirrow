@@ -23,5 +23,5 @@ jobs:
       - name: Get Cypress and Run Tests
         uses: cypress-io/github-action@v5
         with:
-          working-directory: front_end_tests
           start: npm run dev
+          working-directory: cypress/e2e/front_end_tests
