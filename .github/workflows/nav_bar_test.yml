@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install Node and Packages
         working-directory: src
         run: |
             npm ci
