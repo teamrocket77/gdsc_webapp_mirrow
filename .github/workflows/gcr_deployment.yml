@@ -43,6 +43,8 @@ jobs:
       - name: Source -> Docker Image
         run: |-
           DOCKER_BUILDKIT=1 docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+      - run: |-
+        gcloud auth configure-docker -q
       - name: Docker Image -> Google Cloud Run
         run: |-
           docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
