@@ -19,12 +19,8 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install Node and Packages
-        working-directory: src
-        run: |
-            npm ci
-      - name: run tests
         working-directory: src
         run: |
             echo "$PWD"
+            npm ci
             npx cypress run --spec ./cypress/e2e/nav_test.cy.js
