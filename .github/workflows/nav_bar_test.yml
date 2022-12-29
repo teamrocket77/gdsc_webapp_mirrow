@@ -18,6 +18,8 @@ jobs:
       - name: install node
         working-directory: src
         run: |
+            echo "$PWD"
+            ls
             npm ci
       - name: run tests
         run: |
