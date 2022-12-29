@@ -18,9 +18,9 @@ jobs:
       - name: install node
         working-directory: src
         run: |
-            echo "$PWD"
-            ls
             npm ci
       - name: run tests
+        working-directory: src
         run: |
+            echo "$PWD"
             npx cypress run --spec ./cypress/e2e/nav_test.cy.js
