@@ -14,14 +14,11 @@ jobs:
       - name: Get Repo
       - uses: actions/checkout@v3
 
-      - name: Get Node Version
+      - name: Get Node, install and run test
       - uses: actions/setup-node@v3
+        working-directory: src
         with:
           node-version: 16
-
-        working-directory: src
-      - name: Install Node and run the nav_etst
-        working-directory: src
         run: |
             echo "$PWD"
             npm ci
