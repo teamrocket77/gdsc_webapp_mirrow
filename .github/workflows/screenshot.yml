@@ -2,7 +2,8 @@ name: Screenshot actions
 on:
   workflow_dispatch:
   push:
-    - 'nav_testing'
+    branches:
+      - 'nav_testing'
   pull_request:
     types: [ labeled ]
 
