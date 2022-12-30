@@ -8,18 +8,12 @@ on:
     types: [ labeled ]
 
 jobs:
-  #check_for_ui_ux_label:
-  #  runs-on: ubuntu-latest
-  #  outputs:
-  #    label_output: ${{ steps.laebels.outputs.passed }}
-  #  steps:
-  #    - uses: danielchabr/pr-labels-checker@v3.1
-  #      id: labels
-  #      with:
-  #        hasNone: UI/UX
-  #        githubToken: ${{ secrets.GITHUB_TOKEN }}
+  call_ui_ux_label_checker:
+    outputs:
+      ui_ux_label: ${{ call_ui_ux_label_checker.outputs.present }}
+    uses: ./github/workflows/test_labels.yml
 
-  get_screenshots_if_labelled:
+  get_screenshots_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
     runs-on: ubuntu-latest
     defaults:
@@ -30,63 +24,45 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
       - name: Install Packages & Create Fixtures
         run: |
             npm ci
             npm i -g wait-on
             node ./cypress/prep_functions/page_fixture_creator.js
-
       - name: Start Server
         run: |
             npm run dev & wait-on http://localhost:3000
-
       - name: Run Screenshot test
         run: |
             npx cypress run --spec ./cypress/e2e/screenshots.cy.js
-
       - uses: actions/upload-artifact@v3
         with:
           name: Photos for recent PR GUI
           path: "**/cypress/screenshots/**/*.png"
 
   get_screenshots_if_pushed_and_lablled:
-    needs: check_for_ui_ux_label
+    needs: call_ui_ux_label_checker
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'UI/UX' }}
+    if: ${{ call_ui_ux_label_checker.outputs.ui_ux_label }}
     defaults:
       run:
         working-directory: src/
     steps:
-      - uses: danielchabr/pr-labels-checker@v3.1
-        id: labels
-        with:
-          hasNone: UI/UX
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      - name: Check what's inside of the oututs
-        run: |
-          echo "::setOutput::check_for_ui_ux_label"
-
       - name: Install Packages & Create Fixtures
         run: |
             npm ci
             npm i -g wait-on
             node ./cypress/prep_functions/fixture_creator.js
-
       - name: Start Server
         run: |
             npm run dev & wait-on http://localhost:3000
-
       - name: Run Screenshot test
         run: |
             npx cypress run --spec ./cypress/e2e/screenshots.cy.js
-
       - uses: actions/upload-artifact@v3
         with:
           name: Photos for recent PR GUI
