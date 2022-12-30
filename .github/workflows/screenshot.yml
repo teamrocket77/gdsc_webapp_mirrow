@@ -10,6 +10,8 @@ on:
 jobs:
   check_for_ui_ux_label:
     runs-on: ubuntu-latest
+    outputs:
+      label_output: ${{ steps.laebels.outputs.passed }}
     steps:
       - uses: danielchabr/pr-labels-checker@v3.1
         id: labels
@@ -51,7 +53,7 @@ jobs:
   get_screenshots_if_pushed_and_lablled:
     needs: check_for_ui_ux_label
     runs-on: ubuntu-latest
-    if: ${{ check_for_ui_ux_label.passed }}
+    if: ${{ check_for_ui_ux_label.outputs.passed }}
     defaults:
       run:
         working-directory: src/
