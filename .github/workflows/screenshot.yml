@@ -38,7 +38,7 @@ jobs:
           name: Photos for recent PR GUI
           path: "**/cypress/screenshots/**/*.png"
 
-  get_screenshots_if_pushed_and_lablled:
+  get_screenshots_if_pushed_and_labled:
     needs: check_for_ui_ux_label
     runs-on: ubuntu-latest
     if: ${{ needs.check_for_ui_ux_label.outputs.present }}
