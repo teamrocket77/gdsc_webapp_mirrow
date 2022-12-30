@@ -60,7 +60,7 @@ jobs:
         run: |
             npm ci
             npm i -g wait-on
-            node ./cypress/prep_functions/page_fixture_creator.js
+            node ./cypress/prep_functions/fixture_creator.js
 
       - name: Start Server
         run: |
