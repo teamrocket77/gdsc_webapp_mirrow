@@ -9,9 +9,7 @@ on:
 
 jobs:
   check_for_ui_ux_label:
-    outputs:
-      ui_ux_label_present: ${{ jobs }}
-      uses: ./github/workflows/label_checker.yml@dev
+    uses: ./github/workflows/label_checker.yml@dev
 
   get_screenshots_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
@@ -43,7 +41,7 @@ jobs:
   get_screenshots_if_pushed_and_lablled:
     needs: check_for_ui_ux_label
     runs-on: ubuntu-latest
-    if: ${{ needs.check_for_ui_ux_label.outputs.present }}
+    if: ${{ needs.check_for_ui_ux_label.outputs.ui_ux }}
     defaults:
       run:
         working-directory: src/

@@ -8,8 +8,13 @@ on:
     types: [ labeled ]
 
 jobs:
+  check_for_ui_ux_label:
+    uses: ./github/workflows/label_checker.yml@dev
+
   run_nav_test:
     runs-on: ubuntu-latest
+    needs: check_for_ui_ux_label
+    if: ${{ needs.check_for_ui_ux_label.outputs.ui_ux }}
     defaults:
       run:
         working-directory: src
