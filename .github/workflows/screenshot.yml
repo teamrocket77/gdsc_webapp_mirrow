@@ -8,10 +8,17 @@ on:
     types: [ labeled ]
 
 jobs:
-  call_ui_ux_label_checker:
+  check_for_ui_ux_label:
+    runs-on: ubuntu-latest
     outputs:
-      ui_ux_label: ${{ call_ui_ux_label_checker.outputs.present }}
-    uses: ./github/workflows/test_labels.yml
+      present: ${{ steps.check_pr_labels.outputs.result }} 
+    steps: 
+      - name: Check PR labels action step
+        id: check_pr_labels
+        uses: shioyang/check-pr-labels-on-push-action@v1.0.6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: '["UI/UX"]'
 
   get_screenshots_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
@@ -41,9 +48,9 @@ jobs:
           path: "**/cypress/screenshots/**/*.png"
 
   get_screenshots_if_pushed_and_lablled:
-    needs: call_ui_ux_label_checker
+    needs: check_for_ui_ux_label
     runs-on: ubuntu-latest
-    if: ${{ call_ui_ux_label_checker.outputs.ui_ux_label }}
+    if: ${{ check_for_ui_ux_label.outputs.present }}
     defaults:
       run:
         working-directory: src/
