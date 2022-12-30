@@ -9,7 +9,7 @@ on:
 
 jobs:
   check_for_ui_ux_label:
-    uses: ./.github/workflows/label_checker.yml@dev
+    uses: ./.github/workflows/label_checker.yml
 
   get_screenshots_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
