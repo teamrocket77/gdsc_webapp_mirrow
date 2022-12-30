@@ -9,6 +9,7 @@ on:
 
 jobs:
   check_for_ui_ux_label:
+    runs-on: ubuntu-latest
     outputs:
       label: ${{ steps.labels.passed }}
     steps:
