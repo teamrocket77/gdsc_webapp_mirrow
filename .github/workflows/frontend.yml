@@ -20,4 +20,4 @@ jobs:
         with:
           start: npm run dev
           spec: |
-            cypress/**/*js
+            cypress/**/front_end_tests/*js
