@@ -11,9 +11,6 @@ on:
 jobs:
   cypress-run:
     name: Cypress run
-    defaults:
-      run:
-        working-directory: src
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -21,6 +18,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
+          working-directory: src
           start: npm run dev
           spec: |
             cypress/**/front_end_tests/*js
