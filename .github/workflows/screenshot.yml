@@ -9,17 +9,9 @@ on:
 
 jobs:
   check_for_ui_ux_label:
-    runs-on: ubuntu-latest
     outputs:
-      present: ${{ steps.check_pr_labels.outputs.result }} 
-    steps: 
-      - name: Check PR labels action step
-        id: check_pr_labels
-        uses: shioyang/check-pr-labels-on-push-action@v1.0.6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          #labels: '["UI/UX"]'
-          labels: '["Empty_label"]'
+      ui_ux_label_present: ${{ jobs }}
+      uses: ./github/workflows/label_checker.yml@dev
 
   get_screenshots_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
