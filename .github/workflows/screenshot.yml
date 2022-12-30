@@ -45,10 +45,11 @@ jobs:
       run:
         working-directory: src/
     steps:
-      - uses: docker://agilepathway/pull-request-label-checker:latest
+      - uses: danielchabr/pr-labels-checker@v3
+        id: labels
         with:
-          one_of: UI/UX
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          hasAll: UI/UX
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
