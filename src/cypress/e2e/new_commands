@@ -1,0 +1,3 @@
+# npm install -g wait-on
+# npm run dev & wait-on http://localhost:3000
+# npx cypress run --spec ./cypress/e2e/screenshots.cy.js
