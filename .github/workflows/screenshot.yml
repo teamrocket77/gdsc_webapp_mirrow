@@ -18,7 +18,8 @@ jobs:
         uses: shioyang/check-pr-labels-on-push-action@v1.0.6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          labels: '["UI/UX"]'
+          #labels: '["UI/UX"]'
+          labels: '["Empty_label"]'
 
   get_screenshots_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
