@@ -8,6 +8,16 @@ on:
     types: [ labeled ]
 
 jobs:
+  check_for_ui_ux_label:
+    outputs:
+      label: ${{ steps.labels.passed }}
+    steps:
+      - uses: danielchabr/pr-labels-checker@v3.1
+        id: labels
+        with:
+          hasNone: UI/UX
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
   get_screenshots_if_labelled:
     if: ${{ github.event.label.name == 'UI/UX' }}
     runs-on: ubuntu-latest
@@ -40,7 +50,9 @@ jobs:
           path: "**/cypress/screenshots/**/*.png"
 
   get_screenshots_if_pushed_and_lablled:
+    needs: check_for_ui_ux_label
     runs-on: ubuntu-latest
+    if: ${{ check_for_ui_ux_label.outputs.passed:w}
     defaults:
       run:
         working-directory: src/
@@ -55,6 +67,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - name: Check what's inside of the oututs
+        run: |
+          echo "::setOutput::check_for_ui_ux_label"
 
       - name: Install Packages & Create Fixtures
         run: |
