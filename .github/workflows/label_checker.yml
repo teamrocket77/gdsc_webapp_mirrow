@@ -1,6 +1,12 @@
-name: Test Me Labels
+name: Test My Labels
 on:
   workflow_dispatch:
+  workflow_call:
+    ouptuts:
+      ui_ux:
+        description: "Shows if the UI UX label is present in the job"
+        value: ${{ jobs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}
+
   push:
     branches:
       - 'nav_testing'
