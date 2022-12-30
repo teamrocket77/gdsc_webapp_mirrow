@@ -41,7 +41,7 @@ jobs:
   get_screenshots_if_pushed_and_lablled:
     needs: check_for_ui_ux_label
     runs-on: ubuntu-latest
-    if: ${{ needs.check_for_ui_ux_label.outputs.ui_ux }}
+    if: ${{ needs.check_for_ui_ux_label.outputs.present }}
     defaults:
       run:
         working-directory: src/
