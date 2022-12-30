@@ -11,6 +11,9 @@ on:
 jobs:
   cypress-run:
     name: Cypress run
+    defaults:
+      run:
+        working-directory: src
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
