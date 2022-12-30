@@ -18,6 +18,6 @@ jobs:
         uses: shioyang/check-pr-labels-on-push-action@v1.0.6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-        labels: '["UI/UX"]'
+          labels: '["UI/UX"]'
       - name: See result
         run: echo "${{ steps.check_pr_labels.outputs.result }}"
