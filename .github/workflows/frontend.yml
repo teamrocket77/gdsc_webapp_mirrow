@@ -59,4 +59,3 @@ jobs:
         with:
           name: frontend-screenshots
           uses: cypress/screenshots/**
-
