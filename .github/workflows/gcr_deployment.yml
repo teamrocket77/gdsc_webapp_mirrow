@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  REPO_NAME: Webapp
+  REPO_NAME: webapp
   CLOUD_RUN_PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
   CLOUD_RUN_REGION: ${{ secrets.CLOUD_RUN_REGION }}
 
