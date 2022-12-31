@@ -36,8 +36,8 @@ jobs:
             cypress/**/front_end_tests/frontend.*js
       - name: Get Screenshots
           with:
-          name: frontend-screenshots
-          uses: cypress/screenshots/**
+            name: frontend-screenshots
+            uses: cypress/screenshots/**
 
   run_tests_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
