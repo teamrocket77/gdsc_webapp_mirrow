@@ -59,7 +59,7 @@ jobs:
           gcloud auth configure-docker gcr.io
       - name: Docker Image -> Google Cloud Run
         run: |-
-          docker push us.gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+          docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
       - name: Google Cloud Run -> Deploy
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v0
