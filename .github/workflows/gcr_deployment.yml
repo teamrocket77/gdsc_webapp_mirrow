@@ -2,8 +2,8 @@ name: webapp-deployment-gcp
 on:
   release:
     branches:
-      - main # https://dscksu.dev
-      - dev # https://preview.dscksu.dev
+      - main # https://dscksu.club
+      - dev # https://preview.dscksu.club
     types: [published]
   workflow_dispatch:
 
