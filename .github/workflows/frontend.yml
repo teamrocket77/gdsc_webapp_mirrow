@@ -1,16 +1,28 @@
-name: Cypress tests
+name: Cypress Front End tests
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - 'nav_testing'
   pull_request:
-    types: [ labeled ]
+    types: [created, labeled]
+  push:
+    tags:
+      - 'UI/UX'
 
 jobs:
+  check_for_ui_ux_label:
+    runs-on: ubuntu-latest
+    outputs:
+      is_ui_ux_label_present: ${{ steps.check_pr_labels.outputs.result }} 
+    steps: 
+      - name: Check PR labels action step
+        id: check_pr_labels
+        uses: teamrocket77/check-pr-labels-on-push-action@v1.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: '["UI/UX"]'
   cypress-run:
     name: Cypress run
+    needs:  ${{ jobs.check_for_ui_ux_label }}
+    if: ${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -21,4 +33,13 @@ jobs:
           working-directory: src
           start: npm run dev
           spec: |
-            cypress/**/front_end_tests/*js
+            cypress/**/front_end_tests/frontend.*js
+      - name: Get Screenshots
+          with:
+          name: frontend-screenshots
+          uses: cypress/screenshots/**
+
+  run_tests_if_labeled:
+    if: ${{ github.event.label.name == 'UI/UX' }}
+    needs:  ${{ jobs.cypress-run }} # get other job to run
+    runs-on: ubuntu-latest
