@@ -22,7 +22,7 @@ jobs:
 
   cypress-run:
     name: Cypress run
-    needs:  ${{ jobs.check_for_ui_ux_label }}
+    needs:  ${{ check_for_ui_ux_label }}
     if: ${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}
     runs-on: ubuntu-20.04
     steps:
