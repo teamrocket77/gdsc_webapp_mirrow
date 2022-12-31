@@ -36,9 +36,9 @@ jobs:
         id: docker-auth
         uses: 'docker/login-action@v2'
         with:
-          registry: 'gcr.io'
-          username: 'oauth2accesstoken'
-          password: '${{ steps.auth.output.access_token }}'
+          registry: gcr.io
+          username: oauth2accesstoken
+          password: ${{ steps.auth.output.access_token }}
       - name: .env.production -> Source
         run: |-
           cd "$GITHUB_WORKSPACE/src"
