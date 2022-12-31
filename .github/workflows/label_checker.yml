@@ -1,0 +1,29 @@
+name: Test My Labels
+on:
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      present:
+        description: "Shows if the UI UX label is present in the job"
+        value: ${{ jobs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}
+
+  push:
+    branches:
+      - 'nav_testing'
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  check_for_ui_ux_label:
+    runs-on: ubuntu-latest
+    outputs:
+      is_ui_ux_label_present: ${{ steps.check_pr_labels.outputs.result }} 
+    steps: 
+      - name: Check PR labels action step
+        id: check_pr_labels
+        uses: teamrocket77/check-pr-labels-on-push-action@v1.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: '["UI/UX"]'
+      - name: See result
+        run: echo "${{ steps.check_pr_labels.outputs.result }}"

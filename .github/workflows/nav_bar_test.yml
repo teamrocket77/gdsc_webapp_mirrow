@@ -1,0 +1,39 @@
+name: Nav Bar Test YML
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'nav_testing'
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  check_for_ui_ux_label:
+    uses: ./.github/workflows/label_checker.yml
+
+  run_nav_test:
+    needs: check_for_ui_ux_label
+    runs-on: ubuntu-latest
+    if: ${{ needs.check_for_ui_ux_label.outputs.present }}
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Packages
+        run: |
+            npm ci
+            npm i -g wait-on
+
+      - name: Start Server
+        run: |
+            npm run dev & wait-on http://localhost:3000
+
+      - name: Run tests
+        run: |
+            npx cypress run --spec ./cypress/e2e/nav_test.cy.js

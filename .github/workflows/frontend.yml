@@ -56,4 +56,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: frontend-screenshots
-          uses: cypress/screenshots/**
+          path: **/cypress/screenshots/**
