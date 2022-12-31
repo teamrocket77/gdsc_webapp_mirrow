@@ -19,6 +19,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
+
   cypress-run:
     name: Cypress run
     needs:  ${{ jobs.check_for_ui_ux_label }}
@@ -42,5 +43,20 @@ jobs:
 
   run_tests_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
-    needs:  ${{ jobs.cypress-run }} # get other job to run
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: src
+          start: npm run dev
+          spec: |
+            cypress/**/front_end_tests/frontend.*js
+      - name: Get Screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-screenshots
+          uses: cypress/screenshots/**
+
