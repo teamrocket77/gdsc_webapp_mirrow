@@ -35,7 +35,7 @@ jobs:
           spec: |
             cypress/**/front_end_tests/frontend.*js
       - name: Get Screenshots
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v3
           with:
             name: frontend-screenshots
             uses: cypress/screenshots/**
