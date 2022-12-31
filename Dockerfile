@@ -25,7 +25,7 @@ WORKDIR /app
 ENV NODE_ENV production
 
 # Copy Static Directories
-COPY /src/public ./public/
+COPY /src/public ./src/public/
 
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 
