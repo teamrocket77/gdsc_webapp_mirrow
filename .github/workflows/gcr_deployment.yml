@@ -66,6 +66,6 @@ jobs:
         with:
           service: 'app-production'
           region: ${{ secrets.CLOUD_RUN_REGION }}
-          image: "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+          image: gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
       - name: Debug Output
         run: echo ${{ steps.deploy.outputs.url }}
