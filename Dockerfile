@@ -33,6 +33,8 @@ COPY --from=builder --chown=nextjs:nodes /app/src/.next ./src/.next
 COPY --from=builder /app/src/node_modules ./src/node_modules
 COPY --from=builder /app/src/package.json ./src/package.json
 
+WORKDIR /app/src
+
 USER nextjs
 EXPOSE 8080
 EXPOSE 80
