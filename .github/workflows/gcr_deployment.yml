@@ -54,7 +54,7 @@ jobs:
           echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
-          DOCKER_BUILDKIT=1 docker build . -t "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64 -t "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
       - run: |-
           gcloud auth configure-docker gcr.io
       - name: Docker Image -> Google Cloud Run
