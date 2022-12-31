@@ -64,7 +64,7 @@ jobs:
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: '$REPO_NAME-PRODUCTION'
+          service: '$REPO_NAME-production'
           region: ${{ secrets.CLOUD_RUN_REGION }}
           image: "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
       - name: Debug Output
