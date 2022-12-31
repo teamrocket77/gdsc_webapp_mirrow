@@ -39,23 +39,3 @@ jobs:
         with:
           name: Front end Screenshots
           path: "**/cypress/screenshots/**/*.png"
-
-  run_tests_if_labeled:
-    name: Run Frontend Tests on Label Event
-    if: ${{ github.event.label.name == 'UI/UX' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          working-directory: src
-          start: npm run dev
-          spec: |
-            cypress/**/front_end_tests/frontend.*js
-      - name: Get Screenshots
-        uses: actions/upload-artifact@v3
-        with:
-          name: Front end Screenshots
-          path: "**/cypress/screenshots/**/*.png"
