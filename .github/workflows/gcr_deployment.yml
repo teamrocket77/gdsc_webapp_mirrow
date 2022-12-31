@@ -29,17 +29,16 @@ jobs:
         id: auth
         uses: 'google-github-actions/auth@v0'
         with:
-          token_format: 'id_token'
-          id_token_audience: '${{ secrets.DEPLOYMENT_TARGET_DOMAIN }}'
+          token_format: 'access_token'
           workload_identity_provider: '${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ secrets.GOOGLE_WORKLOAD_SERVICE_ACCOUNT }}'
       - name: Docker Authentication
         id: docker-auth
-        uses: 'docker/login-action@v1'
+        uses: 'docker/login-action@v2'
         with:
           username: 'oauth2accesstoken'
           password: '${{ steps.auth.output.access_token }}'
-          registry: "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+          registry: 'gcr.io'
       - name: .env.production -> Source
         run: |-
           cd "$GITHUB_WORKSPACE/src"
