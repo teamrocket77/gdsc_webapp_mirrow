@@ -36,7 +36,6 @@ jobs:
             cypress/**/front_end_tests/frontend.*js
       - name: Get Screenshots
         uses: actions/upload-artifact
-        if: actions/upload-artifact
           with:
             name: frontend-screenshots
             uses: cypress/screenshots/**
