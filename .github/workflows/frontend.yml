@@ -1,11 +1,9 @@
 name: Cypress Front End tests
 
 on:
+  push:
   pull_request:
     types: [created, labeled]
-  push:
-    tags:
-      - 'UI/UX'
 
 jobs:
   check_for_ui_ux_label:
