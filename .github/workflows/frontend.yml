@@ -36,9 +36,9 @@ jobs:
             cypress/**/front_end_tests/frontend.*js
       - name: Get Screenshots
         uses: actions/upload-artifact@v3
-          with:
-            name: frontend-screenshots
-            uses: cypress/screenshots/**
+        with:
+          name: frontend-screenshots
+          uses: cypress/screenshots/**
 
   run_tests_if_labeled:
     if: ${{ github.event.label.name == 'UI/UX' }}
