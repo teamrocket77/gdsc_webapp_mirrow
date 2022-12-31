@@ -8,6 +8,7 @@ on:
 jobs:
   check_for_ui_ux_label:
     runs-on: ubuntu-latest
+    name: Check for the UI/UX Label
     outputs:
       is_ui_ux_label_present: ${{ steps.check_pr_labels.outputs.result }} 
     steps: 
@@ -36,10 +37,11 @@ jobs:
       - name: Get Screenshots
         uses: actions/upload-artifact@v3
         with:
-          name: frontend-screenshots
-          uses: cypress/screenshots/**
+          name: Front end Screenshots
+          path: "**/cypress/screenshots/**/*.png"
 
   run_tests_if_labeled:
+    name: Run Frontend Tests on Label Event
     if: ${{ github.event.label.name == 'UI/UX' }}
     runs-on: ubuntu-20.04
     steps:
