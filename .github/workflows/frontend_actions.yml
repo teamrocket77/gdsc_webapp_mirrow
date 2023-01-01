@@ -18,11 +18,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
+      - name: Is Label present
+        run: |
+          echo "${{ check_pr_labels.ouputs.results }}"
 
   cypress-run:
     name: Cypress run
     needs: check_for_ui_ux_label 
-    if: ${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }} == true
+    if:  needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present  == true
     runs-on: ubuntu-20.04
     steps:
       - name: Echo if labels were found
@@ -37,6 +40,7 @@ jobs:
           start: npm run dev
           spec: |
             cypress/**/frontend_tests/frontend.*js
+          config: supportFile=false
       - name: Get Screenshots
         uses: actions/upload-artifact@v3
         with:
