@@ -25,9 +25,6 @@ jobs:
     if:  needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present
     runs-on: ubuntu-20.04
     steps:
-      - name: Echo if labels were found
-        run: |
-          echo "${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cypress run
