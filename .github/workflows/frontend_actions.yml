@@ -25,6 +25,9 @@ jobs:
     if: ${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }} == true
     runs-on: ubuntu-20.04
     steps:
+      - name: Echo if labels were found
+        run: |
+          echo "${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cypress run
@@ -33,7 +36,7 @@ jobs:
           working-directory: src
           start: npm run dev
           spec: |
-            cypress/**/front_end_tests/frontend.*js
+            cypress/**/frontend_tests/frontend.*js
       - name: Get Screenshots
         uses: actions/upload-artifact@v3
         with:
