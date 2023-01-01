@@ -18,19 +18,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
-      - name: Output label presence
-        run: |
-          echo "${{ steps.check_pr_labels.outputs.result }}"
 
   cypress-run:
     name: Cypress run
     needs: check_for_ui_ux_label 
-    if: ${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}
+    if: ${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }} == true
     runs-on: ubuntu-20.04
     steps:
-      - name: Check Dependency
-        run: |
-          echo "${{ needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present }}"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cypress run
@@ -40,7 +34,6 @@ jobs:
           start: npm run dev
           spec: |
             cypress/**/front_end_tests/frontend.*js
-          config: supportFile=false
       - name: Get Screenshots
         uses: actions/upload-artifact@v3
         with:
