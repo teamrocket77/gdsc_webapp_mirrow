@@ -26,6 +26,7 @@ ENV NODE_ENV production
 
 # Copy Static Directories
 COPY /src/public ./src/public/
+COPY /src/.env.production ./src/.env.production
 
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 
