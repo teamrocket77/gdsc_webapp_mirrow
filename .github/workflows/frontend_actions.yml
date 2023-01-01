@@ -20,7 +20,7 @@ jobs:
           labels: '["UI/UX"]'
       - name: Is Label present
         run: |
-          echo "${{ check_pr_labels.ouputs.results }}"
+          echo "${{ steps.check_pr_labels.ouputs.results }}"
 
   cypress-run:
     name: Cypress run
