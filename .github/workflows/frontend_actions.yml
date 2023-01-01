@@ -18,6 +18,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
+      - name: Is label present
+        run: |
+          echo "${{ setps.check_pr_labels.outputs.result }}"
 
   cypress-run:
     name: Cypress run
