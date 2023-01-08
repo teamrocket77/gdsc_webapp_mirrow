@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cypress Readme &mdash; Testing 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Testing
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Cypress Readme</a><ul>
+<li><a class="reference internal" href="#what-is-it">What is it?</a><ul>
+<li><a class="reference internal" href="#explanation">Explanation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Cypress Readme</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/automation/CYPRESS_README.md.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cypress-readme">
+<h1>Cypress Readme<a class="headerlink" href="#cypress-readme" title="Permalink to this heading"></a></h1>
+<section id="what-is-it">
+<h2>What is it?<a class="headerlink" href="#what-is-it" title="Permalink to this heading"></a></h2>
+<p>Cypress is a testing suite that we have chosen it allows us to do: 1.
+End to End tests 1. Components Tests 1. Integration Tests 1. Unit-tests</p>
+<p>The application is easy to use, and they have great errors.
+<a class="reference external" href="https://docs.cypress.io/guides/overview/why-cypress#What-you-ll-learn">Documentation +
+Why</a></p>
+<p>Say We have the <code class="docutils literal notranslate"><span class="pre">cypress</span></code> folder in <code class="docutils literal notranslate"><span class="pre">webapp/src</span></code> We can invoke all
+of the tests after <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">ci</span></code> and <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">run</span> <span class="pre">dev</span></code> using the command
+<code class="docutils literal notranslate"><span class="pre">npx</span> <span class="pre">cypress</span> <span class="pre">run</span> <span class="pre">--e2e</span></code> ### Breakdown of npx cypress command 1.
+<code class="docutils literal notranslate"><span class="pre">npx</span> <span class="pre">cypress</span></code> access the <code class="docutils literal notranslate"><span class="pre">cypress</span></code> command through <code class="docutils literal notranslate"><span class="pre">npx</span></code> since
+it’s not installed globally 1. <code class="docutils literal notranslate"><span class="pre">cypress</span> <span class="pre">run</span></code> access the <code class="docutils literal notranslate"><span class="pre">run</span></code>
+subcommand through <code class="docutils literal notranslate"><span class="pre">cypress</span></code> 1. <code class="docutils literal notranslate"><span class="pre">--e2e</span></code> run all e2e tests you could
+specify a command using the <code class="docutils literal notranslate"><span class="pre">spec</span></code> ie test location</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>describe(&#39;Get Screenshots&#39;, () =&gt; {
+    let screenshot_options = {
+        capture : &quot;fullPage&quot;,
+    };
+    let get_options = {
+        &quot;timeout&quot; : 10000,
+    };
+    it(&#39;passes&#39;, () =&gt; {
+        let webPath = &#39;http://localhost:3000&#39;;
+        cy.log(&quot;Beginning Screenshot test&quot;);
+        cy.visit(webPath);
+            cy.get(&#39;[data-cy = &quot;nav-bar-option-About&quot;&#39;, get_options)
+            .should(&#39;be.visible&#39;);
+        cy.screenshot(&#39;base&#39;, screenshot_options);
+        cy.fixture(&#39;../fixtures/pages.json&#39;).then((page_json) =&gt; {
+            let pages = page_json[&quot;pages&quot;];
+            for (var page in pages){
+                let baseSubPage = pages[page];
+                let subPage = webPath + &quot;/&quot; + baseSubPage;
+                cy.log(`Visiting subpage: ${subPage}`);
+                cy.visit(subPage);
+                cy.get(&#39;[data-cy = &quot;nav-bar-option-About&quot;&#39;, get_options)
+                    .should(&#39;be.visible&#39;);
+                cy.screenshot(baseSubPage , screenshot_options);
+
+            }
+        });
+    })
+})
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;pages&quot;</span><span class="p">:[</span><span class="s2">&quot;about&quot;</span><span class="p">,</span><span class="s2">&quot;opportunities&quot;</span><span class="p">,</span><span class="s2">&quot;socials&quot;</span><span class="p">,</span><span class="s2">&quot;team&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<section id="explanation">
+<h3>Explanation<a class="headerlink" href="#explanation" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">describe</span></code>: takes a string that serves as the name and function
+here we use a closure</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*options</span></code>: on these lines we configure options for the test to be
+used later</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">it</span></code>: a keyword that takes a string that describes a test</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webpath</span></code>: configuration of the base url</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cy.visit</span></code>: a cypress function that takes us to a string in this
+case it’s the <code class="docutils literal notranslate"><span class="pre">webPath</span></code> from the previous step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cy.get</span></code>: is interesting, we are able to get a particular
+attribute in the code and ensure that it’s visible, it’s relatively
+safe since we may have to wait for the page to load</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cy.screenshot</span></code>: allows us to take a screenshot it takes options
+in the form of JSON</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cy.fixture</span></code>: allows us to load a fixture, this one has been
+generated for us, when that loads we then.</p></li>
+<li><p>grab the pages object from the json</p></li>
+<li><p>loop through pages, and take screenshots with our webPath combined
+with the subpages that our fixture gives</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 mirrow.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

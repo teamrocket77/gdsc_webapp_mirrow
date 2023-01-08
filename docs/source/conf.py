@@ -1,10 +1,13 @@
+import sys, os
+sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(1, os.path.abspath('../../'))
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Testing'
+copyright = '2023 mirrow'
+author = 'Something else'
 
 release = '0.1'
 version = '0.1.0'
