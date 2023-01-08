@@ -16,16 +16,16 @@ export default function Index() {
   return (
     <Container
       display="flex"
-      justifyContent="center"
-      alignItems="center"
+      sx={{justifyContent:"center",
+      alignItems:"center"}}
       maxWidth="lg"
       overflow="hidden"
     >
       <Stack
         spacing={5}
         display="flex"
-        justifyContent="center"
-        alignItems="center"
+        sx={{justifyContent:"center",
+      alignItems:"center"}}
         flexWrap="wrap"
       >
         <Typography

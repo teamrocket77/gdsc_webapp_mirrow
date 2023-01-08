@@ -15,19 +15,17 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function profilecard() {
   return (
-    <Container justifyContent="center" alignItems="center" maxWidth="lg">
+    <Container sx={{justifyContent:"center", alignItems:"center"}} maxWidth="lg">
       <Grid
         container
-        justifyContent="center"
-        alignItems="center"
+        sx={{justifyContent:"center", alignItems:"center"}}
         spacing={4}
         columns={{ xs: 2, sm: 8, md: 16 }}
       >
         {Array.from(Array(4)).map((_, index) => (
           <Grid
             item
-            justifyContent="center"
-            alignItems="center"
+            sx={{justifyContent:"center", alignItems:"center"}}
             display="flex"
             xs={2}
             sm={4}
@@ -40,8 +38,7 @@ export default function profilecard() {
                 container
                 spacing={1.5}
                 direction="column"
-                justifyContent="center"
-                alignItems="center"
+                sx={{justifyContent:"center", alignItems:"center"}}
               >
                 <Grid item>
                   <Avatar

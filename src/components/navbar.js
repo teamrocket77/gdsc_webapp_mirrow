@@ -62,7 +62,7 @@ const Navbar = (props) => {
                       src="/static/images/gdsc_logo.png"
                       height="50px"
                       width="50px"
-                      marginX="auto"
+                      sx={{mx:"auto"}}
                     />
                   </Link>
                 </Grid>
@@ -93,7 +93,6 @@ const Navbar = (props) => {
                     key={page}
                     sx={{ my: 2, mx: 1, color: "inherit", display: "block" }}
                     href={"/" + PAGES_MAPPING[index]}
-                    data-cy={`nav-bar-option-${page}`}
                   >
                     {page}
                   </Button>
