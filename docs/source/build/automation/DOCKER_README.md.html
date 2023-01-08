@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>## Building &mdash; Testing 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="## What is it" href="GITHUB_ACTION_README.md.html" />
+    <link rel="prev" title="Cypress Readme" href="CYPRESS_README.md.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Testing
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CYPRESS_README.md.html">Cypress Readme</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">## Building</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-explanation">Building Explanation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#running">## Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#clearing-containers">## Clearing containers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#listing-containers">listing containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clearing-containers-1">Clearing containers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#clearing-images">### Clearing Images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#listing-images">Listing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clearing-images-1">Clearing Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GITHUB_ACTION_README.md.html">## What is it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GITHUB_ACTION_README.md.html#note">Note:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GITHUB_ACTION_README.md.html#inside-of-steps">### Inside of Steps</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Testing</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">## Building</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/automation/DOCKER_README.md.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building">
+<h1>## Building<a class="headerlink" href="#building" title="Permalink to this heading"></a></h1>
+<ol class="arabic simple">
+<li><p>To build</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">gdsc</span> \
+        <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">FIREBASE_SERVICE_ACCOUNT_PROJECT_ID</span> \
+        <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY</span> \
+        <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL</span> \
+        <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span>  <span class="o">--</span><span class="n">progress</span><span class="o">=</span><span class="n">plain</span> <span class="o">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Alt build</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">gdsc</span> \
+        <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="s2">&quot;FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=$some_Value&quot;</span> \
+        <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="s2">&quot;FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=$some_other_value&quot;</span> \
+        <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="s2">&quot;FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=$some_other_other_value&quot;</span> \
+        <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span>  <span class="o">--</span><span class="n">progress</span><span class="o">=</span><span class="n">plain</span> <span class="o">.</span>
+</pre></div>
+</div>
+<section id="building-explanation">
+<h2>Building Explanation<a class="headerlink" href="#building-explanation" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--build-arg</span></code> Required, this is how we specify a variable that
+should be passed to the container. The proceeding arguments for
+example FIREBASE_SERVICE_ACCOUNT_PROJECT_ID is the name that the
+variable will in the container The proceeding arguments for example
+$some_Value is the name that the variable has inside of your env</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-cache</span></code> Optional, this how we specify that the contianer
+should start from ground 0 instead of some cached state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--progress=plain</span></code> Optional, this how we specift that we want to
+see the building status</p></li>
+</ol>
+</section>
+</section>
+<section id="running">
+<h1>## Running<a class="headerlink" href="#running" title="Permalink to this heading"></a></h1>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">To run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-e</span> <span class="pre">PORT=3000</span> <span class="pre">-p</span> <span class="pre">3000:3000</span> <span class="pre">gdsc</span></code></div>
+<div class="line">## Running Explanation</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">PORT=3000</span></code></div>
+<div class="line">Required, this is how we specify a variable that should be passed
+to the container. The proceeding arguments for example PORT is the
+name that the variable will in the container, 3000 will be it’s
+value inside of the container, since there is a script that uses
+the $PORT flag it will see this instead of None.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">3000:3000</span></code></div>
+<div class="line">Required, this is how we specify what port the container should map
+to on the outside The proceeding arguments for example PORT is the
+name that the variable will in the container, 3000 will be it’s
+value inside of the container, that way when you go to :3000 we are
+able to see it in the browser</div>
+</div>
+</li>
+</ol>
+</section>
+<section id="clearing-containers">
+<h1>## Clearing containers<a class="headerlink" href="#clearing-containers" title="Permalink to this heading"></a></h1>
+<section id="listing-containers">
+<h2>listing containers<a class="headerlink" href="#listing-containers" title="Permalink to this heading"></a></h2>
+<p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>                            <span class="n">COMMAND</span>                  <span class="n">CREATED</span>         <span class="n">STATUS</span>                       <span class="n">PORTS</span>     <span class="n">NAMES</span>
+<span class="mi">984600</span><span class="n">f0d749</span>   <span class="n">gdsc</span>                             <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">gallant_hofstadter</span>
+<span class="mi">17454</span><span class="n">c436e23</span>   <span class="n">gdsc</span>                             <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">naughty_bose</span>
+<span class="n">e27c22417f93</span>   <span class="n">gdsc</span>                             <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">dazzling_tu</span>
+<span class="n">a76fb6793356</span>   <span class="mf">1947240e95</span><span class="n">f3</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">dazzling_leavitt</span>
+<span class="mi">8</span><span class="n">f5d35205bff</span>   <span class="mf">1947240e95</span><span class="n">f3</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">magical_neumann</span>
+<span class="n">cebec5216ad6</span>   <span class="mf">1947240e95</span><span class="n">f3</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">magical_pasteur</span>
+<span class="n">aae934f9a606</span>   <span class="mf">1947240e95</span><span class="n">f3</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">great_heyrovsky</span>
+<span class="mi">40377957</span><span class="n">bf69</span>   <span class="mf">1947240e95</span><span class="n">f3</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">sad_carver</span>
+<span class="mi">07</span><span class="n">de68b4cf23</span>   <span class="mf">1947240e95</span><span class="n">f3</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>                <span class="n">inspiring_mendeleev</span>
+<span class="mi">99471</span><span class="n">fcbc4f2</span>   <span class="mi">9</span><span class="n">c83105b5467</span>                     <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">20</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">137</span><span class="p">)</span> <span class="mi">20</span> <span class="n">hours</span> <span class="n">ago</span>              <span class="n">romantic_cori</span>
+<span class="mi">3</span><span class="n">a359a7ddab2</span>   <span class="n">catthehacker</span><span class="o">/</span><span class="n">ubuntu</span><span class="p">:</span><span class="n">act</span><span class="o">-</span><span class="n">latest</span>   <span class="s2">&quot;/usr/bin/tail -f /d…&quot;</span>   <span class="mi">10</span> <span class="n">days</span> <span class="n">ago</span>     <span class="n">Exited</span> <span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="mi">20</span> <span class="n">hours</span> <span class="n">ago</span>              <span class="n">act</span><span class="o">-</span><span class="n">Screenshot</span><span class="o">-</span><span class="n">actions</span><span class="o">-</span><span class="n">setup</span>
+<span class="mi">739</span><span class="n">c941c64d5</span>   <span class="n">webapp</span>                           <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="mi">4</span> <span class="n">weeks</span> <span class="n">ago</span>     <span class="n">Exited</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="mi">4</span> <span class="n">weeks</span> <span class="n">ago</span>                 <span class="n">webapp_app_1</span>
+<span class="mi">01</span><span class="n">b36d021654</span>   <span class="n">matrim</span><span class="o">/</span><span class="n">cmake</span><span class="o">-</span><span class="n">examples</span><span class="p">:</span><span class="mf">3.4.3</span>      <span class="s2">&quot;/setup.sh /bin/bash&quot;</span>    <span class="mi">5</span> <span class="n">months</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">130</span><span class="p">)</span> <span class="mi">5</span> <span class="n">months</span> <span class="n">ago</span>              <span class="n">eager_kowalevski</span>
+<span class="mi">12</span><span class="n">d3c47dfefb</span>   <span class="n">ubuntu</span>                           <span class="s2">&quot;/bin/bash&quot;</span>              <span class="mi">9</span> <span class="n">months</span> <span class="n">ago</span>    <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">5</span> <span class="n">months</span> <span class="n">ago</span>                <span class="mi">00</span><span class="n">_learning</span>
+<span class="n">c9c6e6d04931</span>   <span class="n">ubuntu</span>                           <span class="s2">&quot;/bin/bash&quot;</span>              <span class="mi">10</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">Exited</span> <span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="mi">9</span> <span class="n">months</span> <span class="n">ago</span>              <span class="n">cloud_ini_valid</span>
+<span class="n">d85374a8fc09</span>   <span class="n">kalilinux</span><span class="o">/</span><span class="n">kali</span><span class="p">:</span><span class="n">latest</span>            <span class="s2">&quot;bash&quot;</span>                   <span class="mi">11</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">Exited</span> <span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="mi">10</span> <span class="n">months</span> <span class="n">ago</span>             <span class="n">zzs</span>
+</pre></div>
+</div>
+</section>
+<section id="clearing-containers-1">
+<span id="id1"></span><h2>Clearing containers<a class="headerlink" href="#clearing-containers-1" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Getting rid of all containers with <code class="docutils literal notranslate"><span class="pre">IMAGE</span></code> as <code class="docutils literal notranslate"><span class="pre">1947240e95f3</span></code>.</div>
+<div class="line">Run the command
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span> <span class="pre">-a</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">1947240e95f3</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'{print</span> <span class="pre">$1}'</span> <span class="pre">|</span> <span class="pre">xargs</span> <span class="pre">docker</span> <span class="pre">rm</span></code>
+#### Explanation 1. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span> <span class="pre">-a</span></code></div>
+<div class="line">Get a list of all containers that your system has 1.
+<code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">1947240e95f3</span></code></div>
+<div class="line">grab all lines that has this string 1. <code class="docutils literal notranslate"><span class="pre">awk</span> <span class="pre">'{print</span> <span class="pre">$1}'</span></code></div>
+<div class="line">grab the first Column(Container id) 1. <code class="docutils literal notranslate"><span class="pre">xargs</span> <span class="pre">docker</span> <span class="pre">rm</span></code></div>
+<div class="line">For all arguments passed into this run the command <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code></div>
+</div>
+</section>
+</section>
+<section id="clearing-images">
+<h1>### Clearing Images<a class="headerlink" href="#clearing-images" title="Permalink to this heading"></a></h1>
+<section id="listing-images">
+<h2>Listing Images<a class="headerlink" href="#listing-images" title="Permalink to this heading"></a></h2>
+<p>Run the command <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code> Output will be</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">images</span>
+<span class="n">REPOSITORY</span>                        <span class="n">TAG</span>           <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>         <span class="n">SIZE</span>
+<span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>                            <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>        <span class="n">ea9c7299c561</span>   <span class="mi">5</span> <span class="n">minutes</span> <span class="n">ago</span>   <span class="mi">503</span><span class="n">MB</span>
+<span class="n">gdsc</span>                              <span class="n">latest</span>        <span class="n">b3bc4d79419a</span>   <span class="mi">16</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="mi">536</span><span class="n">MB</span>
+<span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>                            <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>        <span class="mf">1947240e95</span><span class="n">f3</span>   <span class="mi">17</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="mi">423</span><span class="n">MB</span>
+<span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>                            <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>        <span class="mi">1</span><span class="n">f4934e992fd</span>   <span class="mi">20</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="mi">116</span><span class="n">MB</span>
+<span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>                            <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>        <span class="mi">9</span><span class="n">c83105b5467</span>   <span class="mi">20</span> <span class="n">hours</span> <span class="n">ago</span>    <span class="mi">116</span><span class="n">MB</span>
+<span class="n">catthehacker</span><span class="o">/</span><span class="n">ubuntu</span>               <span class="n">act</span><span class="o">-</span><span class="n">latest</span>    <span class="mi">43379</span><span class="n">ba3e57b</span>   <span class="mi">11</span> <span class="n">days</span> <span class="n">ago</span>     <span class="mf">1.16</span><span class="n">GB</span>
+<span class="n">node</span>                              <span class="mi">16</span><span class="o">-</span><span class="n">alpine</span>     <span class="mi">51405</span><span class="n">b97d471</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>     <span class="mi">116</span><span class="n">MB</span>
+<span class="n">webapp</span>                            <span class="n">latest</span>        <span class="mi">00127415872</span><span class="n">e</span>   <span class="mi">4</span> <span class="n">weeks</span> <span class="n">ago</span>     <span class="mi">459</span><span class="n">MB</span>
+<span class="n">gcr</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">donotleaveon</span><span class="o">/</span><span class="n">webapp</span>        <span class="n">latest</span>        <span class="mi">00127415872</span><span class="n">e</span>   <span class="mi">4</span> <span class="n">weeks</span> <span class="n">ago</span>     <span class="mi">459</span><span class="n">MB</span>
+<span class="n">maven</span>                             <span class="n">latest</span>        <span class="n">ce5cd1bd1247</span>   <span class="mi">6</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mi">556</span><span class="n">MB</span>
+<span class="n">openjdk</span>                           <span class="n">latest</span>        <span class="mf">5e28</span><span class="n">ba2b4cdb</span>   <span class="mi">6</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mi">471</span><span class="n">MB</span>
+<span class="n">gdcs</span>                              <span class="n">latest</span>        <span class="n">d6901f02ae7d</span>   <span class="mi">6</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mi">992</span><span class="n">MB</span>
+<span class="n">twodockernnet_database</span>            <span class="n">latest</span>        <span class="mi">51</span><span class="n">a753c89983</span>   <span class="mi">6</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mf">1.48</span><span class="n">GB</span>
+<span class="n">test_web1</span>                         <span class="n">latest</span>        <span class="n">e74bc9a9e646</span>   <span class="mi">6</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mi">820</span><span class="n">MB</span>
+<span class="n">test</span>                              <span class="n">latest</span>        <span class="mf">24e19</span><span class="n">bc82c73</span>   <span class="mi">7</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mi">251</span><span class="n">MB</span>
+<span class="n">mongo</span>                             <span class="n">latest</span>        <span class="mi">798</span><span class="n">d1656acba</span>   <span class="mi">7</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mi">698</span><span class="n">MB</span>
+<span class="n">mcr</span><span class="o">.</span><span class="n">microsoft</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mssql</span><span class="o">/</span><span class="n">server</span>    <span class="mi">2019</span><span class="o">-</span><span class="n">latest</span>   <span class="n">d78e982c2f2b</span>   <span class="mi">9</span> <span class="n">months</span> <span class="n">ago</span>    <span class="mf">1.48</span><span class="n">GB</span>
+<span class="n">twodockernnet_primary_container</span>   <span class="n">latest</span>        <span class="mf">601e280</span><span class="n">c8525</span>   <span class="mi">10</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mi">107</span><span class="n">MB</span>
+<span class="n">busybox</span>                           <span class="n">latest</span>        <span class="n">cabb9f684f8b</span>   <span class="mi">12</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mf">1.24</span><span class="n">MB</span>
+<span class="n">ubuntu</span>                            <span class="n">latest</span>        <span class="n">ba6acccedd29</span>   <span class="mi">12</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mf">72.8</span><span class="n">MB</span>
+<span class="n">kalilinux</span><span class="o">/</span><span class="n">kali</span>                    <span class="n">latest</span>        <span class="n">ccb499be88d1</span>   <span class="mi">12</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mi">125</span><span class="n">MB</span>
+<span class="n">bash</span>                              <span class="n">latest</span>        <span class="mi">8856</span><span class="n">ae160078</span>   <span class="mi">14</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mf">12.9</span><span class="n">MB</span>
+<span class="n">alpine</span>                            <span class="n">latest</span>        <span class="mi">14119</span><span class="n">a10abf4</span>   <span class="mi">14</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mf">5.6</span><span class="n">MB</span>
+<span class="n">gns3</span><span class="o">/</span><span class="n">xeyes</span>                        <span class="n">latest</span>        <span class="mi">82</span><span class="n">a3859849d7</span>   <span class="mi">15</span> <span class="n">months</span> <span class="n">ago</span>   <span class="mi">155</span><span class="n">MB</span>
+<span class="n">gimp</span><span class="o">/</span><span class="n">gimp</span>                         <span class="n">latest</span>        <span class="mi">298</span><span class="n">b39df5680</span>   <span class="mi">3</span> <span class="n">years</span> <span class="n">ago</span>     <span class="mf">1.63</span><span class="n">GB</span>
+<span class="n">kartoza</span><span class="o">/</span><span class="n">qgis</span><span class="o">-</span><span class="n">desktop</span>              <span class="n">latest</span>        <span class="n">f8fe86a53fe7</span>   <span class="mi">4</span> <span class="n">years</span> <span class="n">ago</span>     <span class="mf">1.07</span><span class="n">GB</span>
+<span class="n">matrim</span><span class="o">/</span><span class="n">cmake</span><span class="o">-</span><span class="n">examples</span>             <span class="mf">3.4.3</span>         <span class="mi">8</span><span class="n">a69b02da2db</span>   <span class="mi">5</span> <span class="n">years</span> <span class="n">ago</span>     <span class="mi">976</span><span class="n">MB</span>
+</pre></div>
+</div>
+</section>
+<section id="clearing-images-1">
+<span id="id2"></span><h2>Clearing Images<a class="headerlink" href="#clearing-images-1" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Getting rid of all images with <code class="docutils literal notranslate"><span class="pre">REPOSITORY</span></code> as <code class="docutils literal notranslate"><span class="pre">none</span></code>.</div>
+<div class="line">Run the command
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">none</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'{print</span> <span class="pre">$3}'</span> <span class="pre">|</span> <span class="pre">xargs</span> <span class="pre">docker</span> <span class="pre">rmi</span></code>
+#### Explanation 1. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code></div>
+<div class="line">Get a list of all images that your system has 1. <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">none</span></code></div>
+<div class="line">grab all lines that has this string 1. <code class="docutils literal notranslate"><span class="pre">awk</span> <span class="pre">'{print</span> <span class="pre">$3}'</span></code></div>
+<div class="line">grab the third Column(Image ID) 1. <code class="docutils literal notranslate"><span class="pre">xargs</span> <span class="pre">docker</span> <span class="pre">rm</span></code></div>
+<div class="line">For all arguments passed into this run the command <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rmi</span></code>,
+which removes images</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CYPRESS_README.md.html" class="btn btn-neutral float-left" title="Cypress Readme" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GITHUB_ACTION_README.md.html" class="btn btn-neutral float-right" title="## What is it" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 mirrow.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

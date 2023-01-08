@@ -1,0 +1,9 @@
+API
+===
+
+.. automdule::
+   :toctree: generated
+
+   CYPRESS_README.md.rst
+   DOCKER_README.md.rst
+   GITHUB_ACTION_README.md.rst
