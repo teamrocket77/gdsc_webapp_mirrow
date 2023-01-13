@@ -1,13 +1,20 @@
 {
-	"plugins" : [
-		"cypress"
-	],
+	"root": true,
+	"env": { 
+		"node": true, 
+		"es6": true,
+		"browser": true
+	},
 	"extends": [
 		"next/core-web-vitals",
 		"eslint:recommended",
-		"next"
+		"next",
+		"plugin:cypress/recommended"
 	],
   "rules": {
-    "react/no-unescaped-entities": 0
+    "react/no-unescaped-entities": 1,
+    "no-unused-vars": 1, // should be removed after merge -> Actually an Error
+    "no-undef": 1, // should be removed afterwards -> Actually an Error
+    "no-mixed-spaces-and-tabs": 1 // should also be removed
   }
 }

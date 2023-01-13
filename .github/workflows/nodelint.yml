@@ -1,4 +1,4 @@
-name: Example NodeJS Workflow
+name: Linting w/comments
 
 on: 
   pull_request:
@@ -22,24 +22,27 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Test Code Linting
+      - name: Run basic linter
         run: npm run lint
-      - name: Save Code Linting Report JSON
+
+      - name: Save Code Linting Report to JSON
         # npm script for ESLint
         # eslint --output-file eslint_report.json --format json src
         # See https://eslint.org/docs/user-guide/command-line-interface#options
-        run: npm run lint-ouput
+
+        run: npm run lint-output
         # Continue to the next step even if this fails
-        continue-on-error: true
+      - name: Check if file is there
+        run: ls -al
+
       - name: Annotate Code Linting Results
         uses: ataylorme/eslint-annotate-action@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           report-json: "eslint_report.json"
-      - name: Ouput Lint file
-        run: cat eslint_report.json
-#     - name: Upload ESLint report
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: eslint_report.json
-#         path: eslint_report.json
+
+      - name: Upload ESLint report
+        uses: actions/upload-artifact@v2
+        with:
+          name: eslint_report.json
+          path: eslint_report.json
