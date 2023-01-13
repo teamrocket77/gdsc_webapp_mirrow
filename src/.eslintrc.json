@@ -1,5 +1,12 @@
 {
-  "extends": "next/core-web-vitals",
+	"plugins" : [
+		"cypress"
+	],
+	"extends": [
+		"next/core-web-vitals",
+		"eslint:recommended",
+		"next"
+	],
   "rules": {
     "react/no-unescaped-entities": 0
   }
