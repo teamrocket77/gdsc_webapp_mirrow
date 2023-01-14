@@ -11,6 +11,8 @@ on:
   schedule:
     - cron: '31 14 * * 1'
   workflow_dispatch:
+  push:
+  pull_request:
 
 # Declare default permissions as read only.
 permissions: read-all
