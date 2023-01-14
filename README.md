@@ -6,6 +6,8 @@ Serves as the primary landing site for the **Google Developer Student Club @ Ken
 # Getting Started
 
 You can follow the guide found [here](https://github.com/KSU-Google-DSC/Webapp/blob/dev/CONTRIBUTING.md).
+[![OpenSSF
+Scorecard](https://api.securityscorecards.dev/projects/github.com/teamrocket77/gdsc_webapp_mirrow/badge)](https://api.securityscorecards.dev/projects/github.com/teamrocket77/gdsc_webapp_mirrow)
 
 # Docker
 
