@@ -4,8 +4,9 @@ on:
     branches:
       - main # https://dscksu.club
       - dev # https://preview.dscksu.club
-    types: [published]
+    types: [ published ]
   workflow_dispatch:
+
 
 env:
   REPO_NAME: webapp
@@ -24,17 +25,17 @@ jobs:
         run: |-
           echo "Current Github workspace: $GITHUB_WORKSPACE"
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@dc323e67f16fb5f7663d20ff7941f27f5809e9b6 # pin@v2
       - name: Google Authentication
         id: auth
-        uses: 'google-github-actions/auth@v1'
+        uses: 'google-github-actions/auth@ef5d53e30bbcd8d0836f4288f5e50ff3e086997d' # pin@v1
         with:
           token_format: 'access_token'
           workload_identity_provider: '${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ secrets.GOOGLE_WORKLOAD_SERVICE_ACCOUNT }}'
       - name: Docker Authentication
         id: docker-auth
-        uses: 'docker/login-action@v2'
+        uses: 'docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a' # pin@v2
         with:
           registry: gcr.io
           username: oauth2accesstoken
@@ -62,7 +63,7 @@ jobs:
           docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
       - name: Google Cloud Run -> Deploy
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v1
+        uses: google-github-actions/deploy-cloudrun@194392f9d796cd42b2617a231eec28e08f9e27e1 # pin@v1
         with:
           service: 'app-production'
           region: ${{ secrets.CLOUD_RUN_REGION }}
