@@ -1,0 +1,72 @@
+name: webapp-deployment-gcp
+on:
+  release:
+    branches:
+      - main # https://dscksu.club
+      - dev # https://preview.dscksu.club
+    types: [published]
+  workflow_dispatch:
+
+env:
+  REPO_NAME: webapp
+  CLOUD_RUN_PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
+  CLOUD_RUN_REGION: ${{ secrets.CLOUD_RUN_REGION }}
+
+jobs:
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: Debug Information
+        run: |-
+          echo "Current Github workspace: $GITHUB_WORKSPACE"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Google Authentication
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GOOGLE_WORKLOAD_SERVICE_ACCOUNT }}'
+      - name: Docker Authentication
+        id: docker-auth
+        uses: 'docker/login-action@v2'
+        with:
+          registry: gcr.io
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+      - name: .env.production -> Source
+        run: |-
+          cd "$GITHUB_WORKSPACE/src"
+          touch .env.production
+          echo "SECRET=${{ secrets.SECRET }}" | tee -a .env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_CLIENT_ID=${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_CLIENT_SECRET=${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_AUTHORIZATION_URL=${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}" | tee -a .env.production
+          echo "Created .env.production to $GITHUB_WORKSPACE/src"
+      - name: Source -> Docker Image
+        run: |-
+          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64 -t "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+      - run: |-
+          gcloud auth configure-docker gcr.io
+      - name: Docker Image -> Google Cloud Run
+        run: |-
+          docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+      - name: Google Cloud Run -> Deploy
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: 'app-production'
+          region: ${{ secrets.CLOUD_RUN_REGION }}
+          image: gcr.io/${{ secrets.CLOUD_RUN_PROJECT_ID }}/${{ secrets.REPO_NAME }}:${{ github.sha }}
+          flags: '--allow-unauthenticated'
+      - name: Debug Output
+        run: echo ${{ steps.deploy.outputs.url }}

@@ -27,7 +27,7 @@ const Events = ({ data }) => {
 
       {/* <EventCardFlip /> */}
       {data.map((event) => (
-        <EventCardFlip
+        <EventCardFlip key={event.title}
           title={`${event.title}`}
           locationType={`${event.location.type}`}
           locationData={`${event.location.data}`}

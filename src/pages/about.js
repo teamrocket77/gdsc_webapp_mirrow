@@ -11,11 +11,11 @@ const About = () => {
       maxWidth="100vw"
       component="div"
       sx={{
-        marginY: { xs: 10, sm: 10, md: 10, lg: 20 },
-        marginX: { xs: 10, sm: 10, md: 10, lg: 20 },
+        marginY: { xs: 8, sm: 10, md: 10, lg: 15 },
+        marginX: { xs: 8, sm: 10, md: 10, lg: 15 },
       }}
     >
-      <Paper elevation="1">
+      <Paper elevation={1}>
         <Grid
           container
           display="flex"
@@ -23,16 +23,14 @@ const About = () => {
           justifyContent="center"
           sx={{
             // paddingX: { xs: 5, sm: 5, md: 10, lg: 10 },
-            padding: 10,
+            padding: 8,
+            
           }}
         >
           <Grid
             item
             xs={12}
             md={6}
-            sx={{
-              paddingRight: { xs: 0, sm: 0, md: 10, lg: 20 },
-            }}
           >
             <Typography
               gutterBottom
@@ -97,12 +95,16 @@ const About = () => {
               </Typography>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6}
+          sx={{
+            paddingLeft: { xs: 0, sm: 0, md: 5, lg: 6 },
+          }}
+          >
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXRUnyNvt35eNGpley13X7C-lXCgT7GZC9uA&usqp=CAU"
+              src="/static/images/groupimage1.png"
               alt="team_picture"
-              height="auto"
-              width="70%"
+              height="100%"
+              width="100%"
             />
           </Grid>
         </Grid>
@@ -112,3 +114,5 @@ const About = () => {
 };
 
 export default About;
+
+

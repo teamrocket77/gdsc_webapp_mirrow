@@ -3,14 +3,9 @@ This webapp mirrors to https://dscksu.club .
 
 Serves as the primary landing site for the **Google Developer Student Club @ Kennesaw State University**. 
 
-# Installation
+# Getting Started
 
-1. Git clone the repo.
-2. cd into ``./src`` under the root directory.
-3. ``npm ci`` to install node modules (it's a faster version of ``npm install`` but with less problems with the ``package-lock.json`` file). 
-> **Note:** If ``npm ci`` is not available, it's likely that you do not have an npm version greater than or equal to 5.7. To correct this, run ``npm install -g npm`` in your shell.
-4. ``npm run dev`` to run in development mode.
-> **Warning:** You will never have to run the application in your local environment in production mode. Production mode is used in production deployment.
+You can follow the guide found [here](https://github.com/KSU-Google-DSC/Webapp/blob/dev/CONTRIBUTING.md).
 
 # Docker
 
