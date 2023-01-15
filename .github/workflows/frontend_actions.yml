@@ -5,7 +5,7 @@ on:
   pull_request:
     types: [ created, labeled ]
 
-permissions: read
+permissions: read-all
 
 jobs:
   check_for_ui_ux_label:
