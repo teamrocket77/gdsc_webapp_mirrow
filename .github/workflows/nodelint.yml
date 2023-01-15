@@ -29,19 +29,15 @@ jobs:
         # npm script for ESLint
         # eslint --output-file eslint_report.json --format json src
         # See https://eslint.org/docs/user-guide/command-line-interface#options
-
         run: npm run lint-output
-        # Continue to the next step even if this fails
-      - name: Check if file is there
-        run: ls -al
 
-      - name: Annotate Code Linting Results
+      - name: Annotated linting code results
         uses: ataylorme/eslint-annotate-action@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           report-json: "eslint_report.json"
 
-      - name: Upload ESLint report
+      - name: Upload ESLint json Report
         uses: actions/upload-artifact@v2
         with:
           name: eslint_report.json
