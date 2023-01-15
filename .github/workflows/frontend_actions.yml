@@ -2,9 +2,10 @@ name: Cypress Front End tests
 
 on:
   push:
-  premissions: read
   pull_request:
     types: [ created, labeled ]
+
+permissions: read
 
 jobs:
   check_for_ui_ux_label:
