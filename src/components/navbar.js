@@ -17,11 +17,11 @@ import React, { useState, useEffect } from "react";
 import DrawerComp from "./DrawerComp";
 
 // Navbar Pages
-const PAGES = ["About", "Events", "Socials", "Our Team", "Opportunities"];
+const PAGES = ["About", "Socials", "Opportunities"];
 
 // This is overkill but, we want page -> href mapping w/ key-value
 // Index matches pages since lists retain position (index)
-const PAGES_MAPPING = ["about", "events", "socials", "team", "opportunities"];
+const PAGES_MAPPING = ["about", "socials", "opportunities"];
 
 const Navbar = (props) => {
   const { data: session, status } = useSession();
@@ -62,7 +62,7 @@ const Navbar = (props) => {
                       src="/static/images/gdsc_logo.png"
                       height="50px"
                       width="50px"
-                      marginX="auto"
+                      sx={{mx:"auto"}}
                     />
                   </Link>
                 </Grid>

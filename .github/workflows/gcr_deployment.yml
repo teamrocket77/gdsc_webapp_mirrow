@@ -2,9 +2,9 @@ name: webapp-deployment-gcp
 on:
   release:
     branches:
-      - main # https://dscksu.dev
-      - dev # https://preview.dscksu.dev
-    types: [ published ]
+      - main # https://dscksu.club
+      - dev # https://preview.dscksu.club
+    types: [published]
   workflow_dispatch:
 
 
@@ -12,39 +12,60 @@ env:
   REPO_NAME: webapp
   CLOUD_RUN_PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
   CLOUD_RUN_REGION: ${{ secrets.CLOUD_RUN_REGION }}
-  SECRET: ${{ secrets.SECRET }}
-  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-  GOOGLE_PROVIDER_CLIENT_ID: ${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}
-  GOOGLE_PROVIDER_CLIENT_SECRET: ${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}
-  GOOGLE_PROVIDER_AUTHORIZATION_URL: ${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}
-  FIREBASE_SERVICE_ACCOUNT_PROJECT_ID: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}
-  FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}
-  FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}
 
 jobs:
   deployment:
     name: Deployment
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
+      - name: Debug Information
+        run: |-
+          echo "Current Github workspace: $GITHUB_WORKSPACE"
       - name: Checkout
         uses: actions/checkout@dc323e67f16fb5f7663d20ff7941f27f5809e9b6 # pin@v2
       - uses: google-github-actions/setup-gcloud@ee9693ff89cdf73862b8a13988f6a71070e8fc58 # pin@v0.6.2
         with:
-          project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
-          service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
-          service_account_email: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_EMAIL }}
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GOOGLE_WORKLOAD_SERVICE_ACCOUNT }}'
+      - name: Docker Authentication
+        id: docker-auth
+        uses: 'docker/login-action@v2'
+        with:
+          registry: gcr.io
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+      - name: .env.production -> Source
+        run: |-
+          cd "$GITHUB_WORKSPACE/src"
+          touch .env.production
+          echo "SECRET=${{ secrets.SECRET }}" | tee -a .env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_CLIENT_ID=${{ secrets.GOOGLE_PROVIDER_CLIENT_ID }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_CLIENT_SECRET=${{ secrets.GOOGLE_PROVIDER_CLIENT_SECRET }}" | tee -a .env.production
+          echo "GOOGLE_PROVIDER_AUTHORIZATION_URL=${{ secrets.GOOGLE_PROVIDER_AUTHORIZATION_URL }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_PROJECT_ID=${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}" | tee -a .env.production
+          echo "FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL=${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}" | tee -a .env.production
+          echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
-          DOCKER_BUILDKIT=1 docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64 -t "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+      - run: |-
+          gcloud auth configure-docker gcr.io
       - name: Docker Image -> Google Cloud Run
         run: |-
           docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
-      - name: Deploy
-        run: |-
-          gcloud components install beta --quiet
-          gcloud beta run deploy $REPO_NAME --image gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
-            --project $CLOUD_RUN_PROJECT_ID \
-            --platform managed \
-            --region $CLOUD_RUN_REGION \
-            --allow-unauthenticated \
-            --quiet
+      - name: Google Cloud Run -> Deploy
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: 'app-production'
+          region: ${{ secrets.CLOUD_RUN_REGION }}
+          image: gcr.io/${{ secrets.CLOUD_RUN_PROJECT_ID }}/${{ secrets.REPO_NAME }}:${{ github.sha }}
+          flags: '--allow-unauthenticated'
+      - name: Debug Output
+        run: echo ${{ steps.deploy.outputs.url }}

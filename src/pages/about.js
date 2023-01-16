@@ -11,8 +11,8 @@ const About = () => {
       maxWidth="100vw"
       component="div"
       sx={{
-        marginY: { xs: 8, sm: 10, md: 10, lg: 15 },
-        marginX: { xs: 8, sm: 10, md: 10, lg: 15 },
+        my: { xs: 10, sm: 10, md: 10, lg: 20 },
+        mx: { xs: 10, sm: 10, md: 10, lg: 20 },
       }}
     >
       <Paper elevation={1}>
