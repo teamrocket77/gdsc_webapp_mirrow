@@ -4,8 +4,9 @@ on:
     branches:
       - main # https://dscksu.dev
       - dev # https://preview.dscksu.dev
-    types: [published]
+    types: [ published ]
   workflow_dispatch:
+
 
 env:
   REPO_NAME: webapp
@@ -26,8 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - uses: google-github-actions/setup-gcloud@v0.6.2
+        uses: actions/checkout@dc323e67f16fb5f7663d20ff7941f27f5809e9b6 # pin@v2
+      - uses: google-github-actions/setup-gcloud@ee9693ff89cdf73862b8a13988f6a71070e8fc58 # pin@v0.6.2
         with:
           project_id: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_KEY }}
