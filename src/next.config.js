@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    esmExternals: false
+    esmExternals: false,
+    forceSwcTransforms: true
   }
 }
 

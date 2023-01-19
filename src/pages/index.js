@@ -26,7 +26,7 @@ export default function Index() {
   // If the client session is loading, do this.
   // Todo: Replace with a nice loading screen.
   if (status === "loading") {
-    return <p>Loading Session</p>;
+    //return <p>Loading Session</p>;
   }
 
   return (
