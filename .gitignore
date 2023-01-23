@@ -3,3 +3,5 @@
 **/.env.*
 **/cypress/videos
 **/cypress/screenshots
+**/coverage
+**/src/.nyc_output

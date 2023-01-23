@@ -1,9 +1,10 @@
+const coverage = require('@cypress/code-coverage/task')
 module.exports = (on, config) => {
-    require('@cypress/code-coverage/task')(on, config)
-  
-    // add other tasks to be registered here
-  
-    // IMPORTANT to return the config object
-    // with the any changed environment variables
-    return config
-  }
+    on('task', coverage.start())
+    on('after:browser:launch', (browser, launchOptions) => {
+        if (browser.name === 'chrome') {
+            launchOptions.args.push('--disable-dev-shm-usage')
+            return launchOptions
+        }
+    })
+}

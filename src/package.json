@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 8080",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:coverage": "nyc --reported=html --reporter=text npm test",
+    "test:open": "cypress open",
+    "test": "npm run test:coverage && npm run test:open",
+    "coverage": "nyc report --reporter=text-lcov"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

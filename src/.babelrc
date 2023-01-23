@@ -1,4 +1,4 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react", "next/babel"],
-  "plugins": ["istanbul"]
+  "presets": ["@babel/preset-env", "@babel/preset-react", "next/babel", "babel-plugin-istanbul"],
+  "plugins": ["transform-class-properties", "istanbul"]
 }
