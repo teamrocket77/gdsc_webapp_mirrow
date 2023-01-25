@@ -23,8 +23,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        //source: "/:path*",
-        source: "/",
+        source: "/:path*",
         headers: securityHeaders,
       }
     ]
