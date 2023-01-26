@@ -4,3 +4,4 @@
 **/env.*
 **/cypress/videos
 **/cypress/screenshots
+**/eslint_report*
