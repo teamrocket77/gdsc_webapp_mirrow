@@ -3,18 +3,18 @@ name: Cypress Front End tests
 on:
   push:
   pull_request:
-    types: [created, labeled]
+    types: [ created, labeled ]
 
 jobs:
   check_for_ui_ux_label:
     runs-on: ubuntu-latest
     name: Check for the UI/UX Label
     outputs:
-      is_ui_ux_label_present: ${{ steps.check_pr_labels.outputs.result }} 
-    steps: 
+      is_ui_ux_label_present: ${{ steps.check_pr_labels.outputs.result }}
+    steps:
       - name: Check PR labels action step
         id: check_pr_labels
-        uses: teamrocket77/check-pr-labels-on-push-action@v1.1
+        uses: teamrocket77/check-pr-labels-on-push-action@9a2bbe4db40b385fd2cbfd9d7ef1190ccd9b4803 # pin@v1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
@@ -24,14 +24,14 @@ jobs:
 
   cypress-run:
     name: Cypress run
-    needs: check_for_ui_ux_label 
-    if:  needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present == 'true'
+    needs: check_for_ui_ux_label
+    if: needs.check_for_ui_ux_label.outputs.is_ui_ux_label_present == 'true'
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # pin@v3
       - name: Cypress run
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@37c511bc322f112c2dd629d3610f4f096bc80096 # pin@v5
         with:
           working-directory: src
           start: npm run dev
@@ -39,7 +39,7 @@ jobs:
             cypress/**/frontend_tests/frontend.*js
           config: supportFile=false
       - name: Get Screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # pin@v3
         with:
           name: Front end Screenshots
           path: "**/cypress/screenshots/**/*.png"

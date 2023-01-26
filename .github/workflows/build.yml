@@ -1,21 +1,15 @@
-name: webapp-deployment-gcp
+name: Build Docker Container on Push and PR
 on:
-  release:
+  push:
+  pull_request:
     branches:
-      - main # https://dscksu.club
-      - dev # https://preview.dscksu.club
-    types: [published]
+      - main 
+      - dev
   workflow_dispatch:
 
-
-env:
-  REPO_NAME: webapp
-  CLOUD_RUN_PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_ID }}
-  CLOUD_RUN_REGION: ${{ secrets.CLOUD_RUN_REGION }}
-
 jobs:
-  deployment:
-    name: Deployment
+  test_docker:
+    name: Build Container as Test
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -55,19 +49,5 @@ jobs:
           echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
-          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64 -t "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
-      - run: |-
-          gcloud auth configure-docker gcr.io
-      - name: Docker Image -> Google Cloud Run
-        run: |-
-          docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
-      - name: Google Cloud Run -> Deploy
-        id: deploy
-        uses: google-github-actions/deploy-cloudrun@194392f9d796cd42b2617a231eec28e08f9e27e1 #v1
-        with:
-          service: 'app-production'
-          region: ${{ secrets.CLOUD_RUN_REGION }}
-          image: gcr.io/${{ secrets.CLOUD_RUN_PROJECT_ID }}/${{ secrets.REPO_NAME }}:${{ github.sha }}
-          flags: '--allow-unauthenticated'
-      - name: Debug Output
-        run: echo ${{ steps.deploy.outputs.url }}
+          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64
+
