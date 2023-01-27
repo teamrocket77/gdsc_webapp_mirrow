@@ -10,8 +10,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 const DrawerComp = () => {
-  const PAGES = ["About", "Socials", "Opportunities"];
-  const PAGES_MAPPING = ["about", "socials", "opportunities"];
+  const PAGES = ["About", "Socials", "Opportunities", "Login"];
+  const PAGES_MAPPING = ["about", "socials", "opportunities", "login"];
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>

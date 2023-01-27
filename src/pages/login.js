@@ -1,24 +1,45 @@
-import { FormControlLabel, Checkbox, Link, Box, TextField, Grid, Typography, Button, Paper } from "@mui/material";
-import CssBaseline from '@mui/material/CssBaseline';
+import {
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Box,
+  TextField,
+  Grid,
+  Typography,
+  Button,
+  Paper,
+} from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { useTheme, createTheme, ThemeProvider } from "@mui/material/styles";
-import * as React from "react";
-
+import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const router = useRouter();
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
-  };
+    try {
+      const session = await signIn("credentials", {
+        username: data.get('username'),
+        password: data.get('password'),
+        callbackUrl: `${window.location.origin}/dashboard`
+      })
+
+      if (session && session.user) {
+        console.log("USER IS SIGNED IN & SESSION IS VALID.");
+      }
+    } catch(error) {
+      console.log("ERROR: ", error);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '90vh', marginTop: 0.6 }}>
+      <Grid container component="main" sx={{ height: "90vh", marginTop: 0.6 }}>
         <CssBaseline />
         <Grid
           item
@@ -27,11 +48,13 @@ export default function SignIn() {
           md={7}
           sx={{
             backgroundImage: `url(/static/images/loginbg.png)`,
-            backgroundRepeat: 'no-repeat',
+            backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -39,26 +62,29 @@ export default function SignIn() {
             sx={{
               my: 8,
               mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-           
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                errorText="Please enter a valid email!"
               />
               <TextField
                 margin="normal"
@@ -69,23 +95,16 @@ export default function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                errorText="Please enter a valid password!"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                href="/dashboard"
               >
                 Sign In
               </Button>
-              <Grid container>
-              </Grid>
+              <Grid container></Grid>
             </Box>
           </Box>
         </Grid>
@@ -93,5 +112,3 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
-
-

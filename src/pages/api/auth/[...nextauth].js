@@ -1,46 +1,73 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-// import { FirestoreAdapter } from '@next-auth/firebase-adapter';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { setSessionCookie } from 'next-auth/react';
 
 // Configure Authentication Provider.
 export default NextAuth({
+    options: process.env.NEXTAUTH_URL,
     providers: [
-        GoogleProvider({
+        
+        // For Development
+        process.env.NODE_ENV == "development" ? CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                username: {
+                    label: "Username",
+                    type: "text"
+                },
+                password: {
+                    label: "Password",
+                    type: "password"
+                }
+            },
+            async authorize(credentials, request) {
+                if (credentials.username === "admin" && credentials.password === "admin") {
+                    return {
+                        id: 1,
+                        name: 'admin',
+                        email: 'admin@dscksu.club'
+                    }
+                }
+                return null;
+            }
+        })
+
+        // For Production
+        : GoogleProvider({
             clientId: process.env.GOOGLE_PROVIDER_CLIENT_ID,
             clientSecret: process.env.GOOGLE_PROVIDER_CLIENT_SECRET,
             authorization: process.env.GOOGLE_PROVIDER_AUTHORIZATION_URL
         }),
     ],
-    adapter: null,
-    // adapter: FirestoreAdapter({
-    //     apiKey: process.env.FIREBASE_USER_ACCOUNT_API_KEY,
-    //     authDomain: process.env.FIREBASE_USER_ACCOUNT_AUTH_DOMAIN,
-    //     databaseURL: process.env.FIREBASE_USER_ACCOUNT_DATABASE_URL,
-    //     projectId: process.env.FIREBASE_USER_ACCOUNT_PROJECT_ID,
-    //     storageBucket: process.env.FIREBASE_USER_ACCOUNT_STORAGE_BUCKET,
-    //     messagingSenderId: process.env.FIREBASE_USER_ACCOUNT_MESSAGING_SENDER_ID,
-    //     appId: process.env.FIREBASE_USER_ACCOUNT_APP_ID,
-    //     measurementId: process.env.FIREBASE_USER_ACCOUNT_MEASUREMENT_ID
-    // }),
     secret: process.env.NEXTAUTH_SECRET,
-    jwt: {
-        encryption: true
+    debug: process.env.NODE_ENV === "development" ? true : false,
+    pages: {
+        signIn: '/auth/signin',
+        signOut: '/auth/signout',
+        error: '/auth/error'
     },
     callbacks: {
-        
-        // Returns session token when callback is invoked.
-        session: async({session, token}) => {
+        async signIn({ user, account, profile, email, credentials }) {
+            if (user) {
+              return true;
+            }
+            return false;
+        },
+        async signOut({ session }) {
+            session.destroy();
+        }, 
+        // Session Expires in 30 minutes.
+        async session({session, token, user}) {
+            session.accessToken = token.accessToken;
+            session.expires = Date.now()+(30*60*1000)
             return session;
         },
-
-        // Manage redirect based on whether or not the user is logged in.
-        // Also known as a protected routes. If the user is not logged in,
-        // redirect (resolve) to the site's landing page ('/').
-        redirect: async(url) => {
-            return Promise.resolve('/');
+        async jwt({ token, user, account, profile, isNewUser }) {
+            if (account) {
+                token.accessToken = account.access_token;
+            }
+            return token;
         }
-    },
-    pages: {
-        //error: '/auth/error'
     }
 })
