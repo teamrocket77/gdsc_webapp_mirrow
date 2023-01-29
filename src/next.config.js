@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     esmExternals: false,
-    forceSwcTransforms: true
+    //forceSwcTransforms: true
   }
 }
 
