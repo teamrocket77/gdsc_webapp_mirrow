@@ -9,19 +9,23 @@ const theme = createTheme({
     },
     secondary: {
       main: blue[500],
+      alternate: "#405D96",
     },
     hashtags: {
       main: "#FF69B4",
     },
     button: {
       main: "#FFBB00",
-      contrastText: "#FFF"
+      contrastText: "#FFF",
     },
     themeColor: {
       blue: "#46A8F6",
       green: "#34A853",
-      red: "#EF5350",
+      red: "",
       yellow: "#FBBC04",
+    },
+    dashboardBackground: {
+      main: "#F9FAFD",
     },
   },
 });

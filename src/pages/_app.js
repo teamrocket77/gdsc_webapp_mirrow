@@ -7,25 +7,22 @@ import { CacheProvider } from "@emotion/react";
 import { SessionProvider } from "next-auth/react";
 import theme from "../themes/theme";
 import createEmotionCache from "../themes/createEmotionCache";
-import Navbar from "../components/navbar";
+import Layout from "../components/Layout";
 
 const clientSideEmotionCache = createEmotionCache();
 
-export default function App(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  // Do not remove the next 54 lines
+export default function App({ Component, emotionCache = clientSideEmotionCache, pageProps: { session, ...pageProps }}) {
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Navbar />
-          <div>
-            <Component {...pageProps} />
-          </div>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
         </ThemeProvider>
       </CacheProvider>
     </SessionProvider>

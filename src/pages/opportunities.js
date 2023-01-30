@@ -82,7 +82,7 @@ const Recruitment = () => {
           alignItems="center"
           justifyContent="center"
           height="100vh"
-          sx={{ marginX: { xs: "30px", sm: "30px", md: "50px", lg: "50px" } }}
+          sx={{ mx: { xs: "30px", sm: "30px", md: "50px", lg: "50px" } }}
         >
           <Grid item xs={12} md={6}>
             <Typography
@@ -166,7 +166,7 @@ for documentation: https://stackblitz.com/edit/react-ls1dwp?file=index.js */}
                 "& .MuiTextField-root": { my: "10px" },
               }}
             >
-              <FormLabel required sx={{ color: "black", marginTop: "50px" }}>
+              <FormLabel required sx={{ color: "black", mt: "50px" }}>
                 Student Information and Contact
               </FormLabel>
               <TextField
@@ -203,7 +203,7 @@ for documentation: https://stackblitz.com/edit/react-ls1dwp?file=index.js */}
               component="fieldset"
               variant="standard"
             >
-              <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+              <FormLabel sx={{ color: "black", mt: "40px" }}>
                 Please select a Department you're applying for. More info on
                 each Department can be found here:{" "}
                 <Link href="https://docs.google.com/presentation/d/1WSEW1rwIS9fCni5fw0wD6XICZfwKd3S51ZyvbGzV5nc/edit#slide=id.geed099d7b2_0_797">
@@ -282,20 +282,20 @@ for documentation: https://stackblitz.com/edit/react-ls1dwp?file=index.js */}
             </FormControl>
             {/*/-----------------------------------------------------------------------*/}
             <FormControl required component="fieldset" variant="standard">
-              <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+              <FormLabel sx={{ color: "black", mt: "40px" }}>
                 Please list down your first, second and third choices from the
                 question above
               </FormLabel>
               <TextField
                 required
                 label="Your answer"
-                marginTop="10px"
+                sx={{mt:"10px"}}
                 variant="standard"
               />
             </FormControl>
             {/*/-----------------------------------------------------------------------*/}
             <FormControl>
-              <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+              <FormLabel sx={{ color: "black", mt: "40px" }}>
                 Please select the role you're looking for
               </FormLabel>
               <RadioGroup>
@@ -312,17 +312,17 @@ for documentation: https://stackblitz.com/edit/react-ls1dwp?file=index.js */}
               </RadioGroup>
             </FormControl>
             {/*/-----------------------------------------------------------------------*/}
-            <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+            <FormLabel sx={{ color: "black", mt: "40px" }}>
               Resume or Experience(s)
             </FormLabel>
             <TextField
               required
               label="Your answer"
-              marginTop="10px"
+              sx={{mt:"10px"}}
               variant="standard"
             />
 
-            <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+            <FormLabel sx={{ color: "black", mt: "40px" }}>
               Provide a summary of what the role that you're applying for means
               to you and how it can make an impact on your resume. This is your
               chance to prove to us why you should have a spot on our team. Our
@@ -332,12 +332,12 @@ for documentation: https://stackblitz.com/edit/react-ls1dwp?file=index.js */}
             <TextField
               required
               label="Your answer"
-              marginTop="10px"
+              sx={{mt:"10px"}}
               variant="standard"
             />
             {/*/-----------------------------------------------------------------------*/}
             <FormControl>
-              <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+              <FormLabel sx={{ color: "black", mt: "40px" }}>
                 Please select an estimate of hours per week that you can
                 dedicate to the group
               </FormLabel>
@@ -371,12 +371,12 @@ for documentation: https://stackblitz.com/edit/react-ls1dwp?file=index.js */}
               </RadioGroup>
             </FormControl>
             {/*/-----------------------------------------------------------------------*/}
-            <FormLabel sx={{ color: "black", marginTop: "40px" }}>
+            <FormLabel sx={{ color: "black", mt: "40px" }}>
               Any additional information you'd like to share with us
             </FormLabel>
             <TextField
               label="Your answer"
-              marginTop="10px"
+              sx={{mt:"10px"}}
               variant="standard"
             />
             {/*/-----------------------------------------------------------------------*/}

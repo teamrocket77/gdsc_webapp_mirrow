@@ -15,6 +15,7 @@ import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "./DrawerComp";
+// import DashboardMenu from "./DashboardMenu";
 
 // Navbar Pages
 const PAGES = ["About", "Socials", "Opportunities"];
@@ -23,7 +24,7 @@ const PAGES = ["About", "Socials", "Opportunities"];
 // Index matches pages since lists retain position (index)
 const PAGES_MAPPING = ["about", "socials", "opportunities"];
 
-const Navbar = (props) => {
+const DefaultNavbar = (props) => {
   const { data: session, status } = useSession();
   const [value, setValue] = useState();
   const theme = useTheme();
@@ -62,7 +63,7 @@ const Navbar = (props) => {
                       src="/static/images/gdsc_logo.png"
                       height="50px"
                       width="50px"
-                      marginX="auto"
+                      sx={{ mx: "auto" }}
                     />
                   </Link>
                 </Grid>
@@ -87,11 +88,17 @@ const Navbar = (props) => {
                 </Link>
               </Typography>
 
+              {/* Keep this here until, I figure out session bs. Ty - Sanjay */}
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 {PAGES.map((page, index) => (
                   <Button
                     key={page}
-                    sx={{ my: 2, mx: 1, color: "inherit", display: "block" }}
+                    sx={{
+                      my: 2,
+                      mx: 1,
+                      color: "inherit",
+                      display: "block",
+                    }}
                     href={"/" + PAGES_MAPPING[index]}
                     data-cy={`nav-bar-option-${page}`}
                   >
@@ -99,24 +106,12 @@ const Navbar = (props) => {
                   </Button>
                 ))}
               </Box>
-
-              {/* If Session does not exist, invalid or client has not logged in, do this. */}
-              {/* {!session && (
-                <>
-                  <Button color="inherit" onClick={() => signIn()}>
-                    Login
-                  </Button>
-                </>
-              )} */}
-
-              {/* If Session does exist and the client has logged in, do this. */}
-              {/* {session && (
-                <>
-                  <Button color="inherit" onClick={() => signOut()}>
-                    Logout
-                  </Button>
-                </>
-              )} */}
+              <Button
+                color="inherit"
+                onClick={(event) => (window.location.href = "/login")}
+              >
+              Login
+              </Button>
             </>
           )}
         </Toolbar>
@@ -125,4 +120,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default DefaultNavbar;

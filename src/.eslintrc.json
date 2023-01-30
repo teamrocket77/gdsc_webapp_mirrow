@@ -1,6 +1,20 @@
 {
-  "extends": "next/core-web-vitals",
+  "root" : true,
+  "env" :{
+    "node" : true,
+    "es6" : true,
+    "browser" : true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "next",
+    "plugin:cypress/recommended"
+  ],
   "rules": {
-    "react/no-unescaped-entities": 0
+    "react/no-unescaped-entities": 1,
+    "no-unused-vars": 1,
+    "no-undef": 1, 
+    "no-mixed-spaces-and-tabs": 1
   }
 }
