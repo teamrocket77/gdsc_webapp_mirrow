@@ -37,14 +37,14 @@ jobs:
         
       - name: Set code coverage commit status
         working-directory: src
-        run: node bin/set-gh-status
+        run: npx -p check-code-coverage set-gh-status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       #commit any changed files (i.e., badge)
       - name: Update code coverage badge
         working-directory: src
-        run: node bin/update-badge
+        run: npx update-badge
 
   test_docker:
     name: Build Container as Test
