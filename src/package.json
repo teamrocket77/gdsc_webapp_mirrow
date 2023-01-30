@@ -10,7 +10,7 @@
     "test:coverage": "nyc --reported=html --reporter=text npm test",
     "test:open": "cypress open",
     "test": "npm run test:coverage && npm run test:open",
-    "coverage": "nyc report --reporter=text-lcov",
+    "coverage": "nyc report --reporter=text-summary",
     "lint-output": "eslint --ext js,jsx -c .eslintrc.json --format json -o ../eslint_report.json .",
     "lint-fix": "eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx ."
   },
