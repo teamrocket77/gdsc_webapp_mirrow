@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Check PR labels action step
         id: check_pr_labels
-        uses: teamrocket77/check-pr-labels-on-push-action@9a2bbe4db40b385fd2cbfd9d7ef1190ccd9b4803 # pin@v1.1
+        uses: teamrocket77/check-pr-labels-on-push-action@1ae71affeff368721ac59ecd75cf8f759ac37db3 # pin@v1.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
