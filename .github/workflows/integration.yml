@@ -34,12 +34,6 @@ jobs:
           echo "LIST ALL"
           ls -lha
           npm run coverage
-        
-      - name: Set code coverage commit status
-        working-directory: src
-        run: npx -p check-code-coverage set-gh-status
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       #commit any changed files (i.e., badge)
       - name: Update code coverage badge
@@ -50,6 +44,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: 'code-coverage/dev'
+          
+      - name: Set code coverage commit status
+        working-directory: src
+        run: npx -p check-code-coverage set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   test_docker:
     name: Build Container as Test
