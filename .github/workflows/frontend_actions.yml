@@ -1,9 +1,12 @@
 name: Cypress Front End tests
 
 on:
-  push:
+  label:
+    types: [created]
   pull_request:
-    types: [ created, labeled ]
+    types: [ opened, labeled, synchronize ]
+
+permissions: read-all
 
 jobs:
   check_for_ui_ux_label:

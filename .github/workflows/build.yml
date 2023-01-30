@@ -1,7 +1,7 @@
 name: Build Docker Container on Push and PR
 on:
-  push:
   pull_request:
+    types: [ opened, labeled, synchronize ]
     branches:
       - main 
       - dev
