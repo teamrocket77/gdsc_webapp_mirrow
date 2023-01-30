@@ -7,6 +7,8 @@ on:
       - dev
   workflow_dispatch:
 
+permissions: read-all
+
 jobs:
   test_docker:
     name: Build Container as Test
@@ -27,13 +29,6 @@ jobs:
           token_format: 'access_token'
           workload_identity_provider: '${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ secrets.GOOGLE_WORKLOAD_SERVICE_ACCOUNT }}'
-      - name: Docker Authentication
-        id: docker-auth
-        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b #pinv2
-        with:
-          registry: gcr.io
-          username: oauth2accesstoken
-          password: ${{ steps.auth.outputs.access_token }}
       - name: .env.production -> Source
         run: |-
           cd "$GITHUB_WORKSPACE/src"
@@ -49,5 +44,5 @@ jobs:
           echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
-          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64
+          DOCKER_BUILDKIT=1 docker --target builder .
 

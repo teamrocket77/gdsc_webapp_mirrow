@@ -1,10 +1,15 @@
 name: Cypress Front End tests
 
 on:
-  label:
-    types: [created]
+  push:
+    branches:
+      - dev
+      - main
   pull_request:
     types: [ opened, labeled, synchronize ]
+    branches:
+      - dev
+      - main
 
 permissions: read-all
 
@@ -17,7 +22,7 @@ jobs:
     steps:
       - name: Check PR labels action step
         id: check_pr_labels
-        uses: teamrocket77/check-pr-labels-on-push-action@1ae71affeff368721ac59ecd75cf8f759ac37db3 # pin@v1.3
+        uses: teamrocket77/check-pr-labels-on-push-action@c27d6443e146f69db177d5e8482e9ce337730c7e # pin@v1.4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: '["UI/UX"]'
