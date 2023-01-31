@@ -44,5 +44,5 @@ jobs:
           echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
-          DOCKER_BUILDKIT=1 docker --target builder .
+          DOCKER_BUILDKIT=1 docker build --target builder .
 
