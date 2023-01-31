@@ -1,4 +1,4 @@
-name: Build Docker Container on Push and PR
+name: Integration tests
 on:
   pull_request:
     types: [ opened, labeled, synchronize ]
@@ -49,15 +49,15 @@ jobs:
     name: Linter + Commenter
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: 'write'
+      "write-all"
     defaults:
       run:
         working-directory: src
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd
         with:
           node-version: 16
 
@@ -74,16 +74,16 @@ jobs:
         run: npm run lint-output
 
       - name: Annotated linting code results
-        uses: a-b-r-o-w-n/eslint-action@0c0983752a98ed6982252ebb9572d082c469a6de
+        uses: ataylorme/eslint-annotate-action@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          files: "src/**/*"
-          extensions: ".js"
-          working-directory: "./src"
-          quiet: "false"
+          report-json: "eslint_report.json"
 
+      - name: Run linter for json Report
+        run: |
+          npm run lint-output
       - name: Upload ESLint json Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
         with:
           name: eslint_report.json
           path: eslint_report.json
