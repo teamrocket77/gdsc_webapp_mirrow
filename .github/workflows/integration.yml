@@ -29,21 +29,22 @@ jobs:
         working-directory: src
         run: npm run coverage
 
-      #commit any changed files (i.e., badge)
+      # commit any changed files (i.e., badge)
       - name: Update code coverage badge
         working-directory: src
         run: npx update-badge
-      
-      - uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'feature/code-coverage'
-          
+
       - name: Set code coverage commit status
         working-directory: src
         run: npx -p check-code-coverage set-gh-status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+       # push changes (i.e., badge): https://github.com/mikeal/publish-to-github-action
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'feature/code-coverage'
 
   test_docker:
     name: Build Container as Test
