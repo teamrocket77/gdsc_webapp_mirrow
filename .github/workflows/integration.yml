@@ -64,9 +64,6 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Run basic linter
-        run: npm run lint
-
       - name: Save Code Linting Report to JSON
         # npm script for ESLint
         # eslint --output-file eslint_report.json --format json src
