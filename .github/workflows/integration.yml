@@ -69,6 +69,7 @@ jobs:
         # eslint --output-file eslint_report.json --format json src
         # See https://eslint.org/docs/user-guide/command-line-interface#options
         run: npm run lint-output
+        continue-on-error: true 
 
       - name: Annotated linting code results
         uses: ataylorme/eslint-annotate-action@v2
