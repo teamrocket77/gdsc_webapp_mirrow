@@ -10,6 +10,53 @@ on:
 permissions: read-all
 
 jobs:
+
+  integration_test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress run
+        working-directory: src
+        run: |
+          npm ci
+          npm run e2e:headless 
+        #uses: cypress-io/github-action@v5
+        #with:
+         # working-directory: src
+          #start: npm run dev
+          #wait-on: 'http://localhost:3000'
+          #wait-on-timeout: 120
+          #spec: |
+          #  cypress/**/frontend_tests/frontend.*js
+          #config: supportFile=false
+
+      - name: Coverage report text
+        working-directory: src
+        run: |
+          echo "LIST ALL"
+          ls -lha
+          npm run coverage
+
+      #commit any changed files (i.e., badge)
+      - name: Update code coverage badge
+        working-directory: src
+        run: npx update-badge
+      
+      - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'code-coverage/dev'
+          
+      - name: Set code coverage commit status
+        working-directory: src
+        run: npx -p check-code-coverage set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   test_docker:
     name: Build Container as Test
     runs-on: ubuntu-latest
