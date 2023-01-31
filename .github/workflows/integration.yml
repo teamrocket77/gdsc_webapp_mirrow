@@ -1,11 +1,13 @@
-name: Build Docker Container on Push and PR
+name: Integration tests
 on:
-  push:
   pull_request:
+    types: [ opened, labeled, synchronize ]
     branches:
       - main 
       - dev
   workflow_dispatch:
+
+permissions: read-all
 
 jobs:
   test_docker:
@@ -27,13 +29,6 @@ jobs:
           token_format: 'access_token'
           workload_identity_provider: '${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ secrets.GOOGLE_WORKLOAD_SERVICE_ACCOUNT }}'
-      - name: Docker Authentication
-        id: docker-auth
-        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b #pinv2
-        with:
-          registry: gcr.io
-          username: oauth2accesstoken
-          password: ${{ steps.auth.outputs.access_token }}
       - name: .env.production -> Source
         run: |-
           cd "$GITHUB_WORKSPACE/src"
@@ -49,5 +44,44 @@ jobs:
           echo "Created .env.production to $GITHUB_WORKSPACE/src"
       - name: Source -> Docker Image
         run: |-
-          DOCKER_BUILDKIT=1 docker build . --platform linux/amd64
+          DOCKER_BUILDKIT=1 docker build --target builder .
+  run_linter:
+    name: Linter + Commenter
+    runs-on: ubuntu-latest
+    permissions:
+      "write-all"
+    defaults:
+      run:
+        working-directory: src
 
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - name: Setup Node
+        uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd
+        with:
+          node-version: 16
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Save Code Linting Report to JSON
+        # npm script for ESLint
+        # eslint --output-file eslint_report.json --format json src
+        # See https://eslint.org/docs/user-guide/command-line-interface#options
+        run: npm run lint-output
+        continue-on-error: true 
+
+      - name: Annotated linting code results
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          report-json: "eslint_report.json"
+
+      - name: Run linter for json Report
+        run: |
+          npm run lint-output
+      - name: Upload ESLint json Report
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
+        with:
+          name: eslint_report.json
+          path: eslint_report.json

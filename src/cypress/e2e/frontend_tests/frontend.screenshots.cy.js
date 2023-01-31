@@ -9,7 +9,7 @@ describe('Get Screenshots', () => {
 		let webPath = 'http://localhost:3000';
 		cy.log("Beginning Screenshot test");
 		cy.visit(webPath);
-    		cy.get('[data-cy = "nav-bar-option-About"', get_options)
+			cy.get('[data-cy = "nav-bar-option-About"', get_options)
 			.should('be.visible');
 		cy.screenshot('base', screenshot_options);
 		cy.fixture('../fixtures/pages.json').then((page_json) => {
@@ -27,4 +27,3 @@ describe('Get Screenshots', () => {
 		});
 	})
 })
-
