@@ -45,4 +45,45 @@ jobs:
       - name: Source -> Docker Image
         run: |-
           DOCKER_BUILDKIT=1 docker build --target builder .
+  run_linter:
+    name: Linter + Commenter
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: 'write'
+    defaults:
+      run:
+        working-directory: src
 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Run basic linter
+        run: npm run lint
+
+      - name: Save Code Linting Report to JSON
+        # npm script for ESLint
+        # eslint --output-file eslint_report.json --format json src
+        # See https://eslint.org/docs/user-guide/command-line-interface#options
+        run: npm run lint-output
+
+      - name: Annotated linting code results
+        uses: a-b-r-o-w-n/eslint-action@v2@0c0983752a98ed6982252ebb9572d082c469a6de
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          files: "src/**/*"
+          extensions: ".js"
+          working-directory: "./src"
+          quiet: "false"
+
+      - name: Upload ESLint json Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: eslint_report.json
+          path: eslint_report.json
