@@ -24,15 +24,6 @@ jobs:
         run: |
           npm ci
           npm run e2e:headless 
-        #uses: cypress-io/github-action@v5
-        #with:
-         # working-directory: src
-          #start: npm run dev
-          #wait-on: 'http://localhost:3000'
-          #wait-on-timeout: 120
-          #spec: |
-          #  cypress/**/frontend_tests/frontend.*js
-          #config: supportFile=false
 
       - name: Coverage report text
         working-directory: src

@@ -10,7 +10,6 @@
     "lint-output": "npx eslint --ext js,jsx -c .eslintrc.json --format json -o ../eslint_report.json .",
     "lint-fix": "npx eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx .",
     "cypress:headless": "cypress run",
-    "test": "npm run test:coverage && npm run test:open",
     "coverage": "nyc report --reporter=text-summary",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless"
   },
@@ -32,22 +31,20 @@
     "wait-on": "^6.0.1"
   },
   "devDependencies": {
+    "nyc": "^15.1.0",
     "@babel/core": "^7.20.12",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@cypress/code-coverage": "^3.10.0",
-    "autoprefixer": "^10.4.12",
+    "@babel/preset-env": "^7.20.2", 
     "babel-plugin-istanbul": "^6.1.1",
-    "check-code-coverage": "^1.10.4",
     "cypress": "^11.2.0",
+    "check-code-coverage": "^1.10.4",
+    "@cypress/code-coverage": "^3.10.0", 
+    "start-server-and-test": "^1.15.3",
+    "autoprefixer": "^10.4.12",
     "eslint": "^8.10.0",
     "eslint-config-next": "^12.1.0",
     "eslint-plugin-cypress": "^2.12.1",
-    "nyc": "^15.1.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
-    "start-server-and-test": "^1.15.3",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.8.4"
   }
