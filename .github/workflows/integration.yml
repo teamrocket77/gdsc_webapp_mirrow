@@ -19,7 +19,9 @@ jobs:
 
       - name: Cypress run
         working-directory: src
-        run: npm run e2e:headless 
+        run: |
+          npm ci
+          npm run e2e:headless 
         #uses: cypress-io/github-action@v5
         #with:
          # working-directory: src
