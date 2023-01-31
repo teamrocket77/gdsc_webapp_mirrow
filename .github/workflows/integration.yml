@@ -18,15 +18,17 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          working-directory: src
-          start: npm run dev
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
-          spec: |
-            cypress/**/frontend_tests/frontend.*js
-          config: supportFile=false
+        working-directory: src
+        run: npm run e2e:headless 
+        #uses: cypress-io/github-action@v5
+        #with:
+         # working-directory: src
+          #start: npm run dev
+          #wait-on: 'http://localhost:3000'
+          #wait-on-timeout: 120
+          #spec: |
+          #  cypress/**/frontend_tests/frontend.*js
+          #config: supportFile=false
 
       - name: Coverage report text
         working-directory: src

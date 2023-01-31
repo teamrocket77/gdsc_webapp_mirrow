@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 8080",
     "lint": "next lint",
-    "test:coverage": "nyc --reported=html --reporter=text npm test",
-    "test:open": "cypress open",
+    "cypress:headless": "cypress run",
     "test": "npm run test:coverage && npm run test:open",
     "coverage": "nyc report --reporter=text-summary",
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
     "lint-output": "eslint --ext js,jsx -c .eslintrc.json --format json -o ../eslint_report.json .",
     "lint-fix": "eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx ."
   },
@@ -47,6 +47,7 @@
     "nyc": "^15.1.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "start-server-and-test": "^1.15.3",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.8.4"
   }
