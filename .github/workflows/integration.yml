@@ -15,9 +15,7 @@ jobs:
   code_coverage:
     name: Code Coverage
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
-
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -29,8 +27,14 @@ jobs:
 
       - name: Coverage report text
         working-directory: src
-        run: npm run coverage
+        run: npm run code_coverage
 
+      - name: Set code coverage commit status
+        working-directory: src
+        run: npx -p check-code-coverage set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
       # commit any changed files (i.e., badge)
       - name: Update code coverage badge
         working-directory: src
@@ -41,12 +45,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: 'feature/code-coverage'
-
-      - name: Set code coverage commit status
-        working-directory: src
-        run: npx -p check-code-coverage set-gh-status
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   test_docker:
     name: Build Container as Test
