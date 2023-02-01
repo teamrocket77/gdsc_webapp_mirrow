@@ -10,7 +10,7 @@
     "lint-output": "npx eslint --ext js,jsx -c .eslintrc.json --format json -o ../eslint_report.json .",
     "lint-fix": "npx eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx .",
     "cypress:headless": "cypress run",
-    "coverage": "nyc report --reporter=text-summary",
+    "code_coverage": "nyc report --reporter=text-summary",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless"
   },
   "dependencies": {
