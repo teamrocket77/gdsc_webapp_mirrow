@@ -1,1 +1,1 @@
- ![check-code-coverage](https://img.shields.io/badge/code--coverage-68.47%25-yellow)
+ ![check-code-coverage](https://img.shields.io/badge/code--coverage-70.54%25-yellow)
