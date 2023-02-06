@@ -9,18 +9,17 @@
     "start": "next start -H 0.0.0.0 -p 8080",
     "lint": "next lint",
     "lint-output": "npx eslint --ext js,jsx -c .eslintrc.json --format json -o ../eslint_report.json .",
-    "lint-fix": "npx eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx .",
-    "cypress:headless": "cypress run",
-    "code_coverage": "nyc report --reporter=text-summary",
-    "e2e:headless": "INSTRUMENT_CODE=1 start-server-and-test dev http://localhost:3000 cypress:headless"
+    "lint-fix": "npx eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx ."
   },
   "dependencies": {
+    "@babel/core": "^7.20.12",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
     "@next-auth/firebase-adapter": "^1.0.1",
+    "babel-plugin-istanbul": "^6.1.1",
     "firebase-admin": "^11.4.1",
     "istanbul-lib-coverage": "^3.2.0",
     "next": "^12.1.0",
@@ -28,28 +27,24 @@
     "nyc": "^15.1.0",
     "react": "^17.0.2",
     "react-card-flip": "^1.1.5",
-    "@babel/core": "^7.20.12",
-    "babel-plugin-istanbul": "^6.1.1",
     "react-dom": "^17.0.2",
     "wait-on": "^6.0.1"
   },
   "devDependencies": {
-    "nyc": "^15.1.0",
     "@babel/core": "^7.20.12",
-    "@babel/preset-env": "^7.20.2", 
-    "babel-plugin-istanbul": "^6.1.1",
-    "cypress": "^11.2.0",
-    "check-code-coverage": "^1.10.4",
-    "@cypress/code-coverage": "^3.10.0", 
-    "start-server-and-test": "^1.15.3",
+    "@babel/preset-env": "^7.20.2",
+    "@cypress/code-coverage": "^3.10.0",
     "autoprefixer": "^10.4.12",
+    "babel-plugin-istanbul": "^6.1.1",
+    "check-code-coverage": "^1.10.4",
+    "cypress": "^11.2.0",
     "eslint": "^8.10.0",
     "eslint-config-next": "^12.1.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "nyc": "^15.1.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.8.4"
   }
-
 }
