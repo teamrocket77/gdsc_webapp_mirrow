@@ -24,7 +24,8 @@ jobs:
         uses: cypress-io/github-action@37c511bc322f112c2dd629d3610f4f096bc80096 # pin@v5
         with:
           working-directory: src
-          start: npm run dev:instrumented
+	  config: pageLoadTimeout=100000, baseUrl=http://localhost:3000
+	  start: npm run dev:instrumented
           spec: |
             cypress/**/*.js
 
