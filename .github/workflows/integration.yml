@@ -1,5 +1,6 @@
 name: Integration tests
 on:
+  push:
   pull_request:
     types: [ opened, labeled, synchronize ]
     branches:
@@ -10,6 +11,43 @@ on:
 permissions: read-all
 
 jobs:
+
+  code_coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+
+      - name: Cypress Test + Get Coverage
+        uses: cypress-io/github-action@37c511bc322f112c2dd629d3610f4f096bc80096 # pin@v5
+        with:
+          working-directory: src
+          config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
+          start: npm run dev:instrumented
+          spec: |
+            cypress/**/*.js
+            
+      - name: Set code coverage commit status
+        working-directory: src
+        run: npx -p check-code-coverage set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # commit any changed files (i.e., badge)
+      - name: Update code coverage badge
+        working-directory: src
+        run: npx update-badge
+
+      # push changes (i.e., badge): https://github.com/mikeal/publish-to-github-action
+      - uses: mikeal/publish-to-github-action@e5a27bbb5174edae8930d2250fc98a3a32478f81 # master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'feature/code-coverage'
+        continue-on-error: true
+        
+
   test_docker:
     name: Build Container as Test
     runs-on: ubuntu-latest

@@ -7,7 +7,7 @@ WORKDIR /app
 COPY /src/package.json ./
 COPY /src/package-lock.json ./
 RUN ls -a
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # Build
 FROM node:16-alpine@sha256:1298fd170c45954fec3d4d063437750f89802d72743816663664cfe9aa152b4b AS builder
