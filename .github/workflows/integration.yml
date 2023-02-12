@@ -47,7 +47,7 @@ jobs:
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'code-coverage/dev'
+          BRANCH_NAME: ${{ github.ref_name }}}
           
       - name: Set code coverage commit status
         working-directory: src
