@@ -11,8 +11,7 @@
     "lint-output": "npx eslint --ext js,jsx -c .eslintrc.json --format json -o ../eslint_report.json .",
     "lint-fix": "npx eslint --ext js,jsx -c .eslintrc.json --fix --ext js.jsx .",
     "e2e:headless": "cypress run --e2e",
-    "code-coverage": "nyc report --reporter=text-summary",
-    "test:coverage": "npm run dev:instrumented & wait-on http://localhost:3000 && npm run e2e:headless && npm run code-coverage && pkill -f 'npm run dev:instrumented'"
+    "code-coverage-report": "nyc report --reporter=text-summary"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
