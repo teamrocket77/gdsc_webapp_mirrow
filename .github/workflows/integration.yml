@@ -24,11 +24,11 @@ jobs:
         uses: cypress-io/github-action@37c511bc322f112c2dd629d3610f4f096bc80096 # pin@v5
         with:
           working-directory: src
-          config: pageLoadTimeout=100000, baseUrl=http://localhost:3000
+          config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
           start: npm run dev:instrumented
           spec: |
             cypress/**/*.js
-
+            
       - name: Set code coverage commit status
         working-directory: src
         run: npx -p check-code-coverage set-gh-status
